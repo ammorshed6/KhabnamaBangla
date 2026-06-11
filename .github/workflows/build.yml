@@ -1,0 +1,82 @@
+name: Build KhabnamaBangla APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Generate launcher icons
+      run: |
+        sudo apt-get install -y imagemagick
+        for size in 48 72 96 144 192; do
+          case $size in
+            48)  dir="mdpi";;
+            72)  dir="hdpi";;
+            96)  dir="xhdpi";;
+            144) dir="xxhdpi";;
+            192) dir="xxxhdpi";;
+          esac
+          mkdir -p app/src/main/res/mipmap-$dir
+          convert -size ${size}x${size} \
+            gradient:'#1b4d3e-#b8860b' \
+            -gravity center \
+            -fill white \
+            -pointsize $((size/3)) \
+            -font /usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf \
+            -annotate 0 'KB' \
+            app/src/main/res/mipmap-$dir/ic_launcher.png
+          cp app/src/main/res/mipmap-$dir/ic_launcher.png \
+             app/src/main/res/mipmap-$dir/ic_launcher_round.png
+        done
+
+    - name: Make gradlew executable
+      run: |
+        if [ ! -f gradlew ]; then
+          gradle wrapper --gradle-version 8.2
+        fi
+        chmod +x gradlew
+
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug --stacktrace
+
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: KhabnamaBangla-debug
+        path: app/build/outputs/apk/debug/app-debug.apk
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      if: github.ref == 'refs/heads/main'
+      with:
+        tag_name: v1.0.${{ github.run_number }}
+        name: "সোলাইমানী খাবনামা v1.0.${{ github.run_number }}"
+        body: |
+          ## 🌙 সোলাইমানী খাবনামা
+          ইসলামী স্বপ্নের ব্যাখ্যা অ্যাপ
+          
+          **ফিচারসমূহ:**
+          - ৩০+ স্বপ্নের ব্যাখ্যা, ১১টি বিভাগ
+          - তিন আলেমের মতামত: ইবনে সীরীন, নাবুলুসী, আ.গ. নাবুলুসী (রহ.)
+          - বাংলায় সার্চ ফিচার
+          - AI দিয়ে যেকোনো স্বপ্নের ব্যাখ্যা
+        files: app/build/outputs/apk/debug/app-debug.apk
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

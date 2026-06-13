@@ -2,1085 +2,392 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 <title>সোলাইমানী খাবনামা</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600&display=swap');
-  :root{--ink:#1a1008;--parchment:#f5efe0;--parchment-dark:#e8dcc5;--gold:#b8860b;--gold-light:#d4a017;--gold-pale:#f0e0a0;--emerald:#1b4d3e;--emerald-light:#2d6a4f;--red:#8b1a1a;--cream:#faf6ed;--shadow:rgba(26,16,8,0.15)}
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Noto Sans Bengali',sans-serif;background:var(--parchment);color:var(--ink);min-height:100vh;font-size:15px}
-  header{background:linear-gradient(135deg,var(--emerald) 0%,#0d2b22 100%);padding:0;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px var(--shadow);border-bottom:2px solid var(--gold)}
-  .header-top{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 4px}
-  .header-title{display:flex;flex-direction:column;align-items:center;flex:1}
-  .app-title{font-family:'Noto Serif Bengali',serif;font-size:20px;font-weight:700;color:var(--gold-light);letter-spacing:1px;text-shadow:0 1px 3px rgba(0,0,0,0.4)}
-  .app-subtitle{font-size:11px;color:#a8c5b0;letter-spacing:.5px;margin-top:1px}
-  .watermark{background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:3px 7px;border-radius:3px;letter-spacing:.5px}
-  .search-wrap{padding:8px 12px 10px;display:flex;gap:8px;align-items:center}
-  .search-box{flex:1;display:flex;align-items:center;background:rgba(255,255,255,0.12);border:1px solid rgba(212,160,23,0.4);border-radius:24px;overflow:hidden}
-  .search-icon{padding:0 10px;color:var(--gold-light);font-size:16px}
-  #searchInput{flex:1;background:transparent;border:none;outline:none;color:#fff;font-family:'Noto Sans Bengali',sans-serif;font-size:14px;padding:9px 0}
-  #searchInput::placeholder{color:rgba(255,255,255,0.5)}
-  .btn-clear{background:none;border:none;color:rgba(255,255,255,0.6);padding:0 10px;font-size:18px;cursor:pointer;display:none}
-  .btn-ai{background:linear-gradient(135deg,var(--gold) 0%,var(--gold-light) 100%);border:none;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,0.3);flex-shrink:0}
-  .tabs{display:flex;background:var(--parchment-dark);border-bottom:2px solid var(--gold);overflow-x:auto}
-  .tab{flex:1;min-width:80px;padding:10px 6px;font-size:12px;font-family:'Noto Sans Bengali',sans-serif;font-weight:500;color:#5a4a30;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;transition:all .2s;text-align:center;white-space:nowrap}
-  .tab.active{color:var(--emerald);border-bottom-color:var(--emerald);font-weight:600;background:rgba(27,77,62,0.08)}
-  main{padding:12px;min-height:calc(100vh - 130px)}
-  .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-  .cat-card{background:linear-gradient(135deg,var(--cream) 0%,#efe6cc 100%);border:1px solid var(--gold-pale);border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;box-shadow:0 2px 8px var(--shadow);transition:transform .15s;position:relative;overflow:hidden}
-  .cat-card:active{transform:scale(0.97)}
-  .cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--emerald))}
-  .cat-icon{font-size:26px;margin-bottom:6px}
-  .cat-name{font-family:'Noto Serif Bengali',serif;font-size:13px;font-weight:600;color:var(--emerald)}
-  .cat-count{font-size:10px;color:#7a6040;margin-top:2px}
-  .dream-list{display:flex;flex-direction:column;gap:10px}
-  .dream-card{background:var(--cream);border:1px solid var(--gold-pale);border-radius:10px;overflow:hidden;box-shadow:0 2px 6px var(--shadow);cursor:pointer}
-  .dream-header{display:flex;align-items:center;padding:10px 12px;gap:10px}
-  .dream-icon{font-size:22px;flex-shrink:0}
-  .dream-title-wrap{flex:1}
-  .dream-title{font-family:'Noto Serif Bengali',serif;font-size:14px;font-weight:600;color:var(--ink);line-height:1.4}
-  .dream-keywords{font-size:11px;color:#8a7050;margin-top:2px}
-  .dream-expand{color:var(--gold);font-size:18px}
-  .dream-body{display:none;border-top:1px solid var(--gold-pale)}
-  .dream-body.open{display:block}
-  .tafsir-tab-row{display:flex;background:var(--parchment-dark);border-bottom:1px solid var(--gold-pale)}
-  .tafsir-btn{flex:1;padding:7px 4px;font-size:11px;font-family:'Noto Sans Bengali',sans-serif;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;color:#6a5030;font-weight:500}
-  .tafsir-btn.active{color:var(--emerald);border-bottom-color:var(--emerald);font-weight:600}
-  .tafsir-content{padding:12px;font-size:13px;line-height:1.8;color:#2a1a08}
-  .tafsir-panel{display:none}
-  .tafsir-panel.active{display:block}
-  .scholar-badge{display:inline-block;background:linear-gradient(90deg,var(--emerald) 0%,var(--emerald-light) 100%);color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;margin-bottom:6px}
-  .result-count{font-size:12px;color:#7a6040;margin-bottom:10px;padding:6px 10px;background:var(--gold-pale);border-radius:6px}
-  .ai-panel{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--cream);border-top:2px solid var(--gold);border-radius:16px 16px 0 0;padding:16px;max-height:70vh;overflow-y:auto;z-index:200;box-shadow:0 -4px 20px var(--shadow)}
-  .ai-panel.open{display:block}
-  .ai-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-  .ai-icon{font-size:24px}
-  .ai-title{flex:1;font-family:'Noto Serif Bengali',serif;font-size:15px;font-weight:600;color:var(--emerald)}
-  .btn-close-ai{background:none;border:none;font-size:22px;color:#8a6040;cursor:pointer}
-  .ai-input-row{display:flex;gap:8px;margin-bottom:12px}
-  #aiInput{flex:1;border:1.5px solid var(--gold-pale);border-radius:24px;padding:10px 14px;font-family:'Noto Sans Bengali',sans-serif;font-size:13px;background:#fff;outline:none;color:var(--ink)}
-  #aiInput:focus{border-color:var(--emerald)}
-  .btn-ask{background:linear-gradient(135deg,var(--emerald) 0%,var(--emerald-light) 100%);color:#fff;border:none;border-radius:24px;padding:10px 16px;font-family:'Noto Sans Bengali',sans-serif;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
-  .ai-response{background:#fff;border:1px solid var(--gold-pale);border-radius:10px;padding:12px;font-size:13px;line-height:1.8;color:var(--ink);min-height:60px}
-  .ai-loading{text-align:center;color:var(--gold);font-size:22px;padding:10px}
-  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199}
-  .overlay.open{display:block}
-  .section-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-  .section-head-icon{font-size:20px}
-  .section-head-title{font-family:'Noto Serif Bengali',serif;font-size:16px;font-weight:700;color:var(--emerald);flex:1}
-  .btn-back{background:none;border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-family:'Noto Sans Bengali',sans-serif;font-size:12px;color:var(--gold);cursor:pointer}
-  .bismillah{text-align:center;font-family:'Noto Serif Bengali',serif;font-size:18px;color:var(--gold);padding:14px;background:linear-gradient(135deg,var(--emerald) 0%,#0d2b22 100%);border-radius:10px;margin-bottom:14px;letter-spacing:1px}
-  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--emerald);color:#fff;padding:10px 20px;border-radius:24px;font-size:13px;z-index:300;transition:transform .3s;white-space:nowrap}
-  .toast.show{transform:translateX(-50%) translateY(0)}
-  .about-card{background:var(--cream);border:1px solid var(--gold-pale);border-radius:10px;padding:16px;margin-bottom:10px;box-shadow:0 2px 6px var(--shadow)}
-  .about-card h3{font-family:'Noto Serif Bengali',serif;font-size:14px;font-weight:700;color:var(--emerald);margin-bottom:8px}
-  .about-card p{font-size:13px;line-height:1.8;color:#3a2a10}
-  .no-result{text-align:center;padding:30px 20px;color:#8a7050}
-  .no-result-icon{font-size:40px;margin-bottom:10px}
-  .no-result p{font-size:14px}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600&display=swap');
+:root{--em:#1b4d3e;--el:#2d6a4f;--go:#b8860b;--gl:#d4a017;--gp:#f0e0a0;--rd:#8b1a1a;--cr:#faf6ed;--pg:#f5efe0;--pd:#e8dcc5;--sh:rgba(26,16,8,0.15)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans Bengali",sans-serif;background:var(--pg);color:#1a1008;min-height:100vh;font-size:15px}
+header{background:linear-gradient(135deg,var(--em),#0d2b22);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px var(--sh);border-bottom:2px solid var(--go)}
+.ht{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 4px}
+.htc{display:flex;flex-direction:column;align-items:center;flex:1}
+.at{font-family:"Noto Serif Bengali",serif;font-size:20px;font-weight:700;color:var(--gl)}
+.as{font-size:11px;color:#a8c5b0;margin-top:1px}
+.wm{background:var(--rd);color:#fff;font-size:10px;font-weight:700;padding:3px 7px;border-radius:3px}
+.sw{padding:8px 12px 10px;display:flex;gap:8px;align-items:center}
+.sb{flex:1;display:flex;align-items:center;background:rgba(255,255,255,0.12);border:1px solid rgba(212,160,23,0.4);border-radius:24px;overflow:hidden}
+.si{padding:0 10px;color:var(--gl);font-size:16px}
+#si{flex:1;background:transparent;border:none;outline:none;color:#fff;font-family:"Noto Sans Bengali",sans-serif;font-size:14px;padding:9px 0}
+#si::placeholder{color:rgba(255,255,255,0.5)}
+#bc{background:none;border:none;color:rgba(255,255,255,0.6);padding:0 10px;font-size:18px;cursor:pointer;display:none}
+.ba{background:linear-gradient(135deg,var(--go),var(--gl));border:none;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,0.3);flex-shrink:0}
+.tabs{display:flex;background:var(--pd);border-bottom:2px solid var(--go)}
+.tab{flex:1;padding:10px 4px;font-size:11px;font-family:"Noto Sans Bengali",sans-serif;font-weight:500;color:#5a4a30;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;text-align:center;white-space:nowrap}
+.tab.active{color:var(--em);border-bottom-color:var(--em);font-weight:600;background:rgba(27,77,62,0.08)}
+main{padding:12px;min-height:calc(100vh - 130px)}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.cc{background:linear-gradient(135deg,var(--cr),#efe6cc);border:1px solid var(--gp);border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;box-shadow:0 2px 8px var(--sh);position:relative;overflow:hidden}
+.cc:active{transform:scale(0.97)}
+.cc::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--go),var(--em))}
+.ci{font-size:26px;margin-bottom:6px}
+.cn{font-family:"Noto Serif Bengali",serif;font-size:13px;font-weight:600;color:var(--em)}
+.ck{font-size:10px;color:#7a6040;margin-top:2px}
+.dl{display:flex;flex-direction:column;gap:10px}
+.dc{background:var(--cr);border:1px solid var(--gp);border-radius:10px;overflow:hidden;box-shadow:0 2px 6px var(--sh)}
+.dh{display:flex;align-items:center;padding:10px 12px;gap:10px;cursor:pointer}
+.di{font-size:22px;flex-shrink:0}
+.dtw{flex:1}
+.dt{font-family:"Noto Serif Bengali",serif;font-size:14px;font-weight:600;line-height:1.4}
+.dk{font-size:11px;color:#8a7050;margin-top:2px}
+.de{color:var(--go);font-size:18px}
+.db{display:none;border-top:1px solid var(--gp)}
+.db.open{display:block}
+.tr{display:flex;background:var(--pd);border-bottom:1px solid var(--gp);overflow-x:auto}
+.tb{flex-shrink:0;padding:6px 8px;font-size:10px;font-family:"Noto Sans Bengali",sans-serif;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;color:#6a5030;font-weight:500;white-space:nowrap}
+.tb.active{color:var(--em);border-bottom-color:var(--em);font-weight:600}
+.tc{padding:12px;font-size:13px;line-height:1.8;color:#2a1a08}
+.tp{display:none}
+.tp.active{display:block}
+.sb2{display:inline-block;background:linear-gradient(90deg,var(--em),var(--el));color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;margin-bottom:6px}
+.rc{font-size:12px;color:#7a6040;margin-bottom:10px;padding:6px 10px;background:var(--gp);border-radius:6px}
+.ap{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--cr);border-top:2px solid var(--go);border-radius:16px 16px 0 0;padding:16px;max-height:70vh;overflow-y:auto;z-index:200;box-shadow:0 -4px 20px var(--sh)}
+.ap.open{display:block}
+.ah{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.at2{flex:1;font-family:"Noto Serif Bengali",serif;font-size:15px;font-weight:600;color:var(--em)}
+.bca{background:none;border:none;font-size:22px;color:#8a6040;cursor:pointer}
+.air{display:flex;gap:8px;margin-bottom:12px}
+#ai{flex:1;border:1.5px solid var(--gp);border-radius:24px;padding:10px 14px;font-family:"Noto Sans Bengali",sans-serif;font-size:13px;background:#fff;outline:none}
+#ai:focus{border-color:var(--em)}
+.bask{background:linear-gradient(135deg,var(--em),var(--el));color:#fff;border:none;border-radius:24px;padding:10px 16px;font-family:"Noto Sans Bengali",sans-serif;font-size:13px;font-weight:600;cursor:pointer}
+.ar{background:#fff;border:1px solid var(--gp);border-radius:10px;padding:12px;font-size:13px;line-height:1.8;min-height:60px}
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199}
+.ov.open{display:block}
+.sh2{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.shi{font-size:20px}
+.sht{font-family:"Noto Serif Bengali",serif;font-size:16px;font-weight:700;color:var(--em);flex:1}
+.bbk{background:none;border:1px solid var(--go);border-radius:20px;padding:4px 12px;font-family:"Noto Sans Bengali",sans-serif;font-size:12px;color:var(--go);cursor:pointer}
+.bism{text-align:center;font-family:"Noto Serif Bengali",serif;font-size:18px;color:var(--go);padding:14px;background:linear-gradient(135deg,var(--em),#0d2b22);border-radius:10px;margin-bottom:14px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--em);color:#fff;padding:10px 20px;border-radius:24px;font-size:13px;z-index:300;transition:transform .3s}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.acard{background:var(--cr);border:1px solid var(--gp);border-radius:10px;padding:16px;margin-bottom:10px}
+.acard h3{font-family:"Noto Serif Bengali",serif;font-size:14px;font-weight:700;color:var(--em);margin-bottom:8px}
+.acard p{font-size:13px;line-height:1.8;color:#3a2a10}
+.nr{text-align:center;padding:30px 20px;color:#8a7050}
 </style>
 </head>
 <body>
 <header>
-  <div class="header-top">
+  <div class="ht">
     <div style="width:80px"></div>
-    <div class="header-title">
-      <div class="app-title">🌙 সোলাইমানী খাবনামা</div>
-      <div class="app-subtitle">ইসলামী স্বপ্নের ব্যাখ্যা</div>
+    <div class="htc">
+      <div class="at">&#x1F319; সোলাইমানী খাবনামা</div>
+      <div class="as">ইসলামী স্বপ্নের ব্যাখ্যা &#x2014; ৬ আলেম</div>
     </div>
-    <span class="watermark">@A.M.MORSHED</span>
+    <span class="wm">@A.M.MORSHED</span>
   </div>
-  <div class="search-wrap">
-    <div class="search-box">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="searchInput" placeholder="স্বপ্নের বিষয় লিখুন..." oninput="onSearch(this.value)">
-      <button class="btn-clear" id="btnClear" onclick="clearSearch()">✕</button>
+  <div class="sw">
+    <div class="sb">
+      <span class="si">&#x1F50D;</span>
+      <input type="text" id="si" placeholder="স্বপ্নের বিষয় লিখুন..." oninput="onSrch(this.value)">
+      <button id="bc" onclick="clrSrch()">&#x2715;</button>
     </div>
-    <button class="btn-ai" onclick="toggleAI()">🤖</button>
+    <button class="ba" onclick="togAI()">&#x1F916;</button>
   </div>
 </header>
 <div class="tabs">
-  <button class="tab active" onclick="showTab('home')">🏠 হোম</button>
-  <button class="tab" onclick="showTab('category')">📂 বিভাগ</button>
-  <button class="tab" onclick="showTab('all')">📖 সব স্বপ্ন</button>
-  <button class="tab" onclick="showTab('about')">ℹ️ পরিচিতি</button>
+  <button class="tab active" onclick="showTab('home')">&#x1F3E0; হোম</button>
+  <button class="tab" onclick="showTab('cat')">&#x1F4C2; বিভাগ</button>
+  <button class="tab" onclick="showTab('all')">&#x1F4D6; সব</button>
+  <button class="tab" onclick="showTab('about')">&#x2139;&#xFE0F; পরিচিতি</button>
 </div>
-<main id="mainContent"></main>
-<div class="overlay" id="overlay" onclick="toggleAI()"></div>
-<div class="ai-panel" id="aiPanel">
-  <div class="ai-header">
-    <span class="ai-icon">🤖</span>
-    <span class="ai-title">AI দিয়ে স্বপ্নের ব্যাখ্যা নিন</span>
-    <button class="btn-close-ai" onclick="toggleAI()">✕</button>
+<main id="mc"></main>
+<div class="ov" id="ov" onclick="togAI()"></div>
+<div class="ap" id="ap">
+  <div class="ah">
+    <span style="font-size:24px">&#x1F916;</span>
+    <span class="at2">AI দিয়ে স্বপ্নের ব্যাখ্যা নিন</span>
+    <button class="bca" onclick="togAI()">&#x2715;</button>
   </div>
-  <div class="ai-input-row">
-    <input type="text" id="aiInput" placeholder="আপনার স্বপ্নের বিস্তারিত লিখুন...">
-    <button class="btn-ask" onclick="askAI()">জিজ্ঞেস করুন</button>
+  <div class="air">
+    <input type="text" id="ai" placeholder="আপনার স্বপ্নের বিস্তারিত লিখুন...">
+    <button class="bask" onclick="askAI()">জিজ্ঞেস করুন</button>
   </div>
-  <div class="ai-response" id="aiResponse">আপনার স্বপ্নের বিষয় উপরে লিখুন এবং "জিজ্ঞেস করুন" বোতামে চাপ দিন।</div>
-</div>
-<div class="toast" id="toast"></div>
-<script>
-const dreams=[
-// ১. পানি ও নদী
-{id:1,cat:'water',icon:'💧',title:'পরিষ্কার পানি দেখা',keywords:'পানি,নদী,খাল,পুকুর',ibnSirin:'পরিষ্কার পানি দেখা জীবনে বরকত ও সুখের আলামত। প্রবহমান পানি দীর্ঘ জীবন ও সুস্বাস্থ্যের ইঙ্গিত দেয়।',nabulusi:'স্বচ্ছ পানি রহমত ও নিয়ামতের প্রতীক। পানি পান করা হলে রিজিক বৃদ্ধির সুসংবাদ।',abdulghani:'স্বপ্নে পানি দেখা ইলম ও হেদায়েতের প্রতীক। ঝরনার পানি আল্লাহর খাস রহমতের ইঙ্গিত।'},
-{id:2,cat:'water',icon:'🌊',title:'সমুদ্রে ডুব দেওয়া',keywords:'সমুদ্র,ডুব,সাঁতার,গভীর',ibnSirin:'সমুদ্রে ডুব দিয়ে জীবিত উঠে আসা রাজা বা শক্তিশালী ব্যক্তির সাথে সম্পর্ক থেকে উপকার লাভের ইঙ্গিত।',nabulusi:'গভীর সমুদ্রে সাঁতার কাটা বড় বিপদ থেকে উদ্ধার পাওয়ার ইঙ্গিত। উদ্ধার হলে আল্লাহর সাহায্য লাভ।',abdulghani:'সমুদ্র হলো দুনিয়ার প্রতীক। তাতে ডুব দেওয়া দুনিয়াবী বিষয়ে গভীরভাবে জড়িত হওয়ার ইঙ্গিত।'},
-{id:3,cat:'water',icon:'🌧️',title:'বৃষ্টি দেখা',keywords:'বৃষ্টি,ঝড়,বর্ষা,মেঘ',ibnSirin:'বৃষ্টি দেখা রহমত ও বরকতের আলামত। ঘরের উপর বৃষ্টি পড়া সে পরিবারে নিয়ামত নাজিলের ইঙ্গিত।',nabulusi:'মৌসুমী বৃষ্টি জীবিকার সমৃদ্ধির ইঙ্গিত। ঝড়ো বৃষ্টি কষ্টের পর সুদিন আসার আলামত।',abdulghani:'বৃষ্টি আল্লাহর রহমতের প্রতীক। দোয়া কবুল হওয়ার সুসংবাদ বহন করে।'},
-{id:4,cat:'water',icon:'🏊',title:'নদীতে গোসল করা',keywords:'গোসল,নদী,পরিষ্কার,পবিত্র',ibnSirin:'পরিষ্কার নদীতে গোসল করা পাপ থেকে মুক্তি ও তওবা কবুলের ইঙ্গিত। মনে শান্তি ও পবিত্রতার আলামত।',nabulusi:'গোসল করা রোগ থেকে মুক্তির ইঙ্গিত। নদীর পানিতে গোসল দীর্ঘ সুস্বাস্থ্যের আলামত।',abdulghani:'গোসল আত্মার পরিশুদ্ধতার প্রতীক। পরিষ্কার পানিতে গোসল গুনাহ মাফের ইঙ্গিত।'},
-{id:5,cat:'water',icon:'⛵',title:'নৌকায় ভ্রমণ',keywords:'নৌকা,জাহাজ,সমুদ্র,নদী,ভ্রমণ',ibnSirin:'নৌকায় ভ্রমণ নিরাপদ পথে জীবন পরিচালনার ইঙ্গিত। সুষ্ঠু নৌকা সাফল্যের প্রতীক।',nabulusi:'নৌকায় ভ্রমণ করা জীবনের এক পর্যায় থেকে অন্য পর্যায়ে যাওয়ার ইঙ্গিত। নিরাপদ পৌঁছানো সাফল্যের আলামত।',abdulghani:'নৌকা জীবনের যানবাহনের প্রতীক। আল্লাহর উপর ভরসা করে পথ চলার ইঙ্গিত।'},
-{id:6,cat:'water',icon:'🌊',title:'বন্যা দেখা',keywords:'বন্যা,প্লাবন,পানি বৃদ্ধি',ibnSirin:'বন্যা দেখা বিপদ ও পরীক্ষার ইঙ্গিত। তবে পানি সরে গেলে বিপদ কেটে যাওয়ার আলামত।',nabulusi:'বন্যায় ভেসে না যাওয়া বিপদ থেকে রক্ষার ইঙ্গিত। উঁচুতে উঠে বাঁচা আল্লাহর সাহায্যের আলামত।',abdulghani:'বন্যা ফিতনা ও বিপদের প্রতীক। দোয়া ও সবরের মাধ্যমে রক্ষা পাওয়ার ইঙ্গিত।'},
-{id:7,cat:'water',icon:'🐟',title:'মাছ দেখা বা ধরা',keywords:'মাছ,মৎস্য,ধরা,জাল',ibnSirin:'মাছ ধরা হালাল রিজিক ও সম্পদ লাভের ইঙ্গিত। বড় মাছ বড় নিয়ামতের আলামত।',nabulusi:'জীবন্ত মাছ দেখা জীবিকার সমৃদ্ধির ইঙ্গিত। মাছ খাওয়া স্বাস্থ্য ও দীর্ঘায়ুর আলামত।',abdulghani:'মাছ সমুদ্রের সম্পদের প্রতীক। মাছ ধরা হালাল উপায়ে জীবিকা অর্জনের ইঙ্গিত।'},
-{id:8,cat:'water',icon:'🌊',title:'কূপ বা ঝরনা দেখা',keywords:'কূপ,ঝরনা,প্রস্রবণ,উৎস',ibnSirin:'কূপ থেকে পানি তোলা জ্ঞান অর্জন ও উপকার লাভের ইঙ্গিত। ঝরনা দেখা বিশুদ্ধ রিজিকের আলামত।',nabulusi:'পরিষ্কার কূপ দেখা ভালো স্ত্রী বা বন্ধুর ইঙ্গিত। কূপ খনন করা শ্রম দিয়ে রিজিক উপার্জনের আলামত।',abdulghani:'ঝরনা আল্লাহর রহমতের উৎসের প্রতীক। ঝরনার পানি পান ইলম ও হেদায়েত লাভের ইঙ্গিত।'},
-
-// ২. আগুন ও আলো
-{id:9,cat:'fire',icon:'🔥',title:'আগুন দেখা',keywords:'আগুন,জ্বলা,আলো',ibnSirin:'আগুন দেখা সাধারণত ফিতনা ও বিপদের ইঙ্গিত। তবে আগুন যদি আলো দেয় কিন্তু পোড়ায় না, তবে ইলম ও জ্ঞানের আলামত।',nabulusi:'ঘরে আগুন লাগলে সে পরিবারে বিপদ আসতে পারে। তওবা ও দোয়ার মাধ্যমে রক্ষা পাওয়া যায়।',abdulghani:'আগুন ক্ষমতা ও প্রভাবের প্রতীক। আগুনে আলো দেখা শাসন ও নেতৃত্বের ইঙ্গিত।'},
-{id:10,cat:'fire',icon:'🕯️',title:'মোমবাতি বা প্রদীপ',keywords:'আলো,মোমবাতি,প্রদীপ,বাতি',ibnSirin:'প্রদীপ দেখা ইলম ও হেদায়েতের প্রতীক। নিভে যাওয়া প্রদীপ নেককার মানুষের ইন্তেকালের ইঙ্গিত।',nabulusi:'উজ্জ্বল আলো দেখা ঈমান ও তাকওয়ার বৃদ্ধির ইঙ্গিত। আলো জ্বলা ঘরে বরকত নাজিল হয়।',abdulghani:'প্রদীপের আলো ইলমের প্রতীক। নতুন প্রদীপ জ্বালানো নতুন ইলম অর্জনের ইঙ্গিত।'},
-{id:11,cat:'fire',icon:'⚡',title:'বজ্রপাত বা বিদ্যুৎ দেখা',keywords:'বজ্র,বিদ্যুৎ,ঝড়,আলো',ibnSirin:'বজ্রপাত দেখা হঠাৎ বিপদ বা সংকটের ইঙ্গিত। বজ্রের আওয়াজ কোনো বড় ঘটনার পূর্বাভাস।',nabulusi:'বিদ্যুৎ চমকানো ভয় ও শঙ্কার ইঙ্গিত। তবে বিদ্যুৎ থেকে রক্ষা পাওয়া বিপদ এড়ানোর আলামত।',abdulghani:'বজ্রপাত আল্লাহর কুদরতের নিদর্শন। এই স্বপ্ন দেখলে ইস্তেগফার ও দোয়া করা উচিত।'},
-{id:12,cat:'fire',icon:'☀️',title:'সূর্যের আলো গায়ে পড়া',keywords:'সূর্য,আলো,রোদ,কিরণ',ibnSirin:'সূর্যের আলো গায়ে পড়া রাজানুগ্রহ ও মর্যাদা বৃদ্ধির ইঙ্গিত। উজ্জ্বল সূর্য সাফল্যের আলামত।',nabulusi:'সূর্যের আলোয় স্নান করা ক্ষমতাবান ব্যক্তির সাথে সম্পর্কের ইঙ্গিত।',abdulghani:'সূর্যের আলো আল্লাহর নূরের প্রতীক। সূর্যের আলোয় পথ চলা সত্যের পথে অগ্রসরের ইঙ্গিত।'},
-
-// ৩. পশু-পাখি
-{id:13,cat:'animals',icon:'🐍',title:'সাপ দেখা',keywords:'সাপ,কামড়,বিষ',ibnSirin:'সাপ দেখা শত্রু ও বিপদের প্রতীক। সাপ মেরে ফেলা শত্রুর উপর বিজয়ের আলামত।',nabulusi:'সাপ স্বপ্নে শত্রু, বিপদ ও প্রলোভনের প্রতীক। সাপ থেকে পালিয়ে আসা বিপদ এড়ানোর ইঙ্গিত।',abdulghani:'সাপ শয়তানের প্রতীক। সাপ মেরে ফেলা নাফসের উপর বিজয় ও গুনাহ থেকে রক্ষার ইঙ্গিত।'},
-{id:14,cat:'animals',icon:'🦁',title:'সিংহ দেখা',keywords:'সিংহ,বাঘ,হিংস্র পশু',ibnSirin:'সিংহ দেখা ক্ষমতাবান শত্রুর প্রতীক। সিংহকে পরাজিত করা বড় বিপদ অতিক্রমের আলামত।',nabulusi:'সিংহ রাজা বা শাসকের প্রতীক। সিংহের সাথে বন্ধুত্ব রাজানুগ্রহ লাভের ইঙ্গিত।',abdulghani:'সিংহ শক্তি ও পরাক্রমের প্রতীক। সিংহের ভয়ে পালানো দুনিয়াবী শক্তির প্রতি ভয়ের ইঙ্গিত।'},
-{id:15,cat:'animals',icon:'🐦',title:'পাখি দেখা',keywords:'পাখি,উড়া,কবুতর,ময়না',ibnSirin:'সাদা পাখি শান্তি ও সুখের প্রতীক। কবুতর দেখা ভালো সংবাদের ইঙ্গিত।',nabulusi:'গান করা পাখি আনন্দ ও খুশির সুসংবাদ। পাখি ধরতে পারা কোনো লক্ষ্য অর্জনের ইঙ্গিত।',abdulghani:'পাখি আত্মার প্রতীক। উড়ন্ত পাখি আধ্যাত্মিক উন্নতির ইঙ্গিত।'},
-{id:16,cat:'animals',icon:'🐄',title:'গরু দেখা',keywords:'গরু,মহিষ,গাভী',ibnSirin:'মোটা-তাজা গরু সমৃদ্ধির আলামত। দুর্বল গরু দুর্ভিক্ষ ও কষ্টের ইঙ্গিত। গরু জবাই করা কল্যাণ লাভের আলামত।',nabulusi:'গরু বছরের প্রতীক। সাতটি মোটা গরু সাত বছরের সুসময়ের ইঙ্গিত।',abdulghani:'গরু রিজিক ও জীবিকার প্রতীক। গরুর দুধ পান হালাল রিজিক লাভের ইঙ্গিত।'},
-{id:17,cat:'animals',icon:'🐑',title:'ভেড়া বা ছাগল দেখা',keywords:'ভেড়া,ছাগল,মেষ,পাল',ibnSirin:'ভেড়া দেখা সম্পদ ও সমৃদ্ধির ইঙ্গিত। ভেড়ার পাল দেখা প্রচুর নিয়ামতের আলামত।',nabulusi:'সাদা ভেড়া পবিত্রতা ও সুখের প্রতীক। ভেড়া জবাই করা উপকার ও সদকার ইঙ্গিত।',abdulghani:'ভেড়া নম্রতা ও বিনয়ের প্রতীক। ভেড়ার পাল পরিচালনা নেতৃত্ব ও দায়িত্বের ইঙ্গিত।'},
-{id:18,cat:'animals',icon:'🐘',title:'হাতি দেখা',keywords:'হাতি,বড় পশু,শক্তি',ibnSirin:'হাতি দেখা ক্ষমতা ও রাজকীয়তার ইঙ্গিত। হাতির পিঠে চড়া উচ্চ পদমর্যাদা লাভের আলামত।',nabulusi:'হাতি শক্তিশালী শাসকের প্রতীক। হাতি পোষ মানানো ক্ষমতাবানকে বশে রাখার ইঙ্গিত।',abdulghani:'হাতি বড় সম্পদের প্রতীক। হাতির পিঠে চড়া বড় দায়িত্ব গ্রহণের ইঙ্গিত।'},
-{id:19,cat:'animals',icon:'🦅',title:'ঈগল বা বাজ দেখা',keywords:'ঈগল,বাজপাখি,বাজ,শিকারি পাখি',ibnSirin:'ঈগল দেখা ক্ষমতাবান ও মর্যাদাবান ব্যক্তির প্রতীক। ঈগল ধরতে পারা উচ্চ পদ লাভের ইঙ্গিত।',nabulusi:'বাজপাখি রাজা ও শাসকের প্রতীক। বাজ থেকে শিকার পাওয়া রাজানুগ্রহ লাভের আলামত।',abdulghani:'ঈগল স্বাধীনতা ও উচ্চতার প্রতীক। ঈগলের মতো উড়া আধ্যাত্মিক উন্নতির ইঙ্গিত।'},
-{id:20,cat:'animals',icon:'🐪',title:'উট দেখা',keywords:'উট,বাহন,মরুভূমি,সফর',ibnSirin:'উট দেখা দীর্ঘ সফর বা কষ্টের পর সাফল্যের ইঙ্গিত। উটে চড়া হজ্বের তওফিক লাভের আলামত।',nabulusi:'উট সহনশীলতা ও ধৈর্যের প্রতীক। উট জবাই করা বড় কল্যাণ লাভের ইঙ্গিত।',abdulghani:'উট আরবের ঐতিহ্যবাহী প্রতীক। উটের কাফেলা দেখা দীর্ঘ যাত্রার ইঙ্গিত।'},
-{id:21,cat:'animals',icon:'🐺',title:'নেকড়ে বা শেয়াল দেখা',keywords:'নেকড়ে,শেয়াল,ধূর্ত',ibnSirin:'নেকড়ে দেখা ধূর্ত শত্রুর ইঙ্গিত। শেয়াল দেখা প্রতারক মানুষের সাথে সম্পর্কের আলামত।',nabulusi:'নেকড়ে থেকে পালিয়ে আসা শত্রুর প্রতারণা থেকে রক্ষার ইঙ্গিত।',abdulghani:'শেয়াল ধূর্ততা ও প্রতারণার প্রতীক। এই স্বপ্ন দেখলে সতর্ক থাকা উচিত।'},
-{id:22,cat:'animals',icon:'🐓',title:'মোরগ বা মুরগি দেখা',keywords:'মোরগ,মুরগি,ডাকা,সকাল',ibnSirin:'মোরগের ডাক শুনা সময়মতো কাজের ইঙ্গিত। মোরগ দেখা আযান ও ইবাদতের প্রতীক।',nabulusi:'সাদা মোরগ দেখা সৎ ও নেককার প্রতিবেশীর ইঙ্গিত। মুরগির ডিম সন্তান ও সম্পদের আলামত।',abdulghani:'মোরগ মুয়াজ্জিনের প্রতীক। মোরগের ডাক ফজরের আযান ও নামাজের ইঙ্গিত।'},
-{id:23,cat:'animals',icon:'🐝',title:'মৌমাছি বা মধু দেখা',keywords:'মৌমাছি,মধু,মৌচাক',ibnSirin:'মৌমাছি দেখা পরিশ্রমী ও উপকারী মানুষের প্রতীক। মৌচাক দেখা সম্পদ ও বরকতের আলামত।',nabulusi:'মৌমাছির কামড় ক্ষতির ইঙ্গিত। মধু সংগ্রহ করা হালাল রিজিক লাভের আলামত।',abdulghani:'মৌমাছি পরিশ্রম ও বরকতের প্রতীক। মধুর মৌচাক দেখা কুরআনের বরকতের ইঙ্গিত।'},
-{id:24,cat:'animals',icon:'🐢',title:'কচ্ছপ দেখা',keywords:'কচ্ছপ,ধীর,দীর্ঘজীবী',ibnSirin:'কচ্ছপ দেখা দীর্ঘায়ু ও ধৈর্যের প্রতীক। কচ্ছপ ধরা বিজ্ঞ ব্যক্তির সাথে পরিচয়ের ইঙ্গিত।',nabulusi:'কচ্ছপ আলেম ও বিজ্ঞ মানুষের প্রতীক। কচ্ছপ খাওয়া ইলম ও হেকমত অর্জনের আলামত।',abdulghani:'কচ্ছপ ধৈর্য ও স্থিরতার প্রতীক। ধীরে ধীরে লক্ষ্যে পৌঁছানোর ইঙ্গিত।'},
-
-// ৪. আকাশ ও প্রকৃতি
-{id:25,cat:'sky',icon:'⭐',title:'তারা দেখা',keywords:'তারা,আকাশ,নক্ষত্র',ibnSirin:'উজ্জ্বল তারা দেখা জ্ঞানী ও আলেম মানুষের ইঙ্গিত। তারা খসে পড়া কোনো বড় মানুষের মৃত্যুর আলামত।',nabulusi:'তারা হলো আলেম ও নেককারদের প্রতীক। অনেক তারা একসাথে দেখা সৎ সঙ্গীর মাধ্যমে উপকার লাভের ইঙ্গিত।',abdulghani:'তারা ইলম ও হেদায়েতের প্রতীক। তারার আলোয় পথ চলা ইলমের আলোয় জীবন পরিচালনার ইঙ্গিত।'},
-{id:26,cat:'sky',icon:'🌙',title:'চাঁদ দেখা',keywords:'চাঁদ,পূর্ণিমা,অর্ধচন্দ্র',ibnSirin:'পূর্ণ চাঁদ দেখা রাজ বা শাসকের প্রতীক। চাঁদের আলোয় স্নান শাসকের অনুগ্রহ লাভের ইঙ্গিত।',nabulusi:'চাঁদ মাতা বা স্ত্রীর প্রতীক। চাঁদের উদয় পরিবারে আনন্দের ইঙ্গিত।',abdulghani:'চাঁদ ইসলামের প্রতীক। অর্ধচন্দ্র দেখা ইসলামের বিজয় ও উন্নতির ইঙ্গিত।'},
-{id:27,cat:'sky',icon:'☀️',title:'সূর্য দেখা',keywords:'সূর্য,রোদ,সকাল',ibnSirin:'সূর্য দেখা রাজা বা ক্ষমতাবান ব্যক্তির প্রতীক। সূর্যের আলো গায়ে পড়া রাজকীয় অনুগ্রহ লাভের ইঙ্গিত।',nabulusi:'সূর্য পিতার প্রতীক। উজ্জ্বল সূর্য পারিবারিক সুখ ও সমৃদ্ধির ইঙ্গিত।',abdulghani:'সূর্য আল্লাহর নূরের প্রতীক। সূর্যের আলোয় পথ চলা সত্যের পথে অগ্রসরের ইঙ্গিত।'},
-{id:28,cat:'sky',icon:'🌈',title:'রংধনু দেখা',keywords:'রংধনু,বৃষ্টি,রঙ,আকাশ',ibnSirin:'রংধনু দেখা শান্তি ও সুখের ইঙ্গিত। বৃষ্টির পর রংধনু বিপদ শেষে সুদিন আসার আলামত।',nabulusi:'রংধনু আল্লাহর বিভিন্ন নিয়ামতের প্রতীক। রংধনু দেখা শুকরিয়া আদায়ের ইঙ্গিত।',abdulghani:'রংধনু আল্লাহর রহমতের চিহ্ন। এই স্বপ্ন দেখা শুভ ও আনন্দের আলামত।'},
-{id:29,cat:'sky',icon:'☁️  <button class="tab" onclick="showTab('about')">ℹ️ পরিচিতি</button>
-</div>
-<main id="mainContent"></main>
-<div class="overlay" id="overlay" onclick="toggleAI()"></div>
-<div class="ai-panel" id="aiPanel">
-  <div class="ai-header">
-    <span class="ai-icon">🤖</span>
-    <span class="ai-title">AI দিয়ে স্বপ্নের ব্যাখ্যা নিন</span>
-    <button class="btn-close-ai" onclick="toggleAI()">✕</button>
-  </div>
-  <div class="ai-input-row">
-    <input type="text" id="aiInput" placeholder="আপনার স্বপ্নের বিস্তারিত লিখুন...">
-    <button class="btn-ask" onclick="askAI()">জিজ্ঞেস করুন</button>
-  </div>
-  <div class="ai-response" id="aiResponse">আপনার স্বপ্নের বিষয় উপরে লিখুন এবং "জিজ্ঞেস করুন" বোতামে চাপ দিন।</div>
+  <div class="ar" id="ar">আপনার স্বপ্নের বিষয় উপরে লিখুন এবং জিজ্ঞেস করুন বোতামে চাপ দিন।</div>
 </div>
 <div class="toast" id="toast"></div>
 <script>
-const dreams=[
-// ১. পানি ও নদী
-{id:1,cat:'water',icon:'💧',title:'পরিষ্কার পানি দেখা',keywords:'পানি,নদী,খাল,পুকুর',ibnSirin:'পরিষ্কার পানি দেখা জীবনে বরকত ও সুখের আলামত। প্রবহমান পানি দীর্ঘ জীবন ও সুস্বাস্থ্যের ইঙ্গিত দেয়।',nabulusi:'স্বচ্ছ পানি রহমত ও নিয়ামতের প্রতীক। পানি পান করা হলে রিজিক বৃদ্ধির সুসংবাদ।',abdulghani:'স্বপ্নে পানি দেখা ইলম ও হেদায়েতের প্রতীক। ঝরনার পানি আল্লাহর খাস রহমতের ইঙ্গিত।'},
-{id:2,cat:'water',icon:'🌊',title:'সমুদ্রে ডুব দেওয়া',keywords:'সমুদ্র,ডুব,সাঁতার,গভীর',ibnSirin:'সমুদ্রে ডুব দিয়ে জীবিত উঠে আসা রাজা বা শক্তিশালী ব্যক্তির সাথে সম্পর্ক থেকে উপকার লাভের ইঙ্গিত।',nabulusi:'গভীর সমুদ্রে সাঁতার কাটা বড় বিপদ থেকে উদ্ধার পাওয়ার ইঙ্গিত। উদ্ধার হলে আল্লাহর সাহায্য লাভ।',abdulghani:'সমুদ্র হলো দুনিয়ার প্রতীক। তাতে ডুব দেওয়া দুনিয়াবী বিষয়ে গভীরভাবে জড়িত হওয়ার ইঙ্গিত।'},
-{id:3,cat:'water',icon:'🌧️',title:'বৃষ্টি দেখা',keywords:'বৃষ্টি,ঝড়,বর্ষা,মেঘ',ibnSirin:'বৃষ্টি দেখা রহমত ও বরকতের আলামত। ঘরের উপর বৃষ্টি পড়া সে পরিবারে নিয়ামত নাজিলের ইঙ্গিত।',nabulusi:'মৌসুমী বৃষ্টি জীবিকার সমৃদ্ধির ইঙ্গিত। ঝড়ো বৃষ্টি কষ্টের পর সুদিন আসার আলামত।',abdulghani:'বৃষ্টি আল্লাহর রহমতের প্রতীক। দোয়া কবুল হওয়ার সুসংবাদ বহন করে।'},
-{id:4,cat:'water',icon:'🏊',title:'নদীতে গোসল করা',keywords:'গোসল,নদী,পরিষ্কার,পবিত্র',ibnSirin:'পরিষ্কার নদীতে গোসল করা পাপ থেকে মুক্তি ও তওবা কবুলের ইঙ্গিত। মনে শান্তি ও পবিত্রতার আলামত।',nabulusi:'গোসল করা রোগ থেকে মুক্তির ইঙ্গিত। নদীর পানিতে গোসল দীর্ঘ সুস্বাস্থ্যের আলামত।',abdulghani:'গোসল আত্মার পরিশুদ্ধতার প্রতীক। পরিষ্কার পানিতে গোসল গুনাহ মাফের ইঙ্গিত।'},
-{id:5,cat:'water',icon:'⛵',title:'নৌকায় ভ্রমণ',keywords:'নৌকা,জাহাজ,সমুদ্র,নদী,ভ্রমণ',ibnSirin:'নৌকায় ভ্রমণ নিরাপদ পথে জীবন পরিচালনার ইঙ্গিত। সুষ্ঠু নৌকা সাফল্যের প্রতীক।',nabulusi:'নৌকায় ভ্রমণ করা জীবনের এক পর্যায় থেকে অন্য পর্যায়ে যাওয়ার ইঙ্গিত। নিরাপদ পৌঁছানো সাফল্যের আলামত।',abdulghani:'নৌকা জীবনের যানবাহনের প্রতীক। আল্লাহর উপর ভরসা করে পথ চলার ইঙ্গিত।'},
-{id:6,cat:'water',icon:'🌊',title:'বন্যা দেখা',keywords:'বন্যা,প্লাবন,পানি বৃদ্ধি',ibnSirin:'বন্যা দেখা বিপদ ও পরীক্ষার ইঙ্গিত। তবে পানি সরে গেলে বিপদ কেটে যাওয়ার আলামত।',nabulusi:'বন্যায় ভেসে না যাওয়া বিপদ থেকে রক্ষার ইঙ্গিত। উঁচুতে উঠে বাঁচা আল্লাহর সাহায্যের আলামত।',abdulghani:'বন্যা ফিতনা ও বিপদের প্রতীক। দোয়া ও সবরের মাধ্যমে রক্ষা পাওয়ার ইঙ্গিত।'},
-{id:7,cat:'water',icon:'🐟',title:'মাছ দেখা বা ধরা',keywords:'মাছ,মৎস্য,ধরা,জাল',ibnSirin:'মাছ ধরা হালাল রিজিক ও সম্পদ লাভের ইঙ্গিত। বড় মাছ বড় নিয়ামতের আলামত।',nabulusi:'জীবন্ত মাছ দেখা জীবিকার সমৃদ্ধির ইঙ্গিত। মাছ খাওয়া স্বাস্থ্য ও দীর্ঘায়ুর আলামত।',abdulghani:'মাছ সমুদ্রের সম্পদের প্রতীক। মাছ ধরা হালাল উপায়ে জীবিকা অর্জনের ইঙ্গিত।'},
-{id:8,cat:'water',icon:'🌊',title:'কূপ বা ঝরনা দেখা',keywords:'কূপ,ঝরনা,প্রস্রবণ,উৎস',ibnSirin:'কূপ থেকে পানি তোলা জ্ঞান অর্জন ও উপকার লাভের ইঙ্গিত। ঝরনা দেখা বিশুদ্ধ রিজিকের আলামত।',nabulusi:'পরিষ্কার কূপ দেখা ভালো স্ত্রী বা বন্ধুর ইঙ্গিত। কূপ খনন করা শ্রম দিয়ে রিজিক উপার্জনের আলামত।',abdulghani:'ঝরনা আল্লাহর রহমতের উৎসের প্রতীক। ঝরনার পানি পান ইলম ও হেদায়েত লাভের ইঙ্গিত।'},
-
-// ২. আগুন ও আলো
-{id:9,cat:'fire',icon:'🔥',title:'আগুন দেখা',keywords:'আগুন,জ্বলা,আলো',ibnSirin:'আগুন দেখা সাধারণত ফিতনা ও বিপদের ইঙ্গিত। তবে আগুন যদি আলো দেয় কিন্তু পোড়ায় না, তবে ইলম ও জ্ঞানের আলামত।',nabulusi:'ঘরে আগুন লাগলে সে পরিবারে বিপদ আসতে পারে। তওবা ও দোয়ার মাধ্যমে রক্ষা পাওয়া যায়।',abdulghani:'আগুন ক্ষমতা ও প্রভাবের প্রতীক। আগুনে আলো দেখা শাসন ও নেতৃত্বের ইঙ্গিত।'},
-{id:10,cat:'fire',icon:'🕯️',title:'মোমবাতি বা প্রদীপ',keywords:'আলো,মোমবাতি,প্রদীপ,বাতি',ibnSirin:'প্রদীপ দেখা ইলম ও হেদায়েতের প্রতীক। নিভে যাওয়া প্রদীপ নেককার মানুষের ইন্তেকালের ইঙ্গিত।',nabulusi:'উজ্জ্বল আলো দেখা ঈমান ও তাকওয়ার বৃদ্ধির ইঙ্গিত। আলো জ্বলা ঘরে বরকত নাজিল হয়।',abdulghani:'প্রদীপের আলো ইলমের প্রতীক। নতুন প্রদীপ জ্বালানো নতুন ইলম অর্জনের ইঙ্গিত।'},
-{id:11,cat:'fire',icon:'⚡',title:'বজ্রপাত বা বিদ্যুৎ দেখা',keywords:'বজ্র,বিদ্যুৎ,ঝড়,আলো',ibnSirin:'বজ্রপাত দেখা হঠাৎ বিপদ বা সংকটের ইঙ্গিত। বজ্রের আওয়াজ কোনো বড় ঘটনার পূর্বাভাস।',nabulusi:'বিদ্যুৎ চমকানো ভয় ও শঙ্কার ইঙ্গিত। তবে বিদ্যুৎ থেকে রক্ষা পাওয়া বিপদ এড়ানোর আলামত।',abdulghani:'বজ্রপাত আল্লাহর কুদরতের নিদর্শন। এই স্বপ্ন দেখলে ইস্তেগফার ও দোয়া করা উচিত।'},
-{id:12,cat:'fire',icon:'☀️',title:'সূর্যের আলো গায়ে পড়া',keywords:'সূর্য,আলো,রোদ,কিরণ',ibnSirin:'সূর্যের আলো গায়ে পড়া রাজানুগ্রহ ও মর্যাদা বৃদ্ধির ইঙ্গিত। উজ্জ্বল সূর্য সাফল্যের আলামত।',nabulusi:'সূর্যের আলোয় স্নান করা ক্ষমতাবান ব্যক্তির সাথে সম্পর্কের ইঙ্গিত।',abdulghani:'সূর্যের আলো আল্লাহর নূরের প্রতীক। সূর্যের আলোয় পথ চলা সত্যের পথে অগ্রসরের ইঙ্গিত।'},
-
-// ৩. পশু-পাখি
-{id:13,cat:'animals',icon:'🐍',title:'সাপ দেখা',keywords:'সাপ,কামড়,বিষ',ibnSirin:'সাপ দেখা শত্রু ও বিপদের প্রতীক। সাপ মেরে ফেলা শত্রুর উপর বিজয়ের আলামত।',nabulusi:'সাপ স্বপ্নে শত্রু, বিপদ ও প্রলোভনের প্রতীক। সাপ থেকে পালিয়ে আসা বিপদ এড়ানোর ইঙ্গিত।',abdulghani:'সাপ শয়তানের প্রতীক। সাপ মেরে ফেলা নাফসের উপর বিজয় ও গুনাহ থেকে রক্ষার ইঙ্গিত।'},
-{id:14,cat:'animals',icon:'🦁',title:'সিংহ দেখা',keywords:'সিংহ,বাঘ,হিংস্র পশু',ibnSirin:'সিংহ দেখা ক্ষমতাবান শত্রুর প্রতীক। সিংহকে পরাজিত করা বড় বিপদ অতিক্রমের আলামত।',nabulusi:'সিংহ রাজা বা শাসকের প্রতীক। সিংহের সাথে বন্ধুত্ব রাজানুগ্রহ লাভের ইঙ্গিত।',abdulghani:'সিংহ শক্তি ও পরাক্রমের প্রতীক। সিংহের ভয়ে পালানো দুনিয়াবী শক্তির প্রতি ভয়ের ইঙ্গিত।'},
-{id:15,cat:'animals',icon:'🐦',title:'পাখি দেখা',keywords:'পাখি,উড়া,কবুতর,ময়না',ibnSirin:'সাদা পাখি শান্তি ও সুখের প্রতীক। কবুতর দেখা ভালো সংবাদের ইঙ্গিত।',nabulusi:'গান করা পাখি আনন্দ ও খুশির সুসংবাদ। পাখি ধরতে পারা কোনো লক্ষ্য অর্জনের ইঙ্গিত।',abdulghani:'পাখি আত্মার প্রতীক। উড়ন্ত পাখি আধ্যাত্মিক উন্নতির ইঙ্গিত।'},
-{id:16,cat:'animals',icon:'🐄',title:'গরু দেখা',keywords:'গরু,মহিষ,গাভী',ibnSirin:'মোটা-তাজা গরু সমৃদ্ধির আলামত। দুর্বল গরু দুর্ভিক্ষ ও কষ্টের ইঙ্গিত। গরু জবাই করা কল্যাণ লাভের আলামত।',nabulusi:'গরু বছরের প্রতীক। সাতটি মোটা গরু সাত বছরের সুসময়ের ইঙ্গিত।',abdulghani:'গরু রিজিক ও জীবিকার প্রতীক। গরুর দুধ পান হালাল রিজিক লাভের ইঙ্গিত।'},
-{id:17,cat:'animals',icon:'🐑',title:'ভেড়া বা ছাগল দেখা',keywords:'ভেড়া,ছাগল,মেষ,পাল',ibnSirin:'ভেড়া দেখা সম্পদ ও সমৃদ্ধির ইঙ্গিত। ভেড়ার পাল দেখা প্রচুর নিয়ামতের আলামত।',nabulusi:'সাদা ভেড়া পবিত্রতা ও সুখের প্রতীক। ভেড়া জবাই করা উপকার ও সদকার ইঙ্গিত।',abdulghani:'ভেড়া নম্রতা ও বিনয়ের প্রতীক। ভেড়ার পাল পরিচালনা নেতৃত্ব ও দায়িত্বের ইঙ্গিত।'},
-{id:18,cat:'animals',icon:'🐘',title:'হাতি দেখা',keywords:'হাতি,বড় পশু,শক্তি',ibnSirin:'হাতি দেখা ক্ষমতা ও রাজকীয়তার ইঙ্গিত। হাতির পিঠে চড়া উচ্চ পদমর্যাদা লাভের আলামত।',nabulusi:'হাতি শক্তিশালী শাসকের প্রতীক। হাতি পোষ মানানো ক্ষমতাবানকে বশে রাখার ইঙ্গিত।',abdulghani:'হাতি বড় সম্পদের প্রতীক। হাতির পিঠে চড়া বড় দায়িত্ব গ্রহণের ইঙ্গিত।'},
-{id:19,cat:'animals',icon:'🦅',title:'ঈগল বা বাজ দেখা',keywords:'ঈগল,বাজপাখি,বাজ,শিকারি পাখি',ibnSirin:'ঈগল দেখা ক্ষমতাবান ও মর্যাদাবান ব্যক্তির প্রতীক। ঈগল ধরতে পারা উচ্চ পদ লাভের ইঙ্গিত।',nabulusi:'বাজপাখি রাজা ও শাসকের প্রতীক। বাজ থেকে শিকার পাওয়া রাজানুগ্রহ লাভের আলামত।',abdulghani:'ঈগল স্বাধীনতা ও উচ্চতার প্রতীক। ঈগলের মতো উড়া আধ্যাত্মিক উন্নতির ইঙ্গিত।'},
-{id:20,cat:'animals',icon:'🐪',title:'উট দেখা',keywords:'উট,বাহন,মরুভূমি,সফর',ibnSirin:'উট দেখা দীর্ঘ সফর বা কষ্টের পর সাফল্যের ইঙ্গিত। উটে চড়া হজ্বের তওফিক লাভের আলামত।',nabulusi:'উট সহনশীলতা ও ধৈর্যের প্রতীক। উট জবাই করা বড় কল্যাণ লাভের ইঙ্গিত।',abdulghani:'উট আরবের ঐতিহ্যবাহী প্রতীক। উটের কাফেলা দেখা দীর্ঘ যাত্রার ইঙ্গিত।'},
-{id:21,cat:'animals',icon:'🐺',title:'নেকড়ে বা শেয়াল দেখা',keywords:'নেকড়ে,শেয়াল,ধূর্ত',ibnSirin:'নেকড়ে দেখা ধূর্ত শত্রুর ইঙ্গিত। শেয়াল দেখা প্রতারক মানুষের সাথে সম্পর্কের আলামত।',nabulusi:'নেকড়ে থেকে পালিয়ে আসা শত্রুর প্রতারণা থেকে রক্ষার ইঙ্গিত।',abdulghani:'শেয়াল ধূর্ততা ও প্রতারণার প্রতীক। এই স্বপ্ন দেখলে সতর্ক থাকা উচিত।'},
-{id:22,cat:'animals',icon:'🐓',title:'মোরগ বা মুরগি দেখা',keywords:'মোরগ,মুরগি,ডাকা,সকাল',ibnSirin:'মোরগের ডাক শুনা সময়মতো কাজের ইঙ্গিত। মোরগ দেখা আযান ও ইবাদতের প্রতীক।',nabulusi:'সাদা মোরগ দেখা সৎ ও নেককার প্রতিবেশীর ইঙ্গিত। মুরগির ডিম সন্তান ও সম্পদের আলামত।',abdulghani:'মোরগ মুয়াজ্জিনের প্রতীক। মোরগের ডাক ফজরের আযান ও নামাজের ইঙ্গিত।'},
-{id:23,cat:'animals',icon:'🐝',title:'মৌমাছি বা মধু দেখা',keywords:'মৌমাছি,মধু,মৌচাক',ibnSirin:'মৌমাছি দেখা পরিশ্রমী ও উপকারী মানুষের প্রতীক। মৌচাক দেখা সম্পদ ও বরকতের আলামত।',nabulusi:'মৌমাছির কামড় ক্ষতির ইঙ্গিত। মধু সংগ্রহ করা হালাল রিজিক লাভের আলামত।',abdulghani:'মৌমাছি পরিশ্রম ও বরকতের প্রতীক। মধুর মৌচাক দেখা কুরআনের বরকতের ইঙ্গিত।'},
-{id:24,cat:'animals',icon:'🐢',title:'কচ্ছপ দেখা',keywords:'কচ্ছপ,ধীর,দীর্ঘজীবী',ibnSirin:'কচ্ছপ দেখা দীর্ঘায়ু ও ধৈর্যের প্রতীক। কচ্ছপ ধরা বিজ্ঞ ব্যক্তির সাথে পরিচয়ের ইঙ্গিত।',nabulusi:'কচ্ছপ আলেম ও বিজ্ঞ মানুষের প্রতীক। কচ্ছপ খাওয়া ইলম ও হেকমত অর্জনের আলামত।',abdulghani:'কচ্ছপ ধৈর্য ও স্থিরতার প্রতীক। ধীরে ধীরে লক্ষ্যে পৌঁছানোর ইঙ্গিত।'},
-
-// ৪. আকাশ ও প্রকৃতি
-{id:25,cat:'sky',icon:'⭐',title:'তারা দেখা',keywords:'তারা,আকাশ,নক্ষত্র',ibnSirin:'উজ্জ্বল তারা দেখা জ্ঞানী ও আলেম মানুষের ইঙ্গিত। তারা খসে পড়া কোনো বড় মানুষের মৃত্যুর আলামত।',nabulusi:'তারা হলো আলেম ও নেককারদের প্রতীক। অনেক তারা একসাথে দেখা সৎ সঙ্গীর মাধ্যমে উপকার লাভের ইঙ্গিত।',abdulghani:'তারা ইলম ও হেদায়েতের প্রতীক। তারার আলোয় পথ চলা ইলমের আলোয় জীবন পরিচালনার ইঙ্গিত।'},
-{id:26,cat:'sky',icon:'🌙',title:'চাঁদ দেখা',keywords:'চাঁদ,পূর্ণিমা,অর্ধচন্দ্র',ibnSirin:'পূর্ণ চাঁদ দেখা রাজ বা শাসকের প্রতীক। চাঁদের আলোয় স্নান শাসকের অনুগ্রহ লাভের ইঙ্গিত।',nabulusi:'চাঁদ মাতা বা স্ত্রীর প্রতীক। চাঁদের উদয় পরিবারে আনন্দের ইঙ্গিত।',abdulghani:'চাঁদ ইসলামের প্রতীক। অর্ধচন্দ্র দেখা ইসলামের বিজয় ও উন্নতির ইঙ্গিত।'},
-{id:27,cat:'sky',icon:'☀️',title:'সূর্য দেখা',keywords:'সূর্য,রোদ,সকাল',ibnSirin:'সূর্য দেখা রাজা বা ক্ষমতাবান ব্যক্তির প্রতীক। সূর্যের আলো গায়ে পড়া রাজকীয় অনুগ্রহ লাভের ইঙ্গিত।',nabulusi:'সূর্য পিতার প্রতীক। উজ্জ্বল সূর্য পারিবারিক সুখ ও সমৃদ্ধির ইঙ্গিত।',abdulghani:'সূর্য আল্লাহর নূরের প্রতীক। সূর্যের আলোয় পথ চলা সত্যের পথে অগ্রসরের ইঙ্গিত।'},
-{id:28,cat:'sky',icon:'🌈',title:'রংধনু দেখা',keywords:'রংধনু,বৃষ্টি,রঙ,আকাশ',ibnSirin:'রংধনু দেখা শান্তি ও সুখের ইঙ্গিত। বৃষ্টির পর রংধনু বিপদ শেষে সুদিন আসার আলামত।',nabulusi:'রংধনু আল্লাহর বিভিন্ন নিয়ামতের প্রতীক। রংধনু দেখা শুকরিয়া আদায়ের ইঙ্গিত।',abdulghani:'রংধনু আল্লাহর রহমতের চিহ্ন। এই স্বপ্ন দেখা শুভ ও আনন্দের আলামত।'},
-{id:29,cat:'sky',icon:'☁️    font-size: 16px;
-  }
-
-  #searchInput {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #fff;
-    font-family: 'Noto Sans Bengali', sans-serif;
-    font-size: 14px;
-    padding: 9px 0;
-  }
-
-  #searchInput::placeholder { color: rgba(255,255,255,0.5); }
-
-  .btn-clear {
-    background: none;
-    border: none;
-    color: rgba(255,255,255,0.6);
-    padding: 0 10px;
-    font-size: 18px;
-    cursor: pointer;
-    display: none;
-  }
-
-  .btn-ai {
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-    border: none;
-    border-radius: 50%;
-    width: 38px;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 18px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    flex-shrink: 0;
-  }
-
-  /* TABS */
-  .tabs {
-    display: flex;
-    background: var(--parchment-dark);
-    border-bottom: 2px solid var(--gold);
-    overflow-x: auto;
-  }
-
-  .tab {
-    flex: 1;
-    min-width: 80px;
-    padding: 10px 6px;
-    font-size: 12px;
-    font-family: 'Noto Sans Bengali', sans-serif;
-    font-weight: 500;
-    color: #5a4a30;
-    background: none;
-    border: none;
-    border-bottom: 3px solid transparent;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-    white-space: nowrap;
-  }
-
-  .tab.active {
-    color: var(--emerald);
-    border-bottom-color: var(--emerald);
-    font-weight: 600;
-    background: rgba(27,77,62,0.08);
-  }
-
-  /* CONTENT */
-  main { padding: 12px; min-height: calc(100vh - 130px); }
-
-  /* CATEGORY GRID */
-  .cat-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-
-  .cat-card {
-    background: linear-gradient(135deg, var(--cream) 0%, #efe6cc 100%);
-    border: 1px solid var(--gold-pale);
-    border-radius: 10px;
-    padding: 14px 10px;
-    text-align: center;
-    cursor: pointer;
-    box-shadow: 0 2px 8px var(--shadow);
-    transition: transform 0.15s, box-shadow 0.15s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cat-card:active { transform: scale(0.97); }
-
-  .cat-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--gold), var(--emerald));
-  }
-
-  .cat-icon { font-size: 26px; margin-bottom: 6px; }
-  .cat-name { font-family: 'Noto Serif Bengali', serif; font-size: 13px; font-weight: 600; color: var(--emerald); }
-  .cat-count { font-size: 10px; color: #7a6040; margin-top: 2px; }
-
-  /* DREAM LIST */
-  .dream-list { display: flex; flex-direction: column; gap: 10px; }
-
-  .dream-card {
-    background: var(--cream);
-    border: 1px solid var(--gold-pale);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px var(--shadow);
-    cursor: pointer;
-  }
-
-  .dream-header {
-    display: flex;
-    align-items: center;
-    padding: 10px 12px;
-    gap: 10px;
-  }
-
-  .dream-icon { font-size: 22px; flex-shrink: 0; }
-
-  .dream-title-wrap { flex: 1; }
-
-  .dream-title {
-    font-family: 'Noto Serif Bengali', serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--ink);
-    line-height: 1.4;
-  }
-
-  .dream-keywords {
-    font-size: 11px;
-    color: #8a7050;
-    margin-top: 2px;
-  }
-
-  .dream-expand { color: var(--gold); font-size: 18px; }
-
-  .dream-body {
-    display: none;
-    border-top: 1px solid var(--gold-pale);
-  }
-
-  .dream-body.open { display: block; }
-
-  .tafsir-tab-row {
-    display: flex;
-    background: var(--parchment-dark);
-    border-bottom: 1px solid var(--gold-pale);
-  }
-
-  .tafsir-btn {
-    flex: 1;
-    padding: 7px 4px;
-    font-size: 11px;
-    font-family: 'Noto Sans Bengali', sans-serif;
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    cursor: pointer;
-    color: #6a5030;
-    font-weight: 500;
-  }
-
-  .tafsir-btn.active {
-    color: var(--emerald);
-    border-bottom-color: var(--emerald);
-    font-weight: 600;
-  }
-
-  .tafsir-content {
-    padding: 12px;
-    font-size: 13px;
-    line-height: 1.8;
-    color: #2a1a08;
-  }
-
-  .tafsir-panel { display: none; }
-  .tafsir-panel.active { display: block; }
-
-  .scholar-badge {
-    display: inline-block;
-    background: linear-gradient(90deg, var(--emerald) 0%, var(--emerald-light) 100%);
-    color: #fff;
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 10px;
-    margin-bottom: 6px;
-  }
-
-  /* SEARCH RESULTS */
-  .search-results { display: none; }
-  .search-results.active { display: block; }
-
-  .result-count {
-    font-size: 12px;
-    color: #7a6040;
-    margin-bottom: 10px;
-    padding: 6px 10px;
-    background: var(--gold-pale);
-    border-radius: 6px;
-  }
-
-  /* AI PANEL */
-  .ai-panel {
-    display: none;
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    background: var(--cream);
-    border-top: 2px solid var(--gold);
-    border-radius: 16px 16px 0 0;
-    padding: 16px;
-    max-height: 70vh;
-    overflow-y: auto;
-    z-index: 200;
-    box-shadow: 0 -4px 20px var(--shadow);
-  }
-
-  .ai-panel.open { display: block; }
-
-  .ai-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-
-  .ai-icon { font-size: 24px; }
-
-  .ai-title {
-    flex: 1;
-    font-family: 'Noto Serif Bengali', serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--emerald);
-  }
-
-  .btn-close-ai {
-    background: none;
-    border: none;
-    font-size: 22px;
-    color: #8a6040;
-    cursor: pointer;
-  }
-
-  .ai-input-row {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-
-  #aiInput {
-    flex: 1;
-    border: 1.5px solid var(--gold-pale);
-    border-radius: 24px;
-    padding: 10px 14px;
-    font-family: 'Noto Sans Bengali', sans-serif;
-    font-size: 13px;
-    background: #fff;
-    outline: none;
-    color: var(--ink);
-  }
-
-  #aiInput:focus { border-color: var(--emerald); }
-
-  .btn-ask {
-    background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-light) 100%);
-    color: #fff;
-    border: none;
-    border-radius: 24px;
-    padding: 10px 16px;
-    font-family: 'Noto Sans Bengali', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-
-  .ai-response {
-    background: #fff;
-    border: 1px solid var(--gold-pale);
-    border-radius: 10px;
-    padding: 12px;
-    font-size: 13px;
-    line-height: 1.8;
-    color: var(--ink);
-    min-height: 60px;
-  }
-
-  .ai-loading { text-align: center; color: var(--gold); font-size: 22px; padding: 10px; }
-
-  /* OVERLAY */
-  .overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.4);
-    z-index: 199;
-  }
-  .overlay.open { display: block; }
-
-  /* SECTION HEADER */
-  .section-head {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-
-  .section-head-icon { font-size: 20px; }
-
-  .section-head-title {
-    font-family: 'Noto Serif Bengali', serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--emerald);
-    flex: 1;
-  }
-
-  .btn-back {
-    background: none;
-    border: 1px solid var(--gold);
-    border-radius: 20px;
-    padding: 4px 12px;
-    font-family: 'Noto Sans Bengali', sans-serif;
-    font-size: 12px;
-    color: var(--gold);
-    cursor: pointer;
-  }
-
-  /* BISMILLAH */
-  .bismillah {
-    text-align: center;
-    font-family: 'Noto Serif Bengali', serif;
-    font-size: 18px;
-    color: var(--gold);
-    padding: 14px;
-    background: linear-gradient(135deg, var(--emerald) 0%, #0d2b22 100%);
-    border-radius: 10px;
-    margin-bottom: 14px;
-    letter-spacing: 1px;
-  }
-
-  /* TOAST */
-  .toast {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(80px);
-    background: var(--emerald);
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 24px;
-    font-size: 13px;
-    z-index: 300;
-    transition: transform 0.3s;
-    white-space: nowrap;
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); }
-
-  /* ABOUT */
-  .about-card {
-    background: var(--cream);
-    border: 1px solid var(--gold-pale);
-    border-radius: 10px;
-    padding: 16px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 6px var(--shadow);
-  }
-  .about-card h3 {
-    font-family: 'Noto Serif Bengali', serif;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--emerald);
-    margin-bottom: 8px;
-  }
-  .about-card p { font-size: 13px; line-height: 1.8; color: #3a2a10; }
-
-  .no-result {
-    text-align: center;
-    padding: 30px 20px;
-    color: #8a7050;
-  }
-  .no-result-icon { font-size: 40px; margin-bottom: 10px; }
-  .no-result p { font-size: 14px; }
-</style>
-</head>
-<body>
-
-<header>
-  <div class="header-top">
-    <div style="width:80px;"></div>
-    <div class="header-title">
-      <div class="app-title">🌙 সোলাইমানী খাবনামা</div>
-      <div class="app-subtitle">ইসলামী স্বপ্নের ব্যাখ্যা</div>
-    </div>
-    <span class="watermark">@A.M.MORSHED</span>
-  </div>
-  <div class="search-wrap">
-    <div class="search-box">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="searchInput" placeholder="স্বপ্নের বিষয় লিখুন..." oninput="onSearch(this.value)">
-      <button class="btn-clear" id="btnClear" onclick="clearSearch()">✕</button>
-    </div>
-    <button class="btn-ai" onclick="toggleAI()" title="AI দিয়ে জিজ্ঞেস করুন">🤖</button>
-  </div>
-</header>
-
-<div class="tabs">
-  <button class="tab active" onclick="showTab('home')">🏠 হোম</button>
-  <button class="tab" onclick="showTab('category')">📂 বিভাগ</button>
-  <button class="tab" onclick="showTab('all')">📖 সব স্বপ্ন</button>
-  <button class="tab" onclick="showTab('about')">ℹ️ পরিচিতি</button>
-</div>
-
-<main id="mainContent">
-  <!-- dynamic content here -->
-</main>
-
-<!-- AI Panel -->
-<div class="overlay" id="overlay" onclick="toggleAI()"></div>
-<div class="ai-panel" id="aiPanel">
-  <div class="ai-header">
-    <span class="ai-icon">🤖</span>
-    <span class="ai-title">AI দিয়ে স্বপ্নের ব্যাখ্যা নিন</span>
-    <button class="btn-close-ai" onclick="toggleAI()">✕</button>
-  </div>
-  <div class="ai-input-row">
-    <input type="text" id="aiInput" placeholder="আপনার স্বপ্নের বিস্তারিত লিখুন...">
-    <button class="btn-ask" onclick="askAI()">জিজ্ঞেস করুন</button>
-  </div>
-  <div class="ai-response" id="aiResponse">আপনার স্বপ্নের বিষয় উপরে লিখুন এবং "জিজ্ঞেস করুন" বোতামে চাপ দিন।</div>
-</div>
-
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
-<script>
-// ===== DREAM DATABASE =====
-const dreams = [
-  // ১. পানি ও নদী
-  {id:1, cat:'water', icon:'💧', title:'পরিষ্কার পানি দেখা', keywords:'পানি,নদী,খাল,পুকুর,সাগর',
-   ibnSirin:'পরিষ্কার পানি দেখা জীবনে বরকত ও সুখের আলামত। হযরত ইবনে সীরীন (রহ.) বলেন, প্রবহমান পানি দেখা দীর্ঘ জীবন ও সুস্বাস্থ্যের ইঙ্গিত দেয়।',
-   nabulusi:'ইমাম নাবুলুসী (রহ.) বলেন, স্বচ্ছ পানি রহমত ও নিয়ামতের প্রতীক। পানি পান করা হলে রিজিক বৃদ্ধির সুসংবাদ।',
-   abdulghani:'শায়খ আব্দুল গনী নাবুলুসী (রহ.) বলেন, স্বপ্নে পানি দেখা ইলম ও হেদায়েতের প্রতীক। বিশেষত ঝরনার পানি আল্লাহর খাস রহমতের ইঙ্গিত।'},
-  {id:2, cat:'water', icon:'🌊', title:'সমুদ্রে ডুব দেওয়া', keywords:'সমুদ্র,ডুব,সাঁতার,গভীর পানি',
-   ibnSirin:'সমুদ্রে ডুব দিয়ে জীবিত উঠে আসা রাজা বা শক্তিশালী ব্যক্তির সাথে সম্পর্ক এবং তা থেকে উপকার লাভের ইঙ্গিত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, গভীর সমুদ্রে সাঁতার কাটা বড় বিপদে পড়ার ও তা থেকে উদ্ধার পাওয়ার ইঙ্গিত। উদ্ধার হলে আল্লাহর সাহায্য লাভ।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, সমুদ্র হলো দুনিয়ার প্রতীক। তাতে ডুব দেওয়া দুনিয়াবী বিষয়ে গভীরভাবে জড়িত হওয়ার ইঙ্গিত।'},
-  {id:3, cat:'water', icon:'🌧️', title:'বৃষ্টি দেখা', keywords:'বৃষ্টি,ঝড়,বর্ষা',
-   ibnSirin:'বৃষ্টি দেখা সাধারণত রহমত ও বরকতের আলামত। ঘরের উপর বৃষ্টি পড়তে দেখা সেই পরিবারে নিয়ামত নাজিলের ইঙ্গিত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, মৌসুমী বৃষ্টি জীবিকার সমৃদ্ধি ও ফসলের উন্নতির ইঙ্গিত। ঝড়ো বৃষ্টি কিছুটা কষ্টের পর সুদিন আসার আলামত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, বৃষ্টি হলো আল্লাহর রহমতের প্রতীক। দোয়া কবুল হওয়ার সুসংবাদ বহন করে।'},
-
-  // ২. আগুন ও আলো
-  {id:4, cat:'fire', icon:'🔥', title:'আগুন দেখা', keywords:'আগুন,জ্বলা,আলোয়',
-   ibnSirin:'স্বপ্নে আগুন দেখা সাধারণত ফিতনা ও বিপদের ইঙ্গিত। তবে আগুন যদি আলো দেয় কিন্তু পোড়ায় না, তবে ইলম ও জ্ঞানের আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, ঘরে আগুন লাগতে দেখলে সে পরিবারে বিপদ আসতে পারে। তওবা ও দোয়ার মাধ্যমে রক্ষা পাওয়া যায়।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, আগুন ক্ষমতা ও প্রভাবের প্রতীক। আগুনে আলো দেখা হলে শাসন ও নেতৃত্বের ইঙ্গিত।'},
-  {id:5, cat:'fire', icon:'🕯️', title:'মোমবাতি বা প্রদীপ দেখা', keywords:'আলো,মোমবাতি,প্রদীপ,বাতি',
-   ibnSirin:'মোমবাতি বা প্রদীপ দেখা ইলম, জ্ঞান ও হেদায়েতের প্রতীক। নিভে যাওয়া প্রদীপ কোনো আলেম বা নেককার মানুষের ইন্তেকালের ইঙ্গিত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, উজ্জ্বল আলো দেখা ঈমান ও তাকওয়ার বৃদ্ধির ইঙ্গিত। যে ঘরে আলো জ্বলছে সে ঘরে বরকত নাজিল হয়।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, প্রদীপের আলো ইলমের প্রতীক। নতুন প্রদীপ জ্বালানো নতুন ইলম অর্জনের ইঙ্গিত।'},
-
-  // ৩. পশু-পাখি
-  {id:6, cat:'animals', icon:'🐍', title:'সাপ দেখা', keywords:'সাপ,কামড়,বিষ',
-   ibnSirin:'সাপ দেখা শত্রু ও বিপদের প্রতীক। সাপ মেরে ফেলা শত্রুর উপর বিজয়ের আলামত। সাপ কামড়ানো শত্রুর ক্ষতির ইঙ্গিত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, সাপ স্বপ্নে শত্রু, বিপদ ও প্রলোভনের প্রতীক। সাপ থেকে পালিয়ে আসা বিপদ এড়ানোর ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, সাপ শয়তানের প্রতীক। সাপ মেরে ফেলা নাফসের উপর বিজয় ও গুনাহ থেকে রক্ষার ইঙ্গিত।'},
-  {id:7, cat:'animals', icon:'🦁', title:'সিংহ দেখা', keywords:'সিংহ,বাঘ,হিংস্র পশু',
-   ibnSirin:'স্বপ্নে সিংহ দেখা ক্ষমতাবান শত্রুর প্রতীক। সিংহকে পরাজিত করা বড় বিপদ অতিক্রম করার আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, সিংহ রাজা বা শাসকের প্রতীক। সিংহের সাথে বন্ধুত্ব রাজানুগ্রহ লাভের ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, সিংহ শক্তি ও পরাক্রমের প্রতীক। সিংহের ভয়ে পালানো দুনিয়াবী শক্তির প্রতি ভয়ের ইঙ্গিত।'},
-  {id:8, cat:'animals', icon:'🐦', title:'পাখি দেখা', keywords:'পাখি,উড়া,কবুতর,ময়না',
-   ibnSirin:'পাখি দেখা সাধারণত শুভ। সাদা পাখি শান্তি ও সুখের প্রতীক। কবুতর দেখা ভালো সংবাদের ইঙ্গিত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, গান করা পাখি আনন্দ ও খুশির সুসংবাদ। পাখি ধরতে পারা কোনো লক্ষ্য অর্জনের ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, পাখি আত্মার প্রতীক। উড়ন্ত পাখি আধ্যাত্মিক উন্নতির ইঙ্গিত।'},
-  {id:9, cat:'animals', icon:'🐄', title:'গরু দেখা', keywords:'গরু,মহিষ,ঢেউ',
-   ibnSirin:'মোটা-তাজা গরু সুসময় ও সমৃদ্ধির আলামত। দুর্বল গরু দুর্ভিক্ষ ও কষ্টের ইঙ্গিত। গরু জবাই করা কল্যাণ লাভের আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, গরু বছরের প্রতীক। সাতটি মোটা গরু সাত বছরের সুসময়ের ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, গরু রিজিক ও জীবিকার প্রতীক। গরুর দুধ পান করা হালাল রিজিক লাভের ইঙ্গিত।'},
-
-  // ৪. আকাশ ও প্রকৃতি
-  {id:10, cat:'sky', icon:'⭐', title:'তারা দেখা', keywords:'তারা,আকাশ,নক্ষত্র,চাঁদ',
-   ibnSirin:'উজ্জ্বল তারা দেখা জ্ঞানী ও আলেম মানুষের ইঙ্গিত। তারা খসে পড়া কোনো বড় মানুষের মৃত্যুর আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, তারা হলো আলেম ও নেককারদের প্রতীক। অনেক তারা একসাথে দেখা সৎ সঙ্গীর মাধ্যমে উপকার লাভের ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, তারা ইলম ও হেদায়েতের প্রতীক। তারার আলোয় পথ চলা ইলমের আলোয় জীবন পরিচালনার ইঙ্গিত।'},
-  {id:11, cat:'sky', icon:'🌙', title:'চাঁদ দেখা', keywords:'চাঁদ,পূর্ণিমা,অর্ধচন্দ্র',
-   ibnSirin:'পূর্ণ চাঁদ দেখা রাজ বা শাসকের প্রতীক। চাঁদের আলোয় স্নান শাসকের অনুগ্রহ লাভের ইঙ্গিত। চাঁদ গ্রাস হওয়া বিপদের আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, চাঁদ মাতা বা স্ত্রীর প্রতীক। চাঁদের উদয় পরিবারে আনন্দের ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, চাঁদ ইসলামের প্রতীক। অর্ধচন্দ্র দেখা ইসলামের বিজয় ও উন্নতির ইঙ্গিত।'},
-  {id:12, cat:'sky', icon:'☀️', title:'সূর্য দেখা', keywords:'সূর্য,রোদ,সকাল',
-   ibnSirin:'সূর্য দেখা রাজা বা ক্ষমতাবান ব্যক্তির প্রতীক। সূর্যের আলো গায়ে পড়া রাজকীয় অনুগ্রহ লাভের ইঙ্গিত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, সূর্য পিতার প্রতীক। উজ্জ্বল সূর্য পারিবারিক সুখ ও সমৃদ্ধির ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, সূর্য আল্লাহর নূরের প্রতীক। সূর্যের আলোয় পথ চলা সত্যের পথে অগ্রসর হওয়ার ইঙ্গিত।'},
-
-  // ৫. মানব ও পরিবার
-  {id:13, cat:'people', icon:'👴', title:'মৃত ব্যক্তিকে দেখা', keywords:'মৃত,মৃত্যু,মরা,লাশ,দাফন',
-   ibnSirin:'মৃত ব্যক্তিকে সুখী দেখা তার জান্নাতের ইঙ্গিত। মৃত ব্যক্তি কিছু দিলে বরকত লাভ, কিছু নিলে হায়াত কমার আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, মৃত ব্যক্তি সাথে কথা বলা তার ওসিয়ত বা উপদেশ পালনের ইঙ্গিত দেয়। মৃতকে জীবিত দেখা পুনরুত্থানের স্মরণ।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, মৃত ব্যক্তি দোয়া চাইলে তার জন্য দোয়া ও সদকা করা উচিত।'},
-  {id:14, cat:'people', icon:'👶', title:'শিশু দেখা', keywords:'শিশু,বাচ্চা,নবজাতক',
-   ibnSirin:'সুন্দর শিশু দেখা সুসংবাদ ও আনন্দের ইঙ্গিত। শিশুর জন্ম দেখা নতুন প্রকল্প বা কাজ শুরুর আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, শিশু বিশুদ্ধতা ও নিষ্পাপতার প্রতীক। হাসিখুশি শিশু পারিবারিক সুখের ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, শিশু নতুন সূচনার প্রতীক। শিশুকে কোলে নেওয়া দায়িত্ব গ্রহণের ইঙ্গিত।'},
-  {id:15, cat:'people', icon:'🤴', title:'রাজা বা বড় ব্যক্তি দেখা', keywords:'রাজা,শাসক,বড় মানুষ,নেতা',
-   ibnSirin:'রাজার সাথে কথা বলা সম্মান ও মর্যাদা লাভের ইঙ্গিত। রাজার কাছ থেকে উপহার পাওয়া পদোন্নতির আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, রাজা বা শাসকের দরবারে উপস্থিত হওয়া রাষ্ট্রীয় সুযোগ লাভের ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, রাজা আল্লাহর রহমতের প্রতীক। রাজার অনুগ্রহ পাওয়া আল্লাহর রহমত লাভের ইঙ্গিত।'},
-
-  // ৬. খাবার ও পানীয়
-  {id:16, cat:'food', icon:'🍯', title:'মধু দেখা বা খাওয়া', keywords:'মধু,মিষ্টি,চিনি',
-   ibnSirin:'মধু দেখা বা খাওয়া কুরআন তিলাওয়াত, ইলম অর্জন ও হালাল রিজিকের প্রতীক।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, মধু হলো সর্বোত্তম মিষ্টি সম্পদ। মধু খাওয়া সুস্বাস্থ্য ও দীর্ঘ জীবনের ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, মধু কুরআনের মিষ্টি কালামের প্রতীক। মধু মাখনের সাথে খাওয়া উভয় জগতে সুখের ইঙ্গিত।'},
-  {id:17, cat:'food', icon:'🍎', title:'ফল খাওয়া', keywords:'ফল,আপেল,আঙুর,খেজুর,তরমুজ',
-   ibnSirin:'পরিচিত ফল খাওয়া হালাল রিজিক ও সুখের প্রতীক। খেজুর খাওয়া বিশেষভাবে শুভ। অচেনা ফল দেখা অজানা নিয়ামতের ইঙ্গিত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, মৌসুমী ফল খাওয়া সময়মতো রিজিক লাভের ইঙ্গিত। আঙুর বিশেষ বরকতের প্রতীক।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, বেহেশতি ফল দেখা জান্নাতের নিয়ামতের ইঙ্গিত এবং আমল বৃদ্ধির তাকিদ।'},
-  {id:18, cat:'food', icon:'🍞', title:'রুটি বা ভাত দেখা', keywords:'রুটি,ভাত,খাবার,রান্না',
-   ibnSirin:'রুটি বা ভাত দেখা হালাল রিজিক ও সাধারণ জীবিকার প্রতীক। একসাথে খাওয়া ভ্রাতৃত্ব ও ভালোবাসার ইঙ্গিত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, তাজা রুটি দীর্ঘ হায়াত ও সুস্বাস্থ্যের ইঙ্গিত। বাসি রুটি কষ্টের সময়ের আলামত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, রুটি মৌলিক জীবিকার প্রতীক। দান করা রুটি সদকার মাধ্যমে বরকত লাভের ইঙ্গিত।'},
-
-  // ৭. মসজিদ ও ইবাদত
-  {id:19, cat:'worship', icon:'🕌', title:'মসজিদে যাওয়া', keywords:'মসজিদ,নামাজ,ইবাদত',
-   ibnSirin:'মসজিদে প্রবেশ করা ইমান ও তাকওয়ার উন্নতির ইঙ্গিত। মসজিদে নামাজ পড়া আল্লাহর নৈকট্য লাভের আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, মসজিদ নির্মাণ করা ইসলামী কার্যক্রমে অবদান রাখার ইঙ্গিত। মসজিদ থেকে বের হওয়া কষ্টের পর মুক্তির আলামত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, মসজিদ আল্লাহর ঘর। সেখানে যাওয়া আল্লাহর দিকে ফিরে আসার ইঙ্গিত।'},
-  {id:20, cat:'worship', icon:'🕋', title:'কাবা শরীফ দেখা', keywords:'কাবা,মক্কা,হজ্ব,তাওয়াফ',
-   ibnSirin:'কাবা শরীফ দেখা অত্যন্ত শুভ স্বপ্ন। হজ্ব করতে দেখা হজ্বের তওফিক লাভের ইঙ্গিত। কাবায় প্রবেশ করা আল্লাহর বিশেষ রহমত লাভের আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, কাবা তাওয়াফ করা সকল বালা-মুসিবত থেকে মুক্তির ইঙ্গিত। এই স্বপ্ন দেখলে হজ্বের প্রস্তুতি নেওয়া উত্তম।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, কাবা দেখা ইসলামের কেন্দ্রবিন্দুর সাথে সম্পর্কের ইঙ্গিত। এই স্বপ্ন অত্যন্ত বরকতময়।'},
-  {id:21, cat:'worship', icon:'📖', title:'কুরআন তিলাওয়াত', keywords:'কুরআন,তিলাওয়াত,আয়াত',
-   ibnSirin:'কুরআন তিলাওয়াত করতে দেখা ইলম, হেদায়েত ও বরকতের শ্রেষ্ঠ আলামত। কুরআন হাতে নেওয়া বড় দায়িত্ব গ্রহণের ইঙ্গিত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, কুরআন পড়তে দেখা সর্বোত্তম স্বপ্নগুলোর একটি। এর মাধ্যমে দুনিয়া ও আখেরাতের কল্যাণ লাভ হয়।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, কুরআন শোনা বা পড়া আল্লাহর কালামের সাথে সম্পর্কের ইঙ্গিত। আমল বৃদ্ধির তাকিদ।'},
-
-  // ৮. ভ্রমণ ও স্থান
-  {id:22, cat:'travel', icon:'🚀', title:'উড়তে দেখা', keywords:'উড়া,আকাশে উড়া,পাখির মতো',
-   ibnSirin:'আকাশে উড়তে দেখা সফর বা ভ্রমণের ইঙ্গিত। উঁচুতে উড়া মর্যাদা ও সম্মান বৃদ্ধির আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, উড়তে দেখা ব্যক্তির মনোবল ও উচ্চাকাঙ্ক্ষার প্রতীক। নিরাপদে উড়া লক্ষ্য অর্জনের ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, উড়া আত্মার মুক্তির প্রতীক। মসজিদের দিকে উড়া আধ্যাত্মিক উন্নতির ইঙ্গিত।'},
-  {id:23, cat:'travel', icon:'🏔️', title:'পাহাড়ে চড়া', keywords:'পাহাড়,উঁচু,চূড়া',
-   ibnSirin:'পাহাড়ে চড়া কঠিন কাজ সম্পন্ন করার ইঙ্গিত। পাহাড়ের চূড়ায় পৌঁছানো লক্ষ্য অর্জন ও সাফল্যের আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, পাহাড় ক্ষমতা ও শক্তির প্রতীক। পাহাড় থেকে পড়ে যাওয়া পদমর্যাদা হারানোর আলামত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, পাহাড় দুনিয়াবী বাধার প্রতীক। পাহাড় অতিক্রম করা সকল বাধা-বিপত্তি অতিক্রমের ইঙ্গিত।'},
-
-  // ৯. ধন-সম্পদ
-  {id:24, cat:'wealth', icon:'💰', title:'সোনা বা রুপা পাওয়া', keywords:'সোনা,রুপা,টাকা,ধন,সম্পদ',
-   ibnSirin:'সোনা পাওয়া সুখ-দুঃখ উভয়ের ইঙ্গিত দিতে পারে। সোনার অলংকার পরা পুরুষের জন্য অশুভ। মহিলার জন্য বরকতের ইঙ্গিত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, রুপা সোনার চেয়ে ভালো স্বপ্ন। রুপার পাত্র দেখা হালাল উপায়ে সম্পদ লাভের ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, সোনা হলো ফিতনার প্রতীক। সোনা সঞ্চয় করা অতিরিক্ত দুনিয়ামুখিতার আলামত।'},
-  {id:25, cat:'wealth', icon:'🏠', title:'ঘর বা বাড়ি দেখা', keywords:'ঘর,বাড়ি,দালান,মহল',
-   ibnSirin:'সুন্দর নতুন ঘর দেখা সুখ ও সমৃদ্ধির ইঙ্গিত। ঘর ভেঙে পড়া পরিবারে বিপদের আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, ঘর পরিবার ও স্ত্রীর প্রতীক। বড় ঘর পরিবারের সমৃদ্ধির ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, ঘর দুনিয়াবী জীবনের প্রতীক। নতুন ঘর নির্মাণ করা জীবনে নতুন পর্যায়ের ইঙ্গিত।'},
-
-  // ১০. শরীর ও স্বাস্থ্য
-  {id:26, cat:'body', icon:'🦷', title:'দাঁত পড়ে যাওয়া', keywords:'দাঁত,পড়া,ব্যথা',
-   ibnSirin:'দাঁত পড়ে যাওয়া স্বজন বিচ্ছেদ বা মৃত্যুর ইঙ্গিত। সামনের দাঁত পড়া ঘনিষ্ঠ আত্মীয়ের বিপদের আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, দাঁত পরিবারের সদস্যদের প্রতীক। উপরের দাঁত পুরুষ, নিচের দাঁত মহিলার প্রতীক।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, দাঁত পড়া বয়স বৃদ্ধি ও জীবনের পরিবর্তনের ইঙ্গিত। দোয়া ও সদকা করা উত্তম।'},
-  {id:27, cat:'body', icon:'🩸', title:'রক্ত দেখা', keywords:'রক্ত,আঘাত,ক্ষত',
-   ibnSirin:'রক্ত দেখা সাধারণত অশুভ। তবে নিজের শরীর থেকে রক্ত বের হওয়া ও থেমে যাওয়া বিপদ থেকে মুক্তির ইঙ্গিত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, রক্ত অপবিত্রতার প্রতীক। রক্ত দেখলে তওবা ও ইস্তেগফার করা উচিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, রক্ত হারাম কাজের সাথে সম্পর্কিত। রক্ত পরিষ্কার করা গুনাহ থেকে তওবার ইঙ্গিত।'},
-  {id:28, cat:'body', icon:'✋', title:'হাত দেখা', keywords:'হাত,বাহু,আঙ্গুল',
-   ibnSirin:'শক্তিশালী হাত দেখা শক্তি ও ক্ষমতার ইঙ্গিত। হাত কেটে যাওয়া ভাই বা বন্ধু থেকে বিচ্ছেদের আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, হাত শক্তি ও কর্মশক্তির প্রতীক। দুই হাতে কাজ করা সমৃদ্ধির ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, হাত দান ও কর্মের প্রতীক। হাত খোলা থাকা উদারতা ও দানের ইঙ্গিত।'},
-
-  // ১১. পোশাক
-  {id:29, cat:'clothes', icon:'👘', title:'সাদা পোশাক পরা', keywords:'পোশাক,কাপড়,সাদা,পরিষ্কার',
-   ibnSirin:'সাদা পোশাক পবিত্রতা, সততা ও সুস্বাস্থ্যের প্রতীক। নতুন সাদা পোশাক পরা মর্যাদা বৃদ্ধির ইঙ্গিত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, সাদা রঙ সর্বোত্তম রঙ। সাদা পোশাক পরা ইহকাল ও পরকালে সম্মানের ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, সাদা পোশাক ইসলামী পবিত্রতার প্রতীক। সাদা পোশাক পরা নেক আমলের ইঙ্গিত।'},
-  {id:30, cat:'clothes', icon:'👑', title:'রাজকীয় পোশাক বা মুকুট', keywords:'মুকুট,রাজকীয়,সিংহাসন',
-   ibnSirin:'মুকুট পরা বা রাজকীয় পোশাক পরা সম্মান ও ক্ষমতা লাভের ইঙ্গিত। বিশেষত আলেমদের জন্য এটি ইলমের মর্যাদার আলামত।',
-   nabulusi:'ইমাম নাবুলুসী বলেন, মুকুট শাসন ও নেতৃত্বের প্রতীক। মুকুট মাথায় দেওয়া পদোন্নতি ও দায়িত্ব গ্রহণের ইঙ্গিত।',
-   abdulghani:'শায়খ আব্দুল গনী বলেন, রাজকীয় পোশাক দুনিয়াবী সম্মানের প্রতীক। আখেরাতের পোশাক আমলের ফলাফল।'},
+var SF=["ইমাম মুহাম্মদ ইবনে সীরীন (রহ.)","ইমাম নাবুলুসী (রহ.)","শায়খ আব্দুল গনী নাবুলুসী (রহ.)","ইমাম ইবনে কাসীর (রহ.)","ইমাম আবু হামিদ গাজ্জালী (রহ.)","ইমাম আব্দুল ওয়াহহাব শা'রানী (রহ.)"];
+var SS=["ইবনে সীরীন","নাবুলুসী","আ.গ. নাবুলুসী","ইবনে কাসীর","গাজ্জালী","শা'রানী"];
+var SK=["s1","s2","s3","s4","s5","s6"];
+var D=[
+{id:1,cat:"water",ic:"&#x1F4A7;",t:"পরিষ্কার পানি দেখা",kw:"পানি,নদী,খাল,পুকুর",s1:"পরিষ্কার পানি দেখা জীবনে বরকত ও সুখের আলামত। প্রবহমান পানি দীর্ঘ জীবন ও সুস্বাস্থ্যের ইঙ্গিত দেয়।",s2:"স্বচ্ছ পানি রহমত ও নিয়ামতের প্রতীক। পানি পান করা রিজিক বৃদ্ধির সুসংবাদ।",s3:"স্বপ্নে পানি দেখা ইলম ও হেদায়েতের প্রতীক। ঝরনার পানি আল্লাহর খাস রহমতের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, পানি জীবনের উৎস। পবিত্র পানি দেখা ঈমানের সতেজতার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, পানি জ্ঞান ও প্রজ্ঞার প্রতীক। পরিষ্কার পানি বিশুদ্ধ অন্তরের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, পানি দেখা আত্মার পরিশুদ্ধতার ইঙ্গিত। তওবা ও ইস্তেগফারের আলামত।"},
+{id:2,cat:"water",ic:"&#x1F30A;",t:"সমুদ্রে ডুব দেওয়া",kw:"সমুদ্র,ডুব,সাঁতার,গভীর",s1:"সমুদ্রে ডুব দিয়ে জীবিত উঠে আসা শক্তিশালী ব্যক্তির সাথে সম্পর্ক থেকে উপকার লাভের ইঙ্গিত।",s2:"গভীর সমুদ্রে সাঁতার কাটা বড় বিপদ থেকে উদ্ধার পাওয়ার ইঙ্গিত।",s3:"সমুদ্র হলো দুনিয়ার প্রতীক। তাতে ডুব দেওয়া দুনিয়াবী বিষয়ে গভীরভাবে জড়িত হওয়ার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, সমুদ্র দুনিয়ার বিশালতার প্রতীক। ডুব দিয়ে সুরক্ষিত থাকা আল্লাহর হেফাজতের ইঙ্গিত।"},
+{id:3,cat:"water",ic:"&#x1F327;",t:"বৃষ্টি দেখা",kw:"বৃষ্টি,ঝড়,বর্ষা,মেঘ",s1:"বৃষ্টি দেখা রহমত ও বরকতের আলামত। ঘরের উপর বৃষ্টি পড়া সে পরিবারে নিয়ামত নাজিলের ইঙ্গিত।",s2:"মৌসুমী বৃষ্টি জীবিকার সমৃদ্ধির ইঙ্গিত। ঝড়ো বৃষ্টি কষ্টের পর সুদিন আসার আলামত।",s3:"বৃষ্টি আল্লাহর রহমতের প্রতীক। দোয়া কবুল হওয়ার সুসংবাদ বহন করে।",s4:"ইবনে কাসীর (রহ.) বলেন, বৃষ্টি আল্লাহর রহমতের নিদর্শন। বৃষ্টিতে ভেজা বরকত লাভের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, বৃষ্টি দেখা মানুষের জন্য রহমত বর্ষণের ইঙ্গিত।"},
+{id:4,cat:"water",ic:"&#x1F3CA;",t:"নদীতে গোসল করা",kw:"গোসল,নদী,পরিষ্কার,পবিত্র",s1:"পরিষ্কার নদীতে গোসল করা পাপ থেকে মুক্তি ও তওবা কবুলের ইঙ্গিত।",s2:"গোসল করা রোগ থেকে মুক্তির ইঙ্গিত। নদীর পানিতে গোসল দীর্ঘ সুস্বাস্থ্যের আলামত।",s5:"গাজ্জালী (রহ.) বলেন, গোসল করা আত্মার পরিশুদ্ধির প্রতীক। এটি তওবার আলামত।"},
+{id:5,cat:"water",ic:"&#x26F5;",t:"নৌকায় ভ্রমণ",kw:"নৌকা,জাহাজ,সমুদ্র,নদী",s1:"নৌকায় ভ্রমণ নিরাপদ পথে জীবন পরিচালনার ইঙ্গিত। সুষ্ঠু নৌকা সাফল্যের প্রতীক।",s2:"নৌকায় ভ্রমণ জীবনের এক পর্যায় থেকে অন্য পর্যায়ে যাওয়ার ইঙ্গিত।",s3:"নৌকা জীবনের যানবাহনের প্রতীক। আল্লাহর উপর ভরসা করে পথ চলার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, নৌকা নূহ (আ.) এর কিস্তির স্মরণ করিয়ে দেয়। মুক্তির ইঙ্গিত।"},
+{id:6,cat:"water",ic:"&#x1F41F;",t:"মাছ দেখা বা ধরা",kw:"মাছ,মৎস্য,ধরা,জাল",s1:"মাছ ধরা হালাল রিজিক ও সম্পদ লাভের ইঙ্গিত। বড় মাছ বড় নিয়ামতের আলামত।",s2:"জীবন্ত মাছ দেখা জীবিকার সমৃদ্ধির ইঙ্গিত।",s3:"মাছ ধরা হালাল উপায়ে জীবিকা অর্জনের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মাছ সমুদ্রের সম্পদের প্রতীক। প্রচুর মাছ প্রচুর রিজিকের আলামত।"},
+{id:7,cat:"water",ic:"&#x26F2;",t:"কূপ বা ঝরনা দেখা",kw:"কূপ,ঝরনা,প্রস্রবণ,উৎস",s1:"কূপ থেকে পানি তোলা জ্ঞান অর্জন ও উপকার লাভের ইঙ্গিত।",s2:"পরিষ্কার কূপ দেখা ভালো স্ত্রী বা বন্ধুর ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, কূপ হলো জ্ঞানের ভান্ডারের প্রতীক। পানি তোলা জ্ঞান অর্জনের ইঙ্গিত।"},
+{id:8,cat:"water",ic:"&#x1F30A;",t:"বন্যা বা প্লাবন দেখা",kw:"বন্যা,প্লাবন,পানি বৃদ্ধি",s1:"বন্যা দেখা বিপদ ও পরীক্ষার ইঙ্গিত। পানি সরে গেলে বিপদ কেটে যাওয়ার আলামত।",s2:"বন্যায় ভেসে না যাওয়া বিপদ থেকে রক্ষার ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, বন্যা ফিতনার প্রতীক। ধৈর্য ধরলে নাজাত পাওয়ার ইঙ্গিত।"},
+{id:9,cat:"fire",ic:"&#x1F525;",t:"আগুন দেখা",kw:"আগুন,জ্বলা,আলো",s1:"আগুন দেখা ফিতনা ও বিপদের ইঙ্গিত। আগুন আলো দেয় কিন্তু পোড়ায় না হলে ইলমের আলামত।",s2:"ঘরে আগুন লাগলে সে পরিবারে বিপদ আসতে পারে।",s3:"আগুন ক্ষমতা ও প্রভাবের প্রতীক। আগুনে আলো দেখা নেতৃত্বের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, আগুন জাহান্নামের স্মরণ করিয়ে দেয়। তওবার তাকিদ।",s5:"গাজ্জালী (রহ.) বলেন, আগুন কু-প্রবৃত্তির প্রতীক। আগুন থেকে রক্ষা পাওয়া নাফসের উপর বিজয়।",s6:"শা'রানী (রহ.) বলেন, আগুন দেখলে বেশি বেশি ইস্তেগফার করা উচিত।"},
+{id:10,cat:"fire",ic:"&#x1F56F;",t:"মোমবাতি বা প্রদীপ",kw:"আলো,মোমবাতি,প্রদীপ,বাতি",s1:"প্রদীপ দেখা ইলম ও হেদায়েতের প্রতীক। নিভে যাওয়া প্রদীপ নেককার মানুষের ইন্তেকালের ইঙ্গিত।",s2:"উজ্জ্বল আলো দেখা ঈমান ও তাকওয়ার বৃদ্ধির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, প্রদীপ নবী ও আলেমদের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, প্রদীপের আলো অন্তরের নূরের প্রতীক।"},
+{id:11,cat:"fire",ic:"&#x26A1;",t:"বজ্রপাত বা বিদ্যুৎ",kw:"বজ্র,বিদ্যুৎ,ঝড়",s1:"বজ্রপাত দেখা হঠাৎ বিপদ বা সংকটের ইঙ্গিত।",s2:"বিদ্যুৎ চমকানো ভয় ও শঙ্কার ইঙ্গিত। বিদ্যুৎ থেকে রক্ষা পাওয়া বিপদ এড়ানোর আলামত।",s6:"শা'রানী (রহ.) বলেন, বজ্রপাত আল্লাহর কুদরতের নিদর্শন। ইস্তেগফার ও দোয়া করা উচিত।"},
+{id:12,cat:"animals",ic:"&#x1F40D;",t:"সাপ দেখা",kw:"সাপ,কামড়,বিষ",s1:"সাপ দেখা শত্রু ও বিপদের প্রতীক। সাপ মেরে ফেলা শত্রুর উপর বিজয়ের আলামত।",s2:"সাপ স্বপ্নে শত্রু ও প্রলোভনের প্রতীক। সাপ থেকে পালানো বিপদ এড়ানোর ইঙ্গিত।",s3:"সাপ শয়তানের প্রতীক। সাপ মেরে ফেলা নাফসের উপর বিজয়ের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, সাপ শয়তানের বাহন। সাপ থেকে রক্ষা পাওয়া ঈমানের শক্তির ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, সাপ কু-প্রবৃত্তির প্রতীক। সাপ মারা নাফসে আম্মারাকে দমনের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, সাপ দেখলে আউযুবিল্লাহ পড়া ও তওবা করা উচিত।"},
+{id:13,cat:"animals",ic:"&#x1F981;",t:"সিংহ দেখা",kw:"সিংহ,বাঘ,হিংস্র পশু",s1:"সিংহ দেখা ক্ষমতাবান শত্রুর প্রতীক। সিংহকে পরাজিত করা বড় বিপদ অতিক্রমের আলামত।",s2:"সিংহ রাজা বা শাসকের প্রতীক। সিংহের সাথে বন্ধুত্ব রাজানুগ্রহ লাভের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, সিংহ পরাক্রমশালী শত্রুর প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, সিংহ দুনিয়াবী শক্তির প্রতীক। সিংহের সামনে দৃঢ় থাকা সাহস ও তাওয়াক্কুলের ইঙ্গিত।"},
+{id:14,cat:"animals",ic:"&#x1F426;",t:"পাখি দেখা",kw:"পাখি,উড়া,কবুতর,ময়না",s1:"সাদা পাখি শান্তি ও সুখের প্রতীক। কবুতর দেখা ভালো সংবাদের ইঙ্গিত।",s2:"গান করা পাখি আনন্দ ও খুশির সুসংবাদ।",s3:"পাখি আত্মার প্রতীক। উড়ন্ত পাখি আধ্যাত্মিক উন্নতির ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, পাখি আত্মার মুক্তির প্রতীক। সুন্দর পাখি নেক আত্মার ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, পাখি আল্লাহর তাসবিহকারী প্রাণী। পাখি দেখা জিকিরের তাকিদ।"},
+{id:15,cat:"animals",ic:"&#x1F404;",t:"গরু দেখা",kw:"গরু,মহিষ,গাভী",s1:"মোটা গরু সমৃদ্ধির আলামত। দুর্বল গরু দুর্ভিক্ষের ইঙ্গিত।",s2:"গরু বছরের প্রতীক। সাতটি মোটা গরু সাত বছরের সুসময়ের ইঙ্গিত।",s3:"গরু রিজিক ও জীবিকার প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, ইউসুফ (আ.) এর স্বপ্নে গরু বছরের প্রতীক ছিল।"},
+{id:16,cat:"animals",ic:"&#x1F411;",t:"ভেড়া বা ছাগল দেখা",kw:"ভেড়া,ছাগল,মেষ,পাল",s1:"ভেড়া দেখা সম্পদ ও সমৃদ্ধির ইঙ্গিত। ভেড়ার পাল প্রচুর নিয়ামতের আলামত।",s2:"সাদা ভেড়া পবিত্রতা ও সুখের প্রতীক।",s6:"শা'রানী (রহ.) বলেন, ভেড়া নম্র ও বিনয়ী মানুষের প্রতীক।"},
+{id:17,cat:"animals",ic:"&#x1F418;",t:"হাতি দেখা",kw:"হাতি,বড় পশু,শক্তি",s1:"হাতি দেখা ক্ষমতা ও রাজকীয়তার ইঙ্গিত। হাতির পিঠে চড়া উচ্চ পদমর্যাদা লাভের আলামত।",s2:"হাতি শক্তিশালী শাসকের প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, হাতি বিশাল শক্তির প্রতীক। হাতি পরিচালনা বড় দায়িত্বের ইঙ্গিত।"},
+{id:18,cat:"animals",ic:"&#x1F985;",t:"ঈগল বা বাজ দেখা",kw:"ঈগল,বাজপাখি,শিকারি পাখি",s1:"ঈগল দেখা ক্ষমতাবান ও মর্যাদাবান ব্যক্তির প্রতীক।",s2:"বাজপাখি রাজা ও শাসকের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, ঈগল উচ্চ লক্ষ্যের প্রতীক। উঁচুতে উড়া আধ্যাত্মিক মর্যাদার ইঙ্গিত।"},
+{id:19,cat:"animals",ic:"&#x1F42A;",t:"উট দেখা",kw:"উট,বাহন,মরুভূমি,সফর",s1:"উট দেখা দীর্ঘ সফর বা কষ্টের পর সাফল্যের ইঙ্গিত।",s2:"উট সহনশীলতা ও ধৈর্যের প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, উট আরব সংস্কৃতির সম্পদের প্রতীক। উট জবাই করা বড় সওয়াবের আলামত।",s6:"শা'রানী (রহ.) বলেন, উট কষ্ট সহ্য করার প্রতীক।"},
+{id:20,cat:"animals",ic:"&#x1F43A;",t:"নেকড়ে বা শেয়াল দেখা",kw:"নেকড়ে,শেয়াল,ধূর্ত",s1:"নেকড়ে দেখা ধূর্ত শত্রুর ইঙ্গিত।",s2:"নেকড়ে থেকে পালিয়ে আসা শত্রুর প্রতারণা থেকে রক্ষার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, ইউসুফ (আ.) এর ভাইরা নেকড়ের অজুহাত দিয়েছিল। নেকড়ে প্রতারণার প্রতীক।"},
+{id:21,cat:"animals",ic:"&#x1F413;",t:"মোরগ বা মুরগি দেখা",kw:"মোরগ,মুরগি,ডাকা,সকাল",s1:"মোরগের ডাক শুনা সময়মতো কাজের ইঙ্গিত। মোরগ দেখা আযানের প্রতীক।",s2:"সাদা মোরগ দেখা সৎ প্রতিবেশীর ইঙ্গিত।",s3:"মোরগ মুয়াজ্জিনের প্রতীক।",s6:"শা'রানী (রহ.) বলেন, মোরগের ডাক ফজরের নামাজের স্মরণ করিয়ে দেয়।"},
+{id:22,cat:"animals",ic:"&#x1F41D;",t:"মৌমাছি দেখা",kw:"মৌমাছি,মধু,মৌচাক",s1:"মৌমাছি দেখা পরিশ্রমী ও উপকারী মানুষের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, মৌমাছি ইলমের প্রতীক। মধু সংগ্রহের মতো ইলম অর্জন করা উচিত।"},
+{id:23,cat:"animals",ic:"&#x1F422;",t:"কচ্ছপ দেখা",kw:"কচ্ছপ,ধীর,দীর্ঘজীবী",s1:"কচ্ছপ দেখা দীর্ঘায়ু ও ধৈর্যের প্রতীক।",s2:"কচ্ছপ আলেম ও বিজ্ঞ মানুষের প্রতীক।"},
+{id:24,cat:"sky",ic:"&#x2B50;",t:"তারা দেখা",kw:"তারা,আকাশ,নক্ষত্র",s1:"উজ্জ্বল তারা দেখা জ্ঞানী ও আলেম মানুষের ইঙ্গিত। তারা খসে পড়া বড় মানুষের মৃত্যুর আলামত।",s2:"তারা হলো আলেম ও নেককারদের প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, ইউসুফ (আ.) স্বপ্নে এগারোটি তারা দেখেছিলেন। তারা মহান ব্যক্তিদের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, তারা আল্লাহর সৃষ্টির বিশালতার প্রতীক।"},
+{id:25,cat:"sky",ic:"&#x1F319;",t:"চাঁদ দেখা",kw:"চাঁদ,পূর্ণিমা,অর্ধচন্দ্র",s1:"পূর্ণ চাঁদ দেখা রাজা বা শাসকের প্রতীক। চাঁদের আলোয় স্নান শাসকের অনুগ্রহ লাভের ইঙ্গিত।",s2:"চাঁদ মাতা বা স্ত্রীর প্রতীক।",s3:"চাঁদ ইসলামের প্রতীক। অর্ধচন্দ্র দেখা ইসলামের বিজয়ের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, ইউসুফ (আ.) স্বপ্নে সূর্য চাঁদ দেখেছিলেন। চাঁদ পিতামাতার প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, চাঁদ অন্তরের নূরের প্রতীক।",s6:"শা'রানী (রহ.) বলেন, পূর্ণ চাঁদ ঈমানের পরিপূর্ণতার ইঙ্গিত।"},
+{id:26,cat:"sky",ic:"&#x2600;",t:"সূর্য দেখা",kw:"সূর্য,রোদ,সকাল",s1:"সূর্য দেখা রাজা বা ক্ষমতাবান ব্যক্তির প্রতীক।",s2:"সূর্য পিতার প্রতীক।",s3:"সূর্য আল্লাহর নূরের প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, সূর্য শাসক ও নেতার প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, সূর্য আল্লাহর সত্তার প্রকাশের প্রতীক। সূর্যের আলো জ্ঞানের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, সূর্য দেখা উচ্চ মর্যাদা লাভের ইঙ্গিত।"},
+{id:27,cat:"sky",ic:"&#x1F308;",t:"রংধনু দেখা",kw:"রংধনু,বৃষ্টি,রঙ,আকাশ",s1:"রংধনু দেখা শান্তি ও সুখের ইঙ্গিত।",s2:"রংধনু আল্লাহর বিভিন্ন নিয়ামতের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, রংধনু আল্লাহর বৈচিত্র্যময় সৃষ্টির নিদর্শন।"},
+{id:28,cat:"sky",ic:"&#x2601;",t:"মেঘ দেখা",kw:"মেঘ,আকাশ,বৃষ্টি,সাদা",s1:"সাদা মেঘ দেখা রহমত ও বরকতের ইঙ্গিত। কালো মেঘ বিপদের আলামত।",s2:"মেঘের মধ্যে থাকা ক্ষমতা ও পদমর্যাদার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মেঘ আল্লাহর রহমত বহনকারী।"},
+{id:29,cat:"sky",ic:"&#x1F32A;",t:"ঝড় বা তুফান দেখা",kw:"ঝড়,তুফান,বাতাস,ঘূর্ণিঝড়",s1:"ঝড় দেখা বিপদ ও ফিতনার ইঙ্গিত। ঝড়ের পর শান্ত হওয়া বিপদ কাটানোর আলামত।",s6:"শা'রানী (রহ.) বলেন, ঝড় পরীক্ষার প্রতীক। আল্লাহর উপর তাওয়াক্কুল রাখলে রক্ষার ইঙ্গিত।"},
+{id:30,cat:"people",ic:"&#x1F474;",t:"মৃত ব্যক্তিকে দেখা",kw:"মৃত,মৃত্যু,মরা,লাশ",s1:"মৃত ব্যক্তিকে সুখী দেখা তার জান্নাতের ইঙ্গিত। মৃত কিছু দিলে বরকত লাভ।",s2:"মৃত ব্যক্তির সাথে কথা বলা তার ওসিয়ত পালনের ইঙ্গিত।",s3:"মৃত ব্যক্তি দোয়া চাইলে তার জন্য দোয়া ও সদকা করা উচিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মৃত ব্যক্তি স্বপ্নে আসে আল্লাহর অনুমতিতে। তার জন্য দোয়া করা উচিত।",s5:"গাজ্জালী (রহ.) বলেন, মৃত ব্যক্তি দেখা আখেরাতের স্মরণের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, মৃত ব্যক্তিকে কষ্টে দেখলে তার জন্য কুরআন পড়া ও সদকা করা উচিত।"},
+{id:31,cat:"people",ic:"&#x1F476;",t:"শিশু দেখা",kw:"শিশু,বাচ্চা,নবজাতক",s1:"সুন্দর শিশু দেখা সুসংবাদ ও আনন্দের ইঙ্গিত।",s2:"শিশু বিশুদ্ধতা ও নিষ্পাপতার প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, শিশু ফিতরতের পবিত্রতার প্রতীক। শিশু দেখা খাঁটি নিয়তের ইঙ্গিত।"},
+{id:32,cat:"people",ic:"&#x1F934;",t:"রাজা বা বড় ব্যক্তি দেখা",kw:"রাজা,শাসক,নেতা,বড়",s1:"রাজার সাথে কথা বলা সম্মান ও মর্যাদা লাভের ইঙ্গিত।",s2:"রাজা বা শাসকের দরবারে উপস্থিত হওয়া রাষ্ট্রীয় সুযোগ লাভের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, রাজা ক্ষমতাবান ব্যক্তির প্রতীক। রাজার অনুগ্রহ সম্মান লাভের ইঙ্গিত।"},
+{id:33,cat:"people",ic:"&#x1F470;",t:"বিবাহ বা নিকাহ দেখা",kw:"বিয়ে,নিকাহ,বিবাহ,কনে,বর",s1:"বিবাহ দেখা সুখ, সমৃদ্ধি ও নতুন সম্পর্কের ইঙ্গিত।",s2:"বিবাহের অনুষ্ঠান দেখা আনন্দময় ঘটনার ইঙ্গিত।",s3:"বিবাহ হালাল সম্পর্কের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, বিবাহ আত্মার পরিপূর্ণতার প্রতীক।",s6:"শা'রানী (রহ.) বলেন, বিবাহ দেখা সুন্নত পালনের তাকিদ।"},
+{id:34,cat:"people",ic:"&#x1F46A;",t:"পরিবার একত্রিত দেখা",kw:"পরিবার,মা,বাবা,ভাই,বোন",s1:"পরিবার একত্রিত দেখা পারিবারিক ঐক্য ও ভালোবাসার ইঙ্গিত।",s2:"মাকে দেখা মাতৃস্নেহের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, পরিবার আল্লাহর বিশেষ নিয়ামত। সম্মিলন দেখা বরকতের আলামত।"},
+{id:35,cat:"people",ic:"&#x1F9D9;",t:"আলেম বা বুজুর্গ দেখা",kw:"আলেম,পীর,বুজুর্গ,হুজুর",s1:"আলেম বা বুজুর্গ দেখা ইলম ও হেদায়েতের ইঙ্গিত।",s2:"বুজুর্গ ব্যক্তি দেখা আধ্যাত্মিক পথনির্দেশের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, আলেম দেখা ইলম অর্জনের তাকিদ। তাদের সাহচর্য সৌভাগ্যের আলামত।",s6:"শা'রানী (রহ.) বলেন, আলেম স্বপ্নে দেখা আল্লাহর হেদায়েতের ইঙ্গিত।"},
+{id:36,cat:"people",ic:"&#x1F47C;",t:"ফেরেশতা দেখা",kw:"ফেরেশতা,মালাইকা,নূর",s1:"ফেরেশতা দেখা অত্যন্ত শুভ স্বপ্ন।",s2:"ফেরেশতা দেখা ঈমান ও তাকওয়ার উচ্চ মর্যাদার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, ফেরেশতা দেখা আল্লাহর বিশেষ রহমতের নিদর্শন।",s5:"গাজ্জালী (রহ.) বলেন, ফেরেশতা দেখা অন্তরের পবিত্রতার পুরস্কার।",s6:"শা'রানী (রহ.) বলেন, ফেরেশতা দেখা উচ্চ আধ্যাত্মিক মর্যাদার ইঙ্গিত।"},
+{id:37,cat:"people",ic:"&#x1F9D3;",t:"নবীজি (সা.) কে দেখা",kw:"নবী,রাসূল,মুহাম্মদ,সাল্লাল্লাহু",s1:"নবীজি (সা.) কে দেখা সর্বোচ্চ শুভ স্বপ্ন। তাঁকে যেভাবেই দেখা হোক তা সত্য, কারণ শয়তান তাঁর রূপ ধারণ করতে পারে না।",s2:"নবীজি (সা.) দেখা সুসংবাদ ও মুক্তির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, হাদিসে স্পষ্ট আছে, যে আমাকে স্বপ্নে দেখেছে সে আমাকেই দেখেছে।",s5:"গাজ্জালী (রহ.) বলেন, নবীজি (সা.) দেখা সর্বোচ্চ আধ্যাত্মিক পুরস্কার।",s6:"শা'রানী (রহ.) বলেন, নবীজি (সা.) কে দেখলে দরূদ পড়া ও কৃতজ্ঞতা প্রকাশ করা উচিত।"},
+{id:38,cat:"food",ic:"&#x1F36F;",t:"মধু দেখা বা খাওয়া",kw:"মধু,মিষ্টি,চিনি",s1:"মধু দেখা বা খাওয়া কুরআন তিলাওয়াত, ইলম অর্জন ও হালাল রিজিকের প্রতীক।",s2:"মধু সর্বোত্তম মিষ্টি সম্পদ।",s3:"মধু কুরআনের মিষ্টি কালামের প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, কুরআনে মধু উল্লেখ আছে। মধু খাওয়া কুরআনের মিষ্টতা আস্বাদনের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, মধু হিকমত ও ইলমের প্রতীক।"},
+{id:39,cat:"food",ic:"&#x1F34E;",t:"ফল খাওয়া",kw:"ফল,আপেল,আঙুর,খেজুর",s1:"পরিচিত ফল খাওয়া হালাল রিজিক ও সুখের প্রতীক। খেজুর খাওয়া বিশেষভাবে শুভ।",s2:"মৌসুমী ফল খাওয়া সময়মতো রিজিক লাভের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, জান্নাতি ফল দেখা পরকালীন নিয়ামতের স্মরণ ও আমল বৃদ্ধির তাকিদ।",s5:"গাজ্জালী (রহ.) বলেন, মিষ্টি ফল সুকর্মের প্রতিফলের প্রতীক।"},
+{id:40,cat:"food",ic:"&#x1F35E;",t:"রুটি বা ভাত দেখা",kw:"রুটি,ভাত,খাবার,রান্না",s1:"রুটি বা ভাত দেখা হালাল রিজিকের প্রতীক। একসাথে খাওয়া ভ্রাতৃত্বের ইঙ্গিত।",s2:"তাজা রুটি দীর্ঘ হায়াত ও সুস্বাস্থ্যের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, রুটি জীবিকার মূল উপাদান। রুটি বিতরণ করা সদকার ইঙ্গিত।"},
+{id:41,cat:"food",ic:"&#x1F356;",t:"গোশত রান্না বা খাওয়া",kw:"গোশত,মাংস,রান্না",s1:"গোশত খাওয়া হালাল সম্পদ লাভের ইঙ্গিত।",s2:"রান্না করা গোশত পরিশ্রমের মাধ্যমে রিজিক অর্জনের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, গোশত সম্পদের প্রতীক। হালাল গোশত হালাল উপার্জনের ইঙ্গিত।"},
+{id:42,cat:"food",ic:"&#x1F95B;",t:"দুধ পান করা",kw:"দুধ,পান,পাত্র,সাদা",s1:"দুধ পান করা ফিতরাত ও ইসলামের উপর থাকার ইঙ্গিত।",s2:"দুধ পবিত্রতা ও নিষ্পাপতার প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, নবীজি (সা.) মেরাজে দুধ পান করেছিলেন। দুধ ফিতরতের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, দুধ ইলম ও হিকমতের প্রতীক।"},
+{id:43,cat:"food",ic:"&#x1F366;",t:"মিষ্টি বা হালুয়া দেখা",kw:"মিষ্টি,হালুয়া,মিষ্টান্ন",s1:"মিষ্টি খাওয়া আনন্দ ও সুখের ইঙ্গিত। হালুয়া দেখা বরকতের আলামত।",s6:"শা'রানী (রহ.) বলেন, মিষ্টি হালাল আনন্দের প্রতীক।"},
+{id:44,cat:"food",ic:"&#x1F9C2;",t:"লবণ বা তিক্ত খাবার",kw:"লবণ,তিক্ত,মরিচ,ঝাল",s1:"তিক্ত খাবার খাওয়া কষ্ট ও পরীক্ষার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, তিক্ত খাবার দুনিয়ার পরীক্ষার প্রতীক। সবর করলে আখেরাতে মিষ্টি ফলের ইঙ্গিত।"},
+{id:45,cat:"worship",ic:"&#x1F54C;",t:"মসজিদে যাওয়া",kw:"মসজিদ,নামাজ,ইবাদত",s1:"মসজিদে প্রবেশ করা ঈমান ও তাকওয়ার উন্নতির ইঙ্গিত।",s2:"মসজিদ নির্মাণ করা ইসলামী কার্যক্রমে অবদান রাখার ইঙ্গিত।",s3:"মসজিদ আল্লাহর ঘর।",s4:"ইবনে কাসীর (রহ.) বলেন, মসজিদ আল্লাহর পবিত্র ঘর। স্বপ্নে মসজিদ দেখা ঈমানের দৃঢ়তার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, মসজিদ আত্মার প্রশান্তির স্থান।",s6:"শা'রানী (রহ.) বলেন, মসজিদ দেখা ইবাদত বৃদ্ধির তাকিদ।"},
+{id:46,cat:"worship",ic:"&#x1F54B;",t:"কাবা শরীফ দেখা",kw:"কাবা,মক্কা,হজ্ব,তাওয়াফ",s1:"কাবা শরীফ দেখা অত্যন্ত শুভ। হজ্ব করতে দেখা হজ্বের তওফিক লাভের ইঙ্গিত।",s2:"কাবা তাওয়াফ করা সকল বালা-মুসিবত থেকে মুক্তির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, কাবা ইসলামের কেন্দ্র।",s5:"গাজ্জালী (রহ.) বলেন, কাবা আল্লাহর ঘর। স্বপ্নে কাবা দেখা সর্বোচ্চ আধ্যাত্মিক পুরস্কার।",s6:"শা'রানী (রহ.) বলেন, কাবা দেখলে হজ্বের নিয়ত করা উচিত।"},
+{id:47,cat:"worship",ic:"&#x1F4D6;",t:"কুরআন তিলাওয়াত",kw:"কুরআন,তিলাওয়াত,আয়াত",s1:"কুরআন তিলাওয়াত করতে দেখা ইলম ও হেদায়েতের শ্রেষ্ঠ আলামত।",s2:"কুরআন পড়তে দেখা সর্বোত্তম স্বপ্নগুলোর একটি।",s4:"ইবনে কাসীর (রহ.) বলেন, কুরআন আল্লাহর বাণী। কুরআন পড়তে দেখা আল্লাহর রহমতের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, কুরআন তিলাওয়াত আত্মার খোরাক।",s6:"শা'রানী (রহ.) বলেন, কুরআন দেখলে আমলের পরিমাণ বাড়ানো উচিত।"},
+{id:48,cat:"worship",ic:"&#x1F932;",t:"দোয়া করতে দেখা",kw:"দোয়া,মোনাজাত,হাত,কান্না",s1:"দোয়া করতে দেখা আল্লাহর দিকে রুজু হওয়ার ইঙ্গিত।",s2:"দোয়া কবুল হওয়া দেখা বড় সুসংবাদ।",s5:"গাজ্জালী (রহ.) বলেন, দোয়া আল্লাহর সাথে বান্দার সংলাপ।",s6:"শা'রানী (রহ.) বলেন, দোয়া করতে দেখা আল্লাহর সান্নিধ্য লাভের আলামত।"},
+{id:49,cat:"worship",ic:"&#x1F319;",t:"রমযান বা রোযা দেখা",kw:"রমযান,রোযা,ইফতার,সেহরি",s1:"রমযান মাস দেখা বরকত ও রহমতের ইঙ্গিত।",s2:"ইফতার করতে দেখা দীর্ঘ পরিশ্রমের পর ফল লাভের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, রমযান আল্লাহর বিশেষ রহমতের মাস।",s5:"গাজ্জালী (রহ.) বলেন, রোযা আত্মার পরিশুদ্ধির মাধ্যম।"},
+{id:50,cat:"worship",ic:"&#x1F54C;",t:"আযান শোনা",kw:"আযান,মুয়াজ্জিন,ডাক,মসজিদ",s1:"আযান শোনা সত্যের ডাকে সাড়া দেওয়ার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, আযান ইসলামের শিআর।",s6:"শা'রানী (রহ.) বলেন, আযান দিতে দেখা সম্মান ও নেতৃত্বের ইঙ্গিত।"},
+{id:51,cat:"worship",ic:"&#x1F4FF;",t:"তসবিহ পড়া",kw:"তসবিহ,জিকির,দানা,পড়া",s1:"তসবিহ পড়তে দেখা আল্লাহর জিকির ও নৈকট্যের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, জিকির আত্মার খোরাক। তসবিহ পড়া আধ্যাত্মিক উন্নতির ইঙ্গিত।"},
+{id:52,cat:"worship",ic:"&#x1F54C;",t:"মদিনা শরীফ দেখা",kw:"মদিনা,মসজিদে নববী,নবী,রওজা",s1:"মদিনা শরীফ দেখা রাসূল (সা.) এর প্রতি ভালোবাসার ইঙ্গিত।",s2:"মদিনা শরীফ যাওয়া রাসূল (সা.) এর জিয়ারতের সুযোগ লাভের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মদিনা নবীজির (সা.) শহর। স্বপ্নে মদিনা দেখা নবীপ্রেমের পুরস্কার।",s6:"শা'রানী (রহ.) বলেন, মদিনা দেখলে দরূদ পাঠ বৃদ্ধি করা উচিত।"},
+{id:53,cat:"worship",ic:"&#x1F9CE;",t:"সিজদা বা নামাজ পড়া",kw:"সিজদা,নামাজ,রুকু,কিয়াম",s1:"নামাজ পড়তে দেখা আল্লাহর নৈকট্য লাভের সর্বোচ্চ আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, নামাজ ঈমানের স্তম্ভ। স্বপ্নে নামাজ পড়া আল্লাহর সান্নিধ্যের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, সিজদা আল্লাহর সাথে সর্বোচ্চ ঘনিষ্ঠতার মুহূর্ত।",s6:"শা'রানী (রহ.) বলেন, নামাজ পড়তে দেখা ঈমানের দৃঢ়তার ইঙ্গিত।"},
+{id:54,cat:"travel",ic:"&#x1F680;",t:"উড়তে দেখা",kw:"উড়া,আকাশে উড়া,পাখির মতো",s1:"আকাশে উড়তে দেখা সফর বা ভ্রমণের ইঙ্গিত। উঁচুতে উড়া মর্যাদা বৃদ্ধির আলামত।",s2:"উড়তে দেখা ব্যক্তির উচ্চাকাঙ্ক্ষার প্রতীক।",s3:"উড়া আত্মার মুক্তির প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, উড়া আত্মার মুক্তির প্রতীক। উঁচুতে উড়া আধ্যাত্মিক উন্নতির ইঙ্গিত।"},
+{id:55,cat:"travel",ic:"&#x1F3D4;",t:"পাহাড়ে চড়া",kw:"পাহাড়,উঁচু,চূড়া",s1:"পাহাড়ে চড়া কঠিন কাজ সম্পন্নের ইঙ্গিত। চূড়ায় পৌঁছানো লক্ষ্য অর্জনের আলামত।",s2:"পাহাড় ক্ষমতা ও শক্তির প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, পাহাড় দুনিয়াবী বাধার প্রতীক।",s6:"শা'রানী (রহ.) বলেন, পাহাড়ের চূড়ায় দাঁড়ানো উচ্চ মাকামের ইঙ্গিত।"},
+{id:56,cat:"travel",ic:"&#x1F3DC;",t:"মরুভূমিতে হাঁটা",kw:"মরুভূমি,বালু,গরম,একা",s1:"মরুভূমিতে হাঁটা কষ্ট ও একাকীত্বের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মরুভূমি পরীক্ষার স্থান। মরুভূমি পার হওয়া ধৈর্যের পুরস্কারের ইঙ্গিত।"},
+{id:57,cat:"travel",ic:"&#x1F332;",t:"জঙ্গলে হাঁটা",kw:"জঙ্গল,বন,গাছ,পথ হারানো",s1:"ঘন জঙ্গলে হাঁটা বিভ্রান্তি ও অনিশ্চয়তার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, জঙ্গল দুনিয়ার জটিলতার প্রতীক। সঠিক পথ খোঁজা হেদায়েতের ইঙ্গিত।"},
+{id:58,cat:"travel",ic:"&#x1F3D9;",t:"অপরিচিত শহরে যাওয়া",kw:"শহর,নগর,অপরিচিত,নতুন",s1:"অপরিচিত শহরে যাওয়া নতুন সুযোগ ও পরিবর্তনের ইঙ্গিত।",s2:"নতুন শহরে বসবাস জীবনে বড় পরিবর্তনের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, অপরিচিত শহর আখেরাতের পথের প্রতীক।"},
+{id:59,cat:"travel",ic:"&#x1F6B6;",t:"দীর্ঘ পথ হাঁটা",kw:"হাঁটা,পথ,দীর্ঘ,ক্লান্তি",s1:"দীর্ঘ পথ হাঁটা কঠিন পরিশ্রম ও সাফল্যের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, দীর্ঘ পথ আধ্যাত্মিক সফরের প্রতীক।"},
+{id:60,cat:"wealth",ic:"&#x1F4B0;",t:"সোনা বা রুপা পাওয়া",kw:"সোনা,রুপা,টাকা,ধন",s1:"সোনা পাওয়া সুখ-দুঃখ উভয়ের ইঙ্গিত। মহিলার জন্য সোনার অলংকার বরকতের ইঙ্গিত।",s2:"রুপা সোনার চেয়ে ভালো স্বপ্ন।",s3:"সোনা ফিতনার প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, সোনা দুনিয়াবী সম্পদের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, সোনা দুনিয়ার প্রতীক। এর মোহ থেকে সাবধান থাকা উচিত।"},
+{id:61,cat:"wealth",ic:"&#x1F3E0;",t:"ঘর বা বাড়ি দেখা",kw:"ঘর,বাড়ি,দালান,মহল",s1:"সুন্দর নতুন ঘর দেখা সুখ ও সমৃদ্ধির ইঙ্গিত।",s2:"ঘর পরিবার ও স্ত্রীর প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, ঘর দুনিয়াবী জীবনের প্রতীক।",s6:"শা'রানী (রহ.) বলেন, জান্নাতের মতো ঘর দেখা আখেরাতের পুরস্কারের ইঙ্গিত।"},
+{id:62,cat:"wealth",ic:"&#x1F511;",t:"চাবি বা তালা দেখা",kw:"চাবি,তালা,দরজা,খোলা",s1:"চাবি পাওয়া সমস্যার সমাধান ও সম্পদ লাভের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, চাবি আল্লাহর কাছে সমাধানের ইঙ্গিত। দোয়া কবুলের আলামত।"},
+{id:63,cat:"wealth",ic:"&#x1F4E6;",t:"উপহার বা তোহফা পাওয়া",kw:"উপহার,তোহফা,হাদিয়া,পুরস্কার",s1:"উপহার পাওয়া নেয়ামত ও ভালোবাসার ইঙ্গিত।",s2:"উপহার দেওয়া ও নেওয়া সম্পর্ক উন্নয়নের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, উপহার আল্লাহর বিশেষ নিয়ামতের প্রতীক।"},
+{id:64,cat:"wealth",ic:"&#x1F33E;",t:"ফসল বা শস্য দেখা",kw:"ফসল,শস্য,ধান,গম,জমি",s1:"সবুজ ফসল দেখা সমৃদ্ধি ও বরকতের ইঙ্গিত।",s2:"ঘন ফসলের মাঠ প্রচুর রিজিকের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, ফসল হালাল পরিশ্রমের প্রতিফলের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, ফসল নেক আমলের ফলের প্রতীক।"},
+{id:65,cat:"wealth",ic:"&#x1F4B3;",t:"টাকা বা মুদ্রা পাওয়া",kw:"টাকা,মুদ্রা,পয়সা,নোট",s1:"টাকা পাওয়া রিজিক বৃদ্ধির ইঙ্গিত। অনেক টাকা পাওয়া বড় নিয়ামতের আলামত।",s2:"মুদ্রা পাওয়া সুনির্দিষ্ট লক্ষ্য অর্জনের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, টাকা দুনিয়াবী সম্পদের প্রতীক। হালাল টাকা হালাল রিজিকের আলামত।"},
+{id:66,cat:"body",ic:"&#x1F9B7;",t:"দাঁত পড়ে যাওয়া",kw:"দাঁত,পড়া,ব্যথা",s1:"দাঁত পড়ে যাওয়া স্বজন বিচ্ছেদ বা মৃত্যুর ইঙ্গিত।",s2:"দাঁত পরিবারের সদস্যদের প্রতীক।",s3:"দাঁত পড়া বয়স বৃদ্ধি ও পরিবর্তনের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, দাঁত পরিবারের প্রতীক।",s6:"শা'রানী (রহ.) বলেন, দাঁত পড়লে দোয়া ও সদকা করা উচিত।"},
+{id:67,cat:"body",ic:"&#x1FA78;",t:"রক্ত দেখা",kw:"রক্ত,আঘাত,ক্ষত",s1:"রক্ত দেখা সাধারণত অশুভ। তবে রক্ত বের হয়ে থেমে যাওয়া বিপদ থেকে মুক্তির ইঙ্গিত।",s2:"রক্ত অপবিত্রতার প্রতীক। তওবা ও ইস্তেগফার করা উচিত।",s5:"গাজ্জালী (রহ.) বলেন, রক্ত দেখা গুনাহের প্রতীক। ইস্তেগফার ও তওবার তাকিদ।"},
+{id:68,cat:"body",ic:"&#x270B;",t:"হাত দেখা",kw:"হাত,বাহু,আঙ্গুল",s1:"শক্তিশালী হাত দেখা শক্তি ও ক্ষমতার ইঙ্গিত।",s2:"হাত শক্তি ও কর্মশক্তির প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, হাত কর্মক্ষমতার প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, হাত দান ও সেবার প্রতীক।"},
+{id:69,cat:"body",ic:"&#x1F441;",t:"চোখ দেখা",kw:"চোখ,দৃষ্টি,অন্ধ,আলো",s1:"সুন্দর চোখ দেখা জ্ঞান ও দূরদর্শিতার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, চোখ অন্তরের আলোর প্রতীক।",s6:"শা'রানী (রহ.) বলেন, চোখ হৃদয়ের দর্পণ। সুন্দর চোখ ঈমানী নূরের ইঙ্গিত।"},
+{id:70,cat:"body",ic:"&#x1F9B6;",t:"পা দেখা",kw:"পা,হাঁটা,খালি পা",s1:"শক্তিশালী পা দেখা দৃঢ় পদক্ষেপের ইঙ্গিত।",s2:"খালি পায়ে হাঁটা বিনয় ও নম্রতার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, পা চলার পথের প্রতীক। সঠিক পথে পা রাখা হেদায়েতের ইঙ্গিত।"},
+{id:71,cat:"body",ic:"&#x1F4AA;",t:"শক্তিশালী শরীর",kw:"শক্তি,সুস্থ,শরীর",s1:"শক্তিশালী শরীর দেখা স্বাস্থ্য ও সামর্থ্যের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, সুস্থ শরীর আল্লাহর আমানত। সঠিক ব্যবহার করা ফরজ।"},
+{id:72,cat:"body",ic:"&#x1F912;",t:"অসুস্থ হওয়া",kw:"অসুস্থ,রোগ,জ্বর,ব্যথা",s1:"অসুস্থ হতে দেখা পরীক্ষা ও গুনাহের কাফফারার ইঙ্গিত।",s2:"রোগ দেখা ধৈর্য পরীক্ষার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, অসুস্থতা আল্লাহর পরীক্ষা। সবর করলে গুনাহ মাফ হয়।",s5:"গাজ্জালী (রহ.) বলেন, রোগ দুনিয়ার ক্ষণস্থায়িত্বের স্মরণ করিয়ে দেয়।"},
+{id:73,cat:"clothes",ic:"&#x1F458;",t:"সাদা পোশাক পরা",kw:"পোশাক,কাপড়,সাদা,পরিষ্কার",s1:"সাদা পোশাক পবিত্রতা ও সুস্বাস্থ্যের প্রতীক।",s2:"সাদা রঙ সর্বোত্তম রঙ।",s3:"সাদা পোশাক ইসলামী পবিত্রতার প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, সাদা পোশাক জান্নাতিদের পোশাকের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, সাদা রঙ আত্মার বিশুদ্ধতার প্রতীক।",s6:"শা'রানী (রহ.) বলেন, সাদা পোশাক পরা নেক আমলের প্রতীক।"},
+{id:74,cat:"clothes",ic:"&#x1F451;",t:"রাজকীয় পোশাক বা মুকুট",kw:"মুকুট,রাজকীয়,সিংহাসন",s1:"মুকুট পরা সম্মান ও ক্ষমতা লাভের ইঙ্গিত।",s2:"মুকুট শাসন ও নেতৃত্বের প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, মুকুট রাজ-ক্ষমতার প্রতীক। পদোন্নতির ইঙ্গিত।"},
+{id:75,cat:"clothes",ic:"&#x1F7E2;",t:"সবুজ পোশাক পরা",kw:"সবুজ,পোশাক,কাপড়,রঙ",s1:"সবুজ পোশাক পরা দীনদারি ও জান্নাতের আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, কুরআনে জান্নাতিদের সবুজ পোশাকের উল্লেখ আছে।",s5:"গাজ্জালী (রহ.) বলেন, সবুজ রঙ রহমত ও প্রাণের প্রতীক।"},
+{id:76,cat:"clothes",ic:"&#x1F48D;",t:"আংটি বা অলংকার পরা",kw:"আংটি,অলংকার,গহনা,পরা",s1:"আংটি পরা কর্তৃত্ব ও মর্যাদার ইঙ্গিত।",s2:"রুপার আংটি পবিত্রতার প্রতীক।",s6:"শা'রানী (রহ.) বলেন, আংটি চুক্তি ও প্রতিশ্রুতির প্রতীক।"},
+{id:77,cat:"death",ic:"&#x26B0;",t:"নিজের মৃত্যু দেখা",kw:"মৃত্যু,মরা,কবর,দাফন,জানাজা",s1:"নিজের মৃত্যু দেখা দীর্ঘায়ু ও তওবার ইঙ্গিত।",s2:"মৃত্যু দেখা আখেরাতের চিন্তা বৃদ্ধির আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, মৃত্যু স্মরণ করা গাফলত থেকে মুক্তির পথ।",s5:"গাজ্জালী (রহ.) বলেন, মৃত্যু দেখা দুনিয়ার মোহ থেকে মুক্তির ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, মৃত্যু দেখলে তওবা ও নেক আমল বৃদ্ধি করা উচিত।"},
+{id:78,cat:"death",ic:"&#x1FAA6;",t:"কবর দেখা",kw:"কবর,মাজার,গোরস্তান",s1:"কবর দেখা পরকালের স্মরণ ও তওবার ইঙ্গিত।",s2:"কবর জিয়ারত করা মৃত্যুর স্মরণ ও নেক আমলের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, কবর আখেরাতের প্রথম মনজিলের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, কবর দেখা দুনিয়ার ক্ষণস্থায়িত্বের স্মরণ।",s6:"শা'রানী (রহ.) বলেন, কবর দেখলে পরিবারের জন্য দোয়া করা উচিত।"},
+{id:79,cat:"death",ic:"&#x1F33A;",t:"জানাজার নামাজ পড়া",kw:"জানাজা,নামাজ,মৃত,দোয়া",s1:"জানাজার নামাজ পড়া মৃত ব্যক্তির জন্য দোয়া করার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, জানাজায় অংশগ্রহণ মুসলমানের দায়িত্ব।",s6:"শা'রানী (রহ.) বলেন, জানাজা দেখলে মৃতের জন্য সদকা করা উচিত।"},
+{id:80,cat:"death",ic:"&#x1F9DF;",t:"কিয়ামত বা হাশরের ময়দান",kw:"কিয়ামত,হাশর,বিচার,আখেরাত",s1:"কিয়ামত দেখা আখেরাতের প্রস্তুতির তাকিদ। হাশরের ময়দানে নিরাপদ থাকা নেক আমলের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, কিয়ামত দেখা তওবা ও ইবাদত বৃদ্ধির তাকিদ।",s5:"গাজ্জালী (রহ.) বলেন, হাশরের ময়দান দেখা পরকালীন জীবনের প্রস্তুতির ইঙ্গিত।"},
+{id:81,cat:"conflict",ic:"&#x2694;",t:"যুদ্ধ বা লড়াই দেখা",kw:"যুদ্ধ,লড়াই,সংঘাত,তরবারি",s1:"যুদ্ধে বিজয়ী হওয়া বাস্তব জীবনে সাফল্যের ইঙ্গিত।",s2:"যুদ্ধ দেখা বাস্তব জীবনে সংঘাতের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, যুদ্ধে বিজয় আল্লাহর সাহায্যের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, যুদ্ধ নাফসের বিরুদ্ধে জিহাদের প্রতীক।"},
+{id:82,cat:"conflict",ic:"&#x1F3F9;",t:"তীর বা ধনুক দেখা",kw:"তীর,ধনুক,যুদ্ধ,নিশানা",s1:"তীর ছোঁড়া নিশানায় পৌঁছানোর ইঙ্গিত।",s2:"ধনুক শক্তি ও সামর্থ্যের প্রতীক।",s6:"শা'রানী (রহ.) বলেন, তীর সত্যের বাণী প্রচারের প্রতীক।"},
+{id:83,cat:"conflict",ic:"&#x1F6E1;",t:"ঢাল বা বর্ম দেখা",kw:"ঢাল,বর্ম,সুরক্ষা,রক্ষা",s1:"ঢাল দেখা সুরক্ষা ও নিরাপত্তার ইঙ্গিত। ঢাল পরা রক্ষা পাওয়ার আলামত।",s5:"গাজ্জালী (রহ.) বলেন, ঢাল তাকওয়ার প্রতীক। তাকওয়া সকল বিপদ থেকে রক্ষার ইঙ্গিত।"},
+{id:84,cat:"knowledge",ic:"&#x1F4DA;",t:"বই পড়া বা লেখা",kw:"বই,পড়া,লেখা,কলম,কাগজ",s1:"বই পড়া ইলম ও জ্ঞান অর্জনের ইঙ্গিত।",s2:"বই দেখা ইলম ও হেদায়েতের প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, বই ইলমের ভান্ডার। পড়তে দেখা ইলম অর্জনের তাকিদ।",s5:"গাজ্জালী (রহ.) বলেন, বই পড়া আত্মার খোরাক অর্জনের প্রতীক।"},
+{id:85,cat:"knowledge",ic:"&#x270F;",t:"কলম বা লেখার সরঞ্জাম",kw:"কলম,লেখা,কালি,কাগজ",s1:"কলম দেখা ইলম ও লেখার ক্ষমতার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, কলম আল্লাহর প্রথম সৃষ্টি। কলম দেখা ইলমের গুরুত্বের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, কলম ইলম প্রচারের মাধ্যম।"},
+{id:86,cat:"knowledge",ic:"&#x1F3EB;",t:"মাদরাসা বা স্কুল দেখা",kw:"মাদরাসা,স্কুল,শিক্ষা,পাঠশালা",s1:"মাদরাসায় যাওয়া ইলম অর্জন ও জ্ঞান বৃদ্ধির ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, মাদরাসা ইলমের কেন্দ্র।",s6:"শা'রানী (রহ.) বলেন, মাদরাসা দেখলে ইলম অন্বেষণের নিয়ত করা উচিত।"},
+{id:87,cat:"colors",ic:"&#x2B1C;",t:"সাদা রঙ দেখা",kw:"সাদা,উজ্জ্বল,পরিষ্কার",s1:"সাদা রঙ পবিত্রতা, শান্তি ও সুখের প্রতীক।",s2:"সাদা রঙ সর্বোত্তম রঙ।",s4:"ইবনে কাসীর (রহ.) বলেন, সাদা রঙ নূর ও পবিত্রতার প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, সাদা রঙ আত্মার বিশুদ্ধতার প্রতীক।",s6:"শা'রানী (রহ.) বলেন, সাদা রঙ দেখা ঈমানের পরিষ্কার অবস্থার ইঙ্গিত।"},
+{id:88,cat:"colors",ic:"&#x2B1B;",t:"কালো রঙ দেখা",kw:"কালো,অন্ধকার,রাত",s1:"কালো রঙ দেখা কষ্ট ও বিপদের ইঙ্গিত। তবে কালো পোশাক আলেমের মর্যাদার আলামত।",s2:"কালো রঙ প্রেক্ষাপট অনুযায়ী বোঝা উচিত।",s5:"গাজ্জালী (রহ.) বলেন, কালো রঙ অন্ধকার ও অজ্ঞতার প্রতীক।"},
+{id:89,cat:"colors",ic:"&#x1F7E9;",t:"সবুজ রঙ দেখা",kw:"সবুজ,গাছ,বাগান,রঙ",s1:"সবুজ রঙ দেখা জান্নাত ও রহমতের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, সবুজ রঙ কুরআনে জান্নাতের রঙ হিসেবে উল্লেখিত।",s5:"গাজ্জালী (রহ.) বলেন, সবুজ রঙ প্রাণ ও আশার প্রতীক।"},
+{id:90,cat:"colors",ic:"&#x1F7E8;",t:"হলুদ রঙ দেখা",kw:"হলুদ,রঙ,সোনালী",s1:"হলুদ রঙ দেখা রোগ বা কষ্টের ইঙ্গিত। তবে সোনালী হলুদ সম্পদের আলামত।",s6:"শা'রানী (রহ.) বলেন, হলুদ রঙ দুর্বলতার প্রতীক। স্বাস্থ্যের প্রতি যত্নশীল হওয়ার ইঙ্গিত।"},
+{id:91,cat:"supernatural",ic:"&#x1F47B;",t:"জিন বা শয়তান দেখা",kw:"জিন,শয়তান,ভূত,আত্মা",s1:"জিন বা শয়তান দেখা বিপদ ও ফিতনার ইঙ্গিত। আউযুবিল্লাহ পড়া এবং তওবা করা উচিত।",s2:"শয়তান দেখলে আয়াতুল কুরসি পড়া উচিত।",s4:"ইবনে কাসীর (রহ.) বলেন, শয়তান দেখা ওয়াসওয়াসা থেকে সাবধান থাকার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, শয়তান দেখা কু-প্রবৃত্তির প্রতীক। জিকির ও ইস্তেগফার করা উচিত।"},
+{id:92,cat:"supernatural",ic:"&#x1F5FD;",t:"জান্নাত দেখা",kw:"জান্নাত,বেহেশত,নেয়ামত",s1:"জান্নাত দেখা অত্যন্ত শুভ স্বপ্ন। নেক আমল ও তাকওয়ার পুরস্কারের ইঙ্গিত।",s2:"জান্নাত দেখা আখেরাতের সাফল্যের সুসংবাদ।",s4:"ইবনে কাসীর (রহ.) বলেন, জান্নাত দেখা আল্লাহর বিশেষ অনুগ্রহের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, জান্নাত দেখা সর্বোচ্চ আধ্যাত্মিক পুরস্কার।",s6:"শা'রানী (রহ.) বলেন, জান্নাত দেখলে বেশি বেশি নেক আমল করা উচিত।"},
+{id:93,cat:"supernatural",ic:"&#x1F525;",t:"জাহান্নাম দেখা",kw:"জাহান্নাম,দোজখ,শাস্তি",s1:"জাহান্নাম দেখা সতর্কতার ইঙ্গিত। তওবা ও গুনাহ থেকে বিরত থাকার তাকিদ।",s4:"ইবনে কাসীর (রহ.) বলেন, জাহান্নাম দেখা গুনাহ থেকে দূরে থাকার কড়া তাকিদ।",s5:"গাজ্জালী (রহ.) বলেন, জাহান্নাম দেখা আখেরাতের ভয় জাগ্রত করার ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, জাহান্নাম দেখলে অবিলম্বে তওবা করা উচিত।"},
+{id:94,cat:"prophets",ic:"&#x1F54A;",t:"হযরত ইব্রাহিম (আ.) দেখা",kw:"ইব্রাহিম,নবী,পয়গম্বর",s1:"হযরত ইব্রাহিম (আ.) দেখা তাওহীদ ও একনিষ্ঠতার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, ইব্রাহিম (আ.) ছিলেন খলিলুল্লাহ। তাঁকে দেখা মহান সৌভাগ্যের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, ইব্রাহিম (আ.) দেখা তাওহীদের শক্তিশালী অনুসরণের ইঙ্গিত।"},
+{id:95,cat:"prophets",ic:"&#x1F30A;",t:"হযরত মুসা (আ.) দেখা",kw:"মুসা,নবী,তুর,কালিমুল্লাহ",s1:"হযরত মুসা (আ.) দেখা শক্তি ও সাহসের ইঙ্গিত। বাতিলের বিরুদ্ধে সত্যের বিজয়ের আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, মুসা (আ.) আল্লাহর কালিমুল্লাহ। তাঁকে দেখা মহা সৌভাগ্য।"},
+{id:96,cat:"prophets",ic:"&#x2B50;",t:"হযরত ইউসুফ (আ.) দেখা",kw:"ইউসুফ,নবী,স্বপ্ন,সৌন্দর্য",s1:"হযরত ইউসুফ (আ.) দেখা সৌন্দর্য, ধৈর্য ও বিজয়ের ইঙ্গিত। কষ্টের পর সাফল্যের আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, ইউসুফ (আ.) স্বপ্নের নবী। তাঁকে দেখা স্বপ্নের সঠিক ব্যাখ্যার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, ইউসুফ (আ.) দেখা ধৈর্য ও তাওয়াক্কুলের তাকিদ।"},
+{id:97,cat:"prophets",ic:"&#x1F54C;",t:"হযরত ঈসা (আ.) দেখা",kw:"ঈসা,নবী,রূহুল্লাহ",s1:"হযরত ঈসা (আ.) দেখা রূহানিয়াত ও আধ্যাত্মিক শক্তির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, ঈসা (আ.) রূহুল্লাহ। তাঁকে দেখা রুহানী উন্নতির ইঙ্গিত।"},
+{id:98,cat:"prophets",ic:"&#x1F4A7;",t:"হযরত নূহ (আ.) দেখা",kw:"নূহ,নবী,কিস্তি,বন্যা",s1:"হযরত নূহ (আ.) দেখা ধৈর্য ও দীর্ঘ সংগ্রামের পর সাফল্যের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, নূহ (আ.) দীর্ঘতম ধৈর্যের নবী। তাঁকে দেখা সবরের তাকিদ।"}
 ];
-
-// ===== CATEGORIES =====
-const categories = [
-  {id:'water', icon:'💧', name:'পানি ও নদী', desc:'পানি, নদী, সমুদ্র, বৃষ্টি'},
-  {id:'fire', icon:'🔥', name:'আগুন ও আলো', desc:'আগুন, আলো, প্রদীপ'},
-  {id:'animals', icon:'🐾', name:'পশু-পাখি', desc:'সাপ, সিংহ, পাখি, গরু'},
-  {id:'sky', icon:'🌙', name:'আকাশ ও প্রকৃতি', desc:'চাঁদ, সূর্য, তারা'},
-  {id:'people', icon:'👥', name:'মানুষ ও পরিবার', desc:'মৃত ব্যক্তি, শিশু, রাজা'},
-  {id:'food', icon:'🍎', name:'খাবার ও পানীয়', desc:'মধু, ফল, রুটি'},
-  {id:'worship', icon:'🕌', name:'ইবাদত ও মসজিদ', desc:'মসজিদ, কাবা, কুরআন'},
-  {id:'travel', icon:'🌍', name:'ভ্রমণ ও স্থান', desc:'উড়া, পাহাড়, সফর'},
-  {id:'wealth', icon:'💰', name:'ধন-সম্পদ', desc:'সোনা, রুপা, ঘর'},
-  {id:'body', icon:'🫀', name:'শরীর ও স্বাস্থ্য', desc:'দাঁত, রক্ত, হাত'},
-  {id:'clothes', icon:'👘', name:'পোশাক ও অলংকার', desc:'পোশাক, মুকুট'},
+var C=[
+{id:"water",ic:"&#x1F4A7;",n:"পানি ও নদী"},
+{id:"fire",ic:"&#x1F525;",n:"আগুন ও আলো"},
+{id:"animals",ic:"&#x1F43E;",n:"পশু-পাখি"},
+{id:"sky",ic:"&#x1F319;",n:"আকাশ ও প্রকৃতি"},
+{id:"people",ic:"&#x1F465;",n:"মানুষ ও পরিবার"},
+{id:"food",ic:"&#x1F34E;",n:"খাবার ও পানীয়"},
+{id:"worship",ic:"&#x1F54C;",n:"ইবাদত ও মসজিদ"},
+{id:"travel",ic:"&#x1F30D;",n:"ভ্রমণ ও স্থান"},
+{id:"wealth",ic:"&#x1F4B0;",n:"ধন-সম্পদ"},
+{id:"body",ic:"&#x1FAC0;",n:"শরীর ও স্বাস্থ্য"},
+{id:"clothes",ic:"&#x1F458;",n:"পোশাক ও অলংকার"},
+{id:"death",ic:"&#x26B0;",n:"মৃত্যু ও কবর"},
+{id:"conflict",ic:"&#x2694;",n:"যুদ্ধ ও সংঘাত"},
+{id:"knowledge",ic:"&#x1F4DA;",n:"বিদ্যা ও ইলম"},
+{id:"colors",ic:"&#x1F3A8;",n:"রঙ ও দৃশ্য"},
+{id:"supernatural",ic:"&#x1F47B;",n:"অতিপ্রাকৃত"},
+{id:"prophets",ic:"&#x1F54A;",n:"নবী-রাসূলগণ"}
 ];
+var curTab="home",openId=null,openPanel={};
 
-// ===== STATE =====
-let currentTab = 'home';
-let currentCat = null;
-let openDreamId = null;
-let openDreamTab = {};
+function cnt(cat){var n=0;for(var i=0;i<D.length;i++){if(D[i].cat===cat)n++;}return n;}
 
-// ===== RENDER HOME =====
-function renderHome() {
-  const d = document.getElementById('mainContent');
-  d.innerHTML = `
-    <div class="bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
-    <div class="section-head">
-      <span class="section-head-icon">📂</span>
-      <span class="section-head-title">বিভাগসমূহ</span>
-    </div>
-    <div class="cat-grid">
-      ${categories.map(c=>`
-        <div class="cat-card" onclick="showCatDreams('${c.id}')">
-          <div class="cat-icon">${c.icon}</div>
-          <div class="cat-name">${c.name}</div>
-          <div class="cat-count">${dreams.filter(x=>x.cat===c.id).length}টি স্বপ্ন</div>
-        </div>`).join('')}
-    </div>`;
-}
+function getSch(d){var r=[];for(var i=0;i<SK.length;i++){if(d[SK[i]])r.push(i);}return r;}
 
-// ===== RENDER CAT =====
-function renderCategory() {
-  const d = document.getElementById('mainContent');
-  const list = categories.map(c=>{
-    const count = dreams.filter(x=>x.cat===c.id).length;
-    return `<div class="cat-card" onclick="showCatDreams('${c.id}')">
-      <div class="cat-icon">${c.icon}</div>
-      <div class="cat-name">${c.name}</div>
-      <div class="cat-count">${count}টি স্বপ্ন</div>
-    </div>`;
-  }).join('');
-  d.innerHTML = `<div class="cat-grid">${list}</div>`;
-}
-
-// ===== SHOW CATEGORY DREAMS =====
-function showCatDreams(catId) {
-  currentCat = catId;
-  const cat = categories.find(c=>c.id===catId);
-  const list = dreams.filter(d=>d.cat===catId);
-  const d = document.getElementById('mainContent');
-  d.innerHTML = `
-    <div class="section-head">
-      <span class="section-head-icon">${cat.icon}</span>
-      <span class="section-head-title">${cat.name}</span>
-      <button class="btn-back" onclick="goBack()">← পিছনে</button>
-    </div>
-    <div class="dream-list">
-      ${list.map(dream=>renderDreamCard(dream)).join('')}
-    </div>`;
-}
-
-// ===== RENDER ALL DREAMS =====
-function renderAll() {
-  const d = document.getElementById('mainContent');
-  d.innerHTML = `
-    <div class="section-head">
-      <span class="section-head-icon">📖</span>
-      <span class="section-head-title">সকল স্বপ্নের তালিকা (${dreams.length}টি)</span>
-    </div>
-    <div class="dream-list">
-      ${dreams.map(dream=>renderDreamCard(dream)).join('')}
-    </div>`;
-}
-
-// ===== RENDER DREAM CARD =====
-function renderDreamCard(dream) {
-  const isOpen = openDreamId === dream.id;
-  const activePanel = openDreamTab[dream.id] || 'ibnSirin';
-  return `
-    <div class="dream-card" id="dreamCard${dream.id}">
-      <div class="dream-header" onclick="toggleDream(${dream.id})">
-        <span class="dream-icon">${dream.icon}</span>
-        <div class="dream-title-wrap">
-          <div class="dream-title">${dream.title}</div>
-          <div class="dream-keywords">${dream.keywords.split(',').map(k=>`#${k.trim()}`).join(' ')}</div>
-        </div>
-        <span class="dream-expand">${isOpen?'▲':'▼'}</span>
-      </div>
-      <div class="dream-body ${isOpen?'open':''}" id="dreamBody${dream.id}">
-        <div class="tafsir-tab-row">
-          <button class="tafsir-btn ${activePanel==='ibnSirin'?'active':''}" onclick="switchTafsir(${dream.id},'ibnSirin')">ইবনে সীরীন</button>
-          <button class="tafsir-btn ${activePanel==='nabulusi'?'active':''}" onclick="switchTafsir(${dream.id},'nabulusi')">নাবুলুসী</button>
-          <button class="tafsir-btn ${activePanel==='abdulghani'?'active':''}" onclick="switchTafsir(${dream.id},'abdulghani')">আ.গ. নাবুলুসী</button>
-        </div>
-        <div class="tafsir-content">
-          <div class="tafsir-panel ${activePanel==='ibnSirin'?'active':''}" id="tp${dream.id}ibnSirin">
-            <span class="scholar-badge">ইমাম মুহাম্মদ ইবনে সীরীন (রহ.)</span>
-            <p>${dream.ibnSirin}</p>
-          </div>
-          <div class="tafsir-panel ${activePanel==='nabulusi'?'active':''}" id="tp${dream.id}nabulusi">
-            <span class="scholar-badge">ইমাম নাবুলুসী (রহ.)</span>
-            <p>${dream.nabulusi}</p>
-          </div>
-          <div class="tafsir-panel ${activePanel==='abdulghani'?'active':''}" id="tp${dream.id}abdulghani">
-            <span class="scholar-badge">শায়খ আব্দুল গনী নাবুলুসী (রহ.)</span>
-            <p>${dream.abdulghani}</p>
-          </div>
-        </div>
-      </div>
-    </div>`;
-}
-
-// ===== TOGGLE DREAM =====
-function toggleDream(id) {
-  if(openDreamId === id) {
-    openDreamId = null;
-  } else {
-    openDreamId = id;
+function buildGrid(){
+  var h="";
+  for(var i=0;i<C.length;i++){
+    var c=cnt(C[i].id);
+    if(c===0)continue;
+    h+="<div class=\"cc\" onclick=\"showCat('"+C[i].id+"')\"><div class=\"ci\">"+C[i].ic+"</div><div class=\"cn\">"+C[i].n+"</div><div class=\"ck\">"+c+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;</div></div>";
   }
-  const body = document.getElementById('dreamBody'+id);
-  const card = document.getElementById('dreamCard'+id);
-  if(body) {
-    body.classList.toggle('open', openDreamId===id);
-    // update expand arrow
-    const header = card.querySelector('.dream-expand');
-    if(header) header.textContent = openDreamId===id ? '▲' : '▼';
+  return h;
+}
+
+function buildCard(d){
+  var isOpen=(openId===d.id);
+  var schs=getSch(d);
+  var def=openPanel[d.id]||(schs.length>0?SK[schs[0]]:"s1");
+  var kws=d.kw.split(",");var kwh="";for(var i=0;i<kws.length;i++){kwh+="#"+kws[i].trim()+" ";}
+  var tabs="";
+  for(var i=0;i<schs.length;i++){var si=schs[i];tabs+="<button class=\"tb"+(def===SK[si]?" active":"")+"\" onclick=\"swP("+d.id+",'"+SK[si]+"')\">"+SS[si]+"</button>";}
+  var panels="";
+  for(var i=0;i<schs.length;i++){var si=schs[i];panels+="<div class=\"tp"+(def===SK[si]?" active":"")+"\" id=\"p"+d.id+SK[si]+"\"><span class=\"sb2\">"+SF[si]+"</span><p>"+d[SK[si]]+"</p></div>";}
+  return "<div class=\"dc\" id=\"dc"+d.id+"\">"
+    +"<div class=\"dh\" onclick=\"togD("+d.id+")\">"
+    +"<span class=\"di\">"+d.ic+"</span>"
+    +"<div class=\"dtw\"><div class=\"dt\">"+d.t+"</div><div class=\"dk\">"+kwh+"</div></div>"
+    +"<span class=\"de\">"+(isOpen?"&#x25B2;":"&#x25BC;")+"</span>"
+    +"</div>"
+    +"<div class=\"db"+(isOpen?" open":"")+"\" id=\"db"+d.id+"\">"
+    +"<div class=\"tr\">"+tabs+"</div>"
+    +"<div class=\"tc\">"+panels+"</div>"
+    +"</div></div>";
+}
+
+function buildList(list){var h="";for(var i=0;i<list.length;i++){h+=buildCard(list[i]);}return h;}
+
+function showHome(){
+  document.getElementById("mc").innerHTML=
+    "<div class=\"bism\">&#x0628;&#x0650;&#x0633;&#x0652;&#x0645;&#x0650; &#x0627;&#x0644;&#x0644;&#x0651;&#x0670;&#x0647;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x064E;&#x062D;&#x0652;&#x0645;&#x0670;&#x0646;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x064E;&#x062D;&#x0650;&#x064A;&#x0652;&#x0645;&#x0650;</div>"
+    +"<div class=\"sh2\"><span class=\"shi\">&#x1F4C2;</span><span class=\"sht\">&#x09AC;&#x09BF;&#x09AD;&#x09BE;&#x0997;&#x09B8;&#x09AE;&#x09C2;&#x09B9; ("+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;, &#x09EC; &#x0986;&#x09B2;&#x09C7;&#x09AE;)</span></div>"
+    +"<div class=\"cg\">"+buildGrid()+"</div>";
+}
+
+function showCatPage(){document.getElementById("mc").innerHTML="<div class=\"cg\">"+buildGrid()+"</div>";}
+
+function showCat(id){
+  var cat=null;for(var i=0;i<C.length;i++){if(C[i].id===id){cat=C[i];break;}}
+  var list=[];for(var i=0;i<D.length;i++){if(D[i].cat===id)list.push(D[i]);}
+  document.getElementById("mc").innerHTML="<div class=\"sh2\"><span class=\"shi\">"+cat.ic+"</span><span class=\"sht\">"+cat.n+"</span><button class=\"bbk\" onclick=\"goBack()\">&#x2190; &#x09AA;&#x09BF;&#x099B;&#x09A8;&#x09C7;</button></div><div class=\"dl\">"+buildList(list)+"</div>";
+}
+
+function showAll(){document.getElementById("mc").innerHTML="<div class=\"sh2\"><span class=\"shi\">&#x1F4D6;</span><span class=\"sht\">&#x09B8;&#x0995;&#x09B2; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8; ("+D.length+"&#x099F;&#x09BF;)</span></div><div class=\"dl\">"+buildList(D)+"</div>";}
+
+function showAbout(){
+  var sh="";for(var i=0;i<SF.length;i++){sh+="<p style=\"margin-bottom:6px\"><strong>"+SF[i]+"</strong></p>";}
+  document.getElementById("mc").innerHTML=
+    "<div class=\"acard\"><h3>&#x1F54C; &#x09B8;&#x09CB;&#x09B2;&#x09BE;&#x0987;&#x09AE;&#x09BE;&#x09A8;&#x09C0; &#x0996;&#x09BE;&#x09AC;&#x09A8;&#x09BE;&#x09AE;&#x09BE;</h3><p>&#x09AE;&#x09CB;&#x099F; "+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x09C7;&#x09B0; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE;, "+C.length+"&#x099F;&#x09BF; &#x09AC;&#x09BF;&#x09AD;&#x09BE;&#x0997;&#x09C7; &#x098F;&#x09AC;&#x0982; &#x09EC; &#x099C;&#x09A8; &#x09AC;&#x09BF;&#x0996;&#x09CD;&#x09AF;&#x09BE;&#x09A4; &#x0986;&#x09B2;&#x09C7;&#x09AE;&#x09C7;&#x09B0; &#x09AE;&#x09A4;&#x09BE;&#x09AE;&#x09A4; &#x09B8;&#x0982;&#x0997;&#x09C3;&#x09B9;&#x09C0;&#x09A4;&#x0964; &#x09AF;&#x09C7; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x09C7; &#x0995;&#x09CB;&#x09A8;&#x09CB; &#x0986;&#x09B2;&#x09C7;&#x09AE;&#x09C7;&#x09B0; &#x09AE;&#x09A4;&#x09BE;&#x09AE;&#x09A4; &#x09A8;&#x09C7;&#x0987; &#x09B8;&#x09C7; &#x099F;&#x09CD;&#x09AF;&#x09BE;&#x09AC; &#x09A6;&#x09C7;&#x0996;&#x09BE;&#x09AC;&#x09C7; &#x09A8;&#x09BE;&#x0964;</p></div>"
+    +"<div class=\"acard\"><h3>&#x1F4DA; &#x0986;&#x09B2;&#x09C7;&#x09AE;&#x0997;&#x09A3;</h3>"+sh+"</div>"
+    +"<div class=\"acard\"><h3>&#x26A0;&#xFE0F; &#x0997;&#x09C1;&#x09B0;&#x09C1;&#x09A4;&#x09CD;&#x09AC;&#x09AA;&#x09C2;&#x09B0;&#x09CD;&#x09A3; &#x09A8;&#x09CB;&#x099F;</h3><p>&#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x09C7;&#x09B0; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09B8;&#x09AC;&#x09B8;&#x09AE;&#x09AF;&#x09BC; &#x09A8;&#x09BF;&#x09B6;&#x09CD;&#x099A;&#x09BF;&#x09A4; &#x09A8;&#x09AF;&#x09BC;&#x0964; &#x09AC;&#x09CD;&#x09AF;&#x0995;&#x09CD;&#x09A4;&#x09BF;, &#x09B8;&#x09AE;&#x09AF;&#x09BC; &#x0993; &#x09AA;&#x09B0;&#x09BF;&#x09B8;&#x09CD;&#x09A5;&#x09BF;&#x09A4;&#x09BF; &#x09AD;&#x09C7;&#x09A6;&#x09C7; &#x09AD;&#x09BF;&#x09A8;&#x09CD;&#x09A8; &#x09B9;&#x09A4;&#x09C7; &#x09AA;&#x09BE;&#x09B0;&#x09C7;&#x0964;</p></div>"
+    +"<div class=\"acard\"><h3>&#x1F468;&#x200D;&#x1F4BB; &#x09A1;&#x09C7;&#x09AD;&#x09C7;&#x09B2;&#x09AA;&#x09BE;&#x09B0;</h3><p>&#x09A4;&#x09C8;&#x09B0;&#x09BF; &#x0995;&#x09B0;&#x09C7;&#x099B;&#x09C7;&#x09A8;: <strong>A.M. Morshed</strong><br>&#x09B8;&#x0982;&#x09B8;&#x09CD;&#x0995;&#x09B0;&#x09A3;: &#x09E9;.&#x09E6; | "+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8; | &#x09EC; &#x0986;&#x09B2;&#x09C7;&#x09AE;</p></div>";
+}
+
+function showTab(t){
+  curTab=t;
+  var tabs=document.querySelectorAll(".tab");
+  var names=["home","cat","all","about"];
+  for(var i=0;i<tabs.length;i++){tabs[i].classList.toggle("active",names[i]===t);}
+  if(t==="home")showHome();
+  else if(t==="cat")showCatPage();
+  else if(t==="all")showAll();
+  else if(t==="about")showAbout();
+}
+
+function goBack(){showTab(curTab==="home"?"home":"cat");}
+
+function togD(id){
+  openId=(openId===id?null:id);
+  var body=document.getElementById("db"+id);
+  var card=document.getElementById("dc"+id);
+  if(body){
+    body.classList.toggle("open",openId===id);
+    var exp=card.querySelector(".de");
+    if(exp)exp.innerHTML=(openId===id?"&#x25B2;":"&#x25BC;");
   }
 }
 
-// ===== SWITCH TAFSIR TAB =====
-function switchTafsir(dreamId, panel) {
-  openDreamTab[dreamId] = panel;
-  const panels = ['ibnSirin','nabulusi','abdulghani'];
-  panels.forEach(p=>{
-    const el = document.getElementById(`tp${dreamId}${p}`);
-    if(el) el.classList.toggle('active', p===panel);
-  });
-  const card = document.getElementById('dreamCard'+dreamId);
-  if(card) {
-    card.querySelectorAll('.tafsir-btn').forEach((btn,i)=>{
-      btn.classList.toggle('active', panels[i]===panel);
-    });
+function swP(did,p){
+  openPanel[did]=p;
+  var d=null;for(var i=0;i<D.length;i++){if(D[i].id===did){d=D[i];break;}}
+  if(!d)return;
+  var schs=getSch(d);
+  for(var i=0;i<SK.length;i++){var el=document.getElementById("p"+did+SK[i]);if(el)el.classList.toggle("active",SK[i]===p);}
+  var card=document.getElementById("dc"+did);
+  if(card){
+    var btns=card.querySelectorAll(".tb");
+    for(var i=0;i<btns.length;i++){btns[i].classList.remove("active");}
+    for(var i=0;i<schs.length;i++){if(SK[schs[i]]===p&&btns[i]){btns[i].classList.add("active");break;}}
   }
 }
 
-// ===== SEARCH =====
-function onSearch(val) {
-  const btn = document.getElementById('btnClear');
-  btn.style.display = val ? 'block' : 'none';
-  if(!val.trim()) {
-    showTab(currentTab);
-    return;
+function onSrch(val){
+  document.getElementById("bc").style.display=val?"block":"none";
+  if(!val.trim()){showTab(curTab);return;}
+  var q=val.trim().toLowerCase();
+  var res=[];
+  for(var i=0;i<D.length;i++){
+    var d=D[i];
+    var txt=d.t+" "+d.kw+" "+(d.s1||"")+" "+(d.s2||"")+" "+(d.s3||"")+" "+(d.s4||"")+" "+(d.s5||"")+" "+(d.s6||"");
+    if(txt.toLowerCase().indexOf(q)>=0)res.push(d);
   }
-  const q = val.trim().toLowerCase();
-  const results = dreams.filter(d=>
-    d.title.toLowerCase().includes(q) ||
-    d.keywords.toLowerCase().includes(q) ||
-    d.ibnSirin.includes(q) ||
-    d.nabulusi.includes(q) ||
-    d.abdulghani.includes(q)
-  );
-  const d = document.getElementById('mainContent');
-  if(results.length===0) {
-    d.innerHTML = `<div class="no-result">
-      <div class="no-result-icon">🔍</div>
-      <p>"${val}" এর জন্য কোনো স্বপ্নের ব্যাখ্যা পাওয়া যায়নি।</p>
-      <p style="margin-top:8px;font-size:12px;">AI দিয়ে জিজ্ঞেস করুন 🤖</p>
-    </div>`;
-    return;
-  }
-  d.innerHTML = `
-    <div class="result-count">🔍 "${val}" — ${results.length}টি ফলাফল পাওয়া গেছে</div>
-    <div class="dream-list">${results.map(dream=>renderDreamCard(dream)).join('')}</div>`;
+  var m=document.getElementById("mc");
+  if(!res.length){m.innerHTML="<div class=\"nr\"><div style=\"font-size:40px\">&#x1F50D;</div><p>"+val+" &#x098F;&#x09B0; &#x099C;&#x09A8;&#x09CD;&#x09AF; &#x0995;&#x09CB;&#x09A8;&#x09CB; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09AA;&#x09BE;&#x0993;&#x09AF;&#x09BC;&#x09BE; &#x09AF;&#x09BE;&#x09AF;&#x09BC;&#x09A8;&#x09BF;&#x0964;</p></div>";return;}
+  m.innerHTML="<div class=\"rc\">&#x1F50D; "+val+" &#x2014; "+res.length+"&#x099F;&#x09BF; &#x09AB;&#x09B2;&#x09BE;&#x09AB;&#x09B2;</div><div class=\"dl\">"+buildList(res)+"</div>";
 }
 
-function clearSearch() {
-  document.getElementById('searchInput').value = '';
-  document.getElementById('btnClear').style.display = 'none';
-  showTab(currentTab);
+function clrSrch(){document.getElementById("si").value="";document.getElementById("bc").style.display="none";showTab(curTab);}
+
+function togAI(){
+  document.getElementById("ap").classList.toggle("open");
+  document.getElementById("ov").classList.toggle("open");
 }
 
-// ===== TABS =====
-function showTab(tab) {
-  currentTab = tab;
-  document.querySelectorAll('.tab').forEach((t,i)=>{
-    t.classList.toggle('active', ['home','category','all','about'][i]===tab);
-  });
-  if(tab==='home') renderHome();
-  else if(tab==='category') renderCategory();
-  else if(tab==='all') renderAll();
-  else if(tab==='about') renderAbout();
-}
-
-function goBack() {
-  showTab(currentTab==='home'?'home':'category');
-}
-
-// ===== ABOUT =====
-function renderAbout() {
-  const d = document.getElementById('mainContent');
-  d.innerHTML = `
-    <div class="about-card">
-      <h3>🕌 সোলাইমানী খাবনামা সম্পর্কে</h3>
-      <p>এই অ্যাপটি ইসলামী পণ্ডিতদের রচিত স্বীকৃত খাবনামা গ্রন্থগুলো থেকে সংকলিত। তিনজন বিখ্যাত আলেমের ব্যাখ্যা একসাথে পাওয়া যায়।</p>
-    </div>
-    <div class="about-card">
-      <h3>📚 আলেমগণের পরিচয়</h3>
-      <p><strong>ইমাম মুহাম্মদ ইবনে সীরীন (রহ.)</strong> (৬৫৩–৭২৯ খ্রি.) — তাবেয়ী, স্বপ্নের ব্যাখ্যায় সর্বকালের শ্রেষ্ঠ বিশেষজ্ঞ। তাঁর গ্রন্থ "তাবীরুর রুয়া" বিশ্বখ্যাত।</p>
-      <br>
-      <p><strong>ইমাম নাবুলুসী (রহ.)</strong> (১৬৪১–১৭৩১ খ্রি.) — সিরিয়ার হানাফী আলেম ও সুফী। তাঁর "তাতিরুল আনাম" স্বপ্নের ব্যাখ্যায় অনন্য।</p>
-      <br>
-      <p><strong>শায়খ আব্দুল গনী নাবুলুসী (রহ.)</strong> — ইমাম নাবুলুসীর পুত্র এবং স্বপ্ন বিজ্ঞানে তাঁর উত্তরসূরী।</p>
-    </div>
-    <div class="about-card">
-      <h3>⚠️ গুরুত্বপূর্ণ নোট</h3>
-      <p>স্বপ্নের ব্যাখ্যা সবসময় নিশ্চিত নয়। একই স্বপ্নের ব্যাখ্যা ব্যক্তি, সময় ও পরিস্থিতি ভেদে ভিন্ন হতে পারে। AI ব্যাখ্যা শুধু সহায়তার জন্য।</p>
-    </div>
-    <div class="about-card">
-      <h3>👨‍💻 ডেভেলপার</h3>
-      <p>তৈরি করেছেন: <strong>A.M. Morshed</strong><br>সংস্করণ: ১.০ | বাংলাদেশ</p>
-    </div>`;
-}
-
-// ===== AI =====
-function toggleAI() {
-  const panel = document.getElementById('aiPanel');
-  const overlay = document.getElementById('overlay');
-  panel.classList.toggle('open');
-  overlay.classList.toggle('open');
-}
-
-async function askAI() {
-  const input = document.getElementById('aiInput').value.trim();
-  if(!input) { showToast('স্বপ্নের বিষয় লিখুন'); return; }
-  const resp = document.getElementById('aiResponse');
-  resp.innerHTML = '<div class="ai-loading">⏳ AI বিশ্লেষণ করছে...</div>';
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system:`আপনি একজন বিশেষজ্ঞ ইসলামী স্বপ্ন ব্যাখ্যাকারী। ইমাম ইবনে সীরীন, ইমাম নাবুলুসী এবং শায়খ আব্দুল গনী নাবুলুসী (রহ.)-এর মতামতের ভিত্তিতে বাংলায় সংক্ষিপ্ত ও স্পষ্ট ব্যাখ্যা দিন। সবসময় বলুন যে এটি সম্ভাব্য ব্যাখ্যা, নিশ্চিত নয়।`,
-        messages:[{role:'user', content:`এই স্বপ্নটির ইসলামী ব্যাখ্যা দিন: ${input}`}]
+async function askAI(){
+  var inp=document.getElementById("ai").value.trim();
+  if(!inp){shToast("&#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x09C7;&#x09B0; &#x09AC;&#x09BF;&#x09B7;&#x09AF;&#x09BC; &#x09B2;&#x09BF;&#x0996;&#x09C1;&#x09A8;");return;}
+  var ar=document.getElementById("ar");
+  ar.innerHTML="&#x23F3; AI &#x09AC;&#x09BF;&#x09B6;&#x09CD;&#x09B2;&#x09C7;&#x09B7;&#x09A3; &#x0995;&#x09B0;&#x099B;&#x09C7;...";
+  try{
+    var res=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",
+        max_tokens:1200,
+        system:"&#x0986;&#x09AA;&#x09A8;&#x09BF; &#x098F;&#x0995;&#x099C;&#x09A8; &#x09AC;&#x09BF;&#x09B6;&#x09C7;&#x09B7;&#x099C;&#x09CD;&#x099E; &#x0987;&#x09B8;&#x09B2;&#x09BE;&#x09AE;&#x09C0; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE;&#x0995;&#x09BE;&#x09B0;&#x09C0;&#x0964; &#x0987;&#x09AE;&#x09BE;&#x09AE; &#x0987;&#x09AC;&#x09A8;&#x09C7; &#x09B8;&#x09C0;&#x09B0;&#x09C0;&#x09A8;, &#x0987;&#x09AE;&#x09BE;&#x09AE; &#x09A8;&#x09BE;&#x09AC;&#x09C1;&#x09B2;&#x09C1;&#x09B8;&#x09C0;, &#x09B6;&#x09BE;&#x09AF;&#x09BC;&#x0996; &#x0986;&#x09AC;&#x09CD;&#x09A6;&#x09C1;&#x09B2; &#x0997;&#x09A8;&#x09C0; &#x09A8;&#x09BE;&#x09AC;&#x09C1;&#x09B2;&#x09C1;&#x09B8;&#x09C0;, &#x0987;&#x09AE;&#x09BE;&#x09AE; &#x0987;&#x09AC;&#x09A8;&#x09C7; &#x0995;&#x09BE;&#x09B8;&#x09C0;&#x09B0;, &#x0987;&#x09AE;&#x09BE;&#x09AE; &#x0997;&#x09BE;&#x099C;&#x09CD;&#x099C;&#x09BE;&#x09B2;&#x09C0; &#x0993; &#x0987;&#x09AE;&#x09BE;&#x09AE; &#x09B6;&#x09BE;'&#x09B0;&#x09BE;&#x09A8;&#x09C0; &#x09B0;&#x09B9;. &#x098F;&#x09B0; &#x09AE;&#x09A4;&#x09BE;&#x09AE;&#x09A4;&#x09C7;&#x09B0; &#x09AD;&#x09BF;&#x09A4;&#x09CD;&#x09A4;&#x09BF;&#x09A4;&#x09C7; &#x09AC;&#x09BE;&#x0982;&#x09B2;&#x09BE;&#x09AF;&#x09BC; &#x09AC;&#x09BF;&#x09B8;&#x09CD;&#x09A4;&#x09BE;&#x09B0;&#x09BF;&#x09A4; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09A6;&#x09BF;&#x09A8;&#x0964;",
+        messages:[{role:"user",content:"&#x098F;&#x0987; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x099F;&#x09BF;&#x09B0; &#x0987;&#x09B8;&#x09B2;&#x09BE;&#x09AE;&#x09C0; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09A6;&#x09BF;&#x09A8;: "+inp}]
       })
     });
-    const data = await res.json();
-    const text = data.content?.[0]?.text || 'উত্তর পাওয়া যায়নি।';
-    resp.innerHTML = text.replace(/\n/g,'<br>');
-  } catch(e) {
-    resp.innerHTML = '❌ AI সংযোগ ব্যর্থ হয়েছে। ইন্টারনেট সংযোগ পরীক্ষা করুন।';
-  }
+    var data=await res.json();
+    ar.innerHTML=(data.content&&data.content[0]?data.content[0].text:"&#x0989;&#x09A4;&#x09CD;&#x09A4;&#x09B0; &#x09AA;&#x09BE;&#x0993;&#x09AF;&#x09BC;&#x09BE; &#x09AF;&#x09BE;&#x09AF;&#x09BC;&#x09A8;&#x09BF;&#x0964;").replace(/\n/g,"<br>");
+  }catch(e){ar.innerHTML="&#x274C; AI &#x09B8;&#x0982;&#x09AF;&#x09CB;&#x0997; &#x09AC;&#x09CD;&#x09AF;&#x09B0;&#x09CD;&#x09A5;&#x0964; &#x0987;&#x09A8;&#x09CD;&#x099F;&#x09BE;&#x09B0;&#x09A8;&#x09C7;&#x099F; &#x09AA;&#x09B0;&#x09C0;&#x0995;&#x09CD;&#x09B7;&#x09BE; &#x0995;&#x09B0;&#x09C1;&#x09A8;&#x0964;";}
 }
 
-// ===== TOAST =====
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 2500);
-}
+function shToast(msg){var t=document.getElementById("toast");t.innerHTML=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2500);}
 
-// ===== INIT =====
-renderHome();
+showHome();
 </script>
 </body>
 </html>

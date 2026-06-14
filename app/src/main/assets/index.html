@@ -1,90 +1,117 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 <title>সোলাইমানী খাবনামা</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600&display=swap');
-:root{--em:#1b4d3e;--el:#2d6a4f;--go:#b8860b;--gl:#d4a017;--gp:#f0e0a0;--rd:#8b1a1a;--cr:#faf6ed;--pg:#f5efe0;--pd:#e8dcc5;--sh:rgba(26,16,8,0.15)}
+
+[data-theme="light"]{
+--em:#1b4d3e;--el:#2d6a4f;--go:#b8860b;--gl:#d4a017;--gp:#f0e0a0;
+--rd:#8b1a1a;--cr:#faf6ed;--pg:#f5efe0;--pd:#e8dcc5;--sh:rgba(26,16,8,0.15);
+--ink:#1a1008;--ink2:#3a2a10;--ink3:#6a5030;--hbg:#1b4d3e;--hbg2:#0d2b22;
+--card:#faf6ed;--border:#f0e0a0;--tab:#e8dcc5;--dua:#fff8e7;--dua-border:#d4a017}
+[data-theme="dark"]{
+--em:#4caf87;--el:#5dc498;--go:#d4a017;--gl:#e8b830;--gp:#3a3010;
+--rd:#c0392b;--cr:#1a1a1a;--pg:#121212;--pd:#1e1e1e;--sh:rgba(0,0,0,0.4);
+--ink:#e8e0d0;--ink2:#c8b898;--ink3:#8a7a60;--hbg:#0d2b22;--hbg2:#071a14;
+--card:#1e1e1e;--border:#2a2a2a;--tab:#181818;--dua:#1a1500;--dua-border:#5a4010}
+
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Noto Sans Bengali",sans-serif;background:var(--pg);color:#1a1008;min-height:100vh;font-size:15px}
-header{background:linear-gradient(135deg,var(--em),#0d2b22);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px var(--sh);border-bottom:2px solid var(--go)}
-.ht{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 4px}
+body{font-family:"Noto Sans Bengali",sans-serif;background:var(--pg);color:var(--ink);min-height:100vh;font-size:var(--fs,15px);transition:background .3s,color .3s}
+header{background:linear-gradient(135deg,var(--hbg),var(--hbg2));position:sticky;top:0;z-index:100;box-shadow:0 2px 12px var(--sh);border-bottom:2px solid var(--go)}
+.ht{display:flex;align-items:center;justify-content:space-between;padding:8px 12px 4px}
 .htc{display:flex;flex-direction:column;align-items:center;flex:1}
-.at{font-family:"Noto Serif Bengali",serif;font-size:20px;font-weight:700;color:var(--gl)}
-.as{font-size:11px;color:#a8c5b0;margin-top:1px}
+.at{font-family:"Noto Serif Bengali",serif;font-size:18px;font-weight:700;color:var(--gl)}
+.as{font-size:10px;color:#a8c5b0;margin-top:1px}
 .wm{background:var(--rd);color:#fff;font-size:10px;font-weight:700;padding:3px 7px;border-radius:3px}
-.sw{padding:8px 12px 10px;display:flex;gap:8px;align-items:center}
+.htools{display:flex;gap:6px;align-items:center}
+.htbtn{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:20px;color:#fff;font-size:11px;padding:4px 8px;cursor:pointer;font-family:"Noto Sans Bengali",sans-serif;white-space:nowrap}
+.sw{padding:6px 12px 8px;display:flex;gap:8px;align-items:center}
 .sb{flex:1;display:flex;align-items:center;background:rgba(255,255,255,0.12);border:1px solid rgba(212,160,23,0.4);border-radius:24px;overflow:hidden}
 .si{padding:0 10px;color:var(--gl);font-size:16px}
-#si{flex:1;background:transparent;border:none;outline:none;color:#fff;font-family:"Noto Sans Bengali",sans-serif;font-size:14px;padding:9px 0}
+#si{flex:1;background:transparent;border:none;outline:none;color:#fff;font-family:"Noto Sans Bengali",sans-serif;font-size:14px;padding:8px 0}
 #si::placeholder{color:rgba(255,255,255,0.5)}
 #bc{background:none;border:none;color:rgba(255,255,255,0.6);padding:0 10px;font-size:18px;cursor:pointer;display:none}
-.ba{background:linear-gradient(135deg,var(--go),var(--gl));border:none;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,0.3);flex-shrink:0}
-.tabs{display:flex;background:var(--pd);border-bottom:2px solid var(--go)}
-.tab{flex:1;padding:10px 4px;font-size:11px;font-family:"Noto Sans Bengali",sans-serif;font-weight:500;color:#5a4a30;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;text-align:center;white-space:nowrap}
-.tab.active{color:var(--em);border-bottom-color:var(--em);font-weight:600;background:rgba(27,77,62,0.08)}
-main{padding:12px;min-height:calc(100vh - 130px)}
+.ba{background:linear-gradient(135deg,var(--go),var(--gl));border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:17px;box-shadow:0 2px 8px rgba(0,0,0,0.3);flex-shrink:0}
+.tabs{display:flex;background:var(--tab);border-bottom:2px solid var(--go)}
+.tab{flex:1;padding:9px 4px;font-size:11px;font-family:"Noto Sans Bengali",sans-serif;font-weight:500;color:var(--ink3);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;text-align:center;white-space:nowrap}
+.tab.active{color:var(--em);border-bottom-color:var(--em);font-weight:600}
+main{padding:12px;min-height:calc(100vh - 140px)}
 .cg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.cc{background:linear-gradient(135deg,var(--cr),#efe6cc);border:1px solid var(--gp);border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;box-shadow:0 2px 8px var(--sh);position:relative;overflow:hidden}
+.cc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;box-shadow:0 2px 8px var(--sh);position:relative;overflow:hidden;transition:background .3s}
 .cc:active{transform:scale(0.97)}
 .cc::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--go),var(--em))}
 .ci{font-size:26px;margin-bottom:6px}
 .cn{font-family:"Noto Serif Bengali",serif;font-size:13px;font-weight:600;color:var(--em)}
-.ck{font-size:10px;color:#7a6040;margin-top:2px}
+.ck{font-size:10px;color:var(--ink3);margin-top:2px}
 .dl{display:flex;flex-direction:column;gap:10px}
-.dc{background:var(--cr);border:1px solid var(--gp);border-radius:10px;overflow:hidden;box-shadow:0 2px 6px var(--sh)}
+.dc{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 2px 6px var(--sh);transition:background .3s}
 .dh{display:flex;align-items:center;padding:10px 12px;gap:10px;cursor:pointer}
 .di{font-size:22px;flex-shrink:0}
 .dtw{flex:1}
-.dt{font-family:"Noto Serif Bengali",serif;font-size:14px;font-weight:600;line-height:1.4}
-.dk{font-size:11px;color:#8a7050;margin-top:2px}
+.dt{font-family:"Noto Serif Bengali",serif;font-size:14px;font-weight:600;line-height:1.4;color:var(--ink)}
+.dk{font-size:11px;color:var(--ink3);margin-top:2px}
 .de{color:var(--go);font-size:18px}
-.db{display:none;border-top:1px solid var(--gp)}
+.db{display:none;border-top:1px solid var(--border)}
 .db.open{display:block}
-.tr{display:flex;background:var(--pd);border-bottom:1px solid var(--gp);overflow-x:auto}
-.tb{flex-shrink:0;padding:6px 8px;font-size:10px;font-family:"Noto Sans Bengali",sans-serif;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;color:#6a5030;font-weight:500;white-space:nowrap}
+.tr{display:flex;background:var(--tab);border-bottom:1px solid var(--border);overflow-x:auto}
+.tb{flex-shrink:0;padding:6px 8px;font-size:10px;font-family:"Noto Sans Bengali",sans-serif;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;color:var(--ink3);font-weight:500;white-space:nowrap}
 .tb.active{color:var(--em);border-bottom-color:var(--em);font-weight:600}
-.tc{padding:12px;font-size:13px;line-height:1.8;color:#2a1a08}
+.tc{padding:12px;font-size:13px;line-height:1.8;color:var(--ink2)}
 .tp{display:none}
 .tp.active{display:block}
 .sb2{display:inline-block;background:linear-gradient(90deg,var(--em),var(--el));color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;margin-bottom:6px}
-.rc{font-size:12px;color:#7a6040;margin-bottom:10px;padding:6px 10px;background:var(--gp);border-radius:6px}
-.ap{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--cr);border-top:2px solid var(--go);border-radius:16px 16px 0 0;padding:16px;max-height:70vh;overflow-y:auto;z-index:200;box-shadow:0 -4px 20px var(--sh)}
+.dua-box{background:var(--dua);border:1px solid var(--dua-border);border-radius:8px;padding:10px 12px;margin-top:10px}
+.dua-title{font-size:11px;font-weight:600;color:var(--go);margin-bottom:6px}
+.dua-arabic{font-size:16px;text-align:right;color:var(--ink);line-height:2;direction:rtl;margin-bottom:4px}
+.dua-bn{font-size:12px;color:var(--ink3);line-height:1.6;margin-bottom:4px}
+.karanio{background:rgba(27,77,62,0.08);border-left:3px solid var(--em);padding:8px 10px;margin-top:8px;border-radius:0 6px 6px 0;font-size:12px;color:var(--ink2);line-height:1.7}
+.karanio-title{font-size:11px;font-weight:700;color:var(--em);margin-bottom:4px}
+.rc{font-size:12px;color:var(--ink3);margin-bottom:10px;padding:6px 10px;background:var(--border);border-radius:6px}
+.ap{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:2px solid var(--go);border-radius:16px 16px 0 0;padding:16px;max-height:70vh;overflow-y:auto;z-index:200;box-shadow:0 -4px 20px var(--sh)}
 .ap.open{display:block}
 .ah{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .at2{flex:1;font-family:"Noto Serif Bengali",serif;font-size:15px;font-weight:600;color:var(--em)}
-.bca{background:none;border:none;font-size:22px;color:#8a6040;cursor:pointer}
+.bca{background:none;border:none;font-size:22px;color:var(--ink3);cursor:pointer}
 .air{display:flex;gap:8px;margin-bottom:12px}
-#ai{flex:1;border:1.5px solid var(--gp);border-radius:24px;padding:10px 14px;font-family:"Noto Sans Bengali",sans-serif;font-size:13px;background:#fff;outline:none}
+#ai{flex:1;border:1.5px solid var(--border);border-radius:24px;padding:10px 14px;font-family:"Noto Sans Bengali",sans-serif;font-size:13px;background:var(--pg);outline:none;color:var(--ink)}
 #ai:focus{border-color:var(--em)}
 .bask{background:linear-gradient(135deg,var(--em),var(--el));color:#fff;border:none;border-radius:24px;padding:10px 16px;font-family:"Noto Sans Bengali",sans-serif;font-size:13px;font-weight:600;cursor:pointer}
-.ar{background:#fff;border:1px solid var(--gp);border-radius:10px;padding:12px;font-size:13px;line-height:1.8;min-height:60px}
+.ar{background:var(--pg);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:13px;line-height:1.8;min-height:60px;color:var(--ink)}
 .ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199}
 .ov.open{display:block}
 .sh2{display:flex;align-items:center;gap:8px;margin-bottom:12px}
 .shi{font-size:20px}
 .sht{font-family:"Noto Serif Bengali",serif;font-size:16px;font-weight:700;color:var(--em);flex:1}
 .bbk{background:none;border:1px solid var(--go);border-radius:20px;padding:4px 12px;font-family:"Noto Sans Bengali",sans-serif;font-size:12px;color:var(--go);cursor:pointer}
-.bism{text-align:center;font-family:"Noto Serif Bengali",serif;font-size:18px;color:var(--go);padding:14px;background:linear-gradient(135deg,var(--em),#0d2b22);border-radius:10px;margin-bottom:14px}
+.bism{text-align:center;font-family:"Noto Serif Bengali",serif;font-size:18px;color:var(--go);padding:14px;background:linear-gradient(135deg,var(--hbg),var(--hbg2));border-radius:10px;margin-bottom:14px}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--em);color:#fff;padding:10px 20px;border-radius:24px;font-size:13px;z-index:300;transition:transform .3s}
 .toast.show{transform:translateX(-50%) translateY(0)}
-.acard{background:var(--cr);border:1px solid var(--gp);border-radius:10px;padding:16px;margin-bottom:10px}
+.acard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:10px}
 .acard h3{font-family:"Noto Serif Bengali",serif;font-size:14px;font-weight:700;color:var(--em);margin-bottom:8px}
-.acard p{font-size:13px;line-height:1.8;color:#3a2a10}
-.nr{text-align:center;padding:30px 20px;color:#8a7050}
+.acard p{font-size:13px;line-height:1.8;color:var(--ink2)}
+.nr{text-align:center;padding:30px 20px;color:var(--ink3)}
+/* Font size panel */
+.fspanel{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:2px solid var(--go);border-radius:16px 16px 0 0;padding:16px;z-index:200;box-shadow:0 -4px 20px var(--sh)}
+.fspanel.open{display:block}
+.fs-row{display:flex;align-items:center;gap:12px;justify-content:center;margin-top:10px}
+.fsbtn{background:var(--em);color:#fff;border:none;border-radius:50%;width:40px;height:40px;font-size:20px;cursor:pointer;font-weight:700}
+.fs-val{font-family:"Noto Serif Bengali",serif;font-size:18px;font-weight:700;color:var(--em);min-width:50px;text-align:center}
 </style>
 </head>
 <body>
 <header>
   <div class="ht">
-    <div style="width:80px"></div>
+    <div style="width:10px"></div>
     <div class="htc">
       <div class="at">&#x1F319; সোলাইমানী খাবনামা</div>
       <div class="as">ইসলামী স্বপ্নের ব্যাখ্যা &#x2014; ৬ আলেম</div>
     </div>
-    <span class="wm">@A.M.MORSHED</span>
+    <div class="htools">
+      <span class="wm">@A.M.MORSHED</span>
+    </div>
   </div>
   <div class="sw">
     <div class="sb">
@@ -92,6 +119,8 @@ main{padding:12px;min-height:calc(100vh - 130px)}
       <input type="text" id="si" placeholder="স্বপ্নের বিষয় লিখুন..." oninput="onSrch(this.value)">
       <button id="bc" onclick="clrSrch()">&#x2715;</button>
     </div>
+    <button class="htbtn" onclick="togDark()" id="dmBtn">&#x1F319; ডার্ক</button>
+    <button class="htbtn" onclick="togFS()">&#x1F524; ফন্ট</button>
     <button class="ba" onclick="togAI()">&#x1F916;</button>
   </div>
 </header>
@@ -102,7 +131,7 @@ main{padding:12px;min-height:calc(100vh - 130px)}
   <button class="tab" onclick="showTab('about')">&#x2139;&#xFE0F; পরিচিতি</button>
 </div>
 <main id="mc"></main>
-<div class="ov" id="ov" onclick="togAI()"></div>
+<div class="ov" id="ov" onclick="closeAll()"></div>
 <div class="ap" id="ap">
   <div class="ah">
     <span style="font-size:24px">&#x1F916;</span>
@@ -115,13 +144,25 @@ main{padding:12px;min-height:calc(100vh - 130px)}
   </div>
   <div class="ar" id="ar">আপনার স্বপ্নের বিষয় উপরে লিখুন এবং জিজ্ঞেস করুন বোতামে চাপ দিন।</div>
 </div>
+<div class="fspanel" id="fsp">
+  <div class="ah">
+    <span style="font-size:20px">&#x1F524;</span>
+    <span class="at2">ফন্ট সাইজ পরিবর্তন</span>
+    <button class="bca" onclick="togFS()">&#x2715;</button>
+  </div>
+  <div class="fs-row">
+    <button class="fsbtn" onclick="chFS(-1)">&#x2212;</button>
+    <span class="fs-val" id="fsv">15px</span>
+    <button class="fsbtn" onclick="chFS(1)">&#x2B;</button>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 <script>
 var SF=["ইমাম মুহাম্মদ ইবনে সীরীন (রহ.)","ইমাম নাবুলুসী (রহ.)","শায়খ আব্দুল গনী নাবুলুসী (রহ.)","ইমাম ইবনে কাসীর (রহ.)","ইমাম আবু হামিদ গাজ্জালী (রহ.)","ইমাম আব্দুল ওয়াহহাব শা'রানী (রহ.)"];
 var SS=["ইবনে সীরীন","নাবুলুসী","আ.গ. নাবুলুসী","ইবনে কাসীর","গাজ্জালী","শা'রানী"];
 var SK=["s1","s2","s3","s4","s5","s6"];
 var D=[
-{id:1,cat:"water",ic:"&#x1F4A7;",t:"পরিষ্কার পানি দেখা",kw:"পানি,নদী,খাল,পুকুর",s1:"পরিষ্কার পানি দেখা জীবনে বরকত ও সুখের আলামত। প্রবহমান পানি দীর্ঘ জীবন ও সুস্বাস্থ্যের ইঙ্গিত দেয়।",s2:"স্বচ্ছ পানি রহমত ও নিয়ামতের প্রতীক। পানি পান করা রিজিক বৃদ্ধির সুসংবাদ।",s3:"স্বপ্নে পানি দেখা ইলম ও হেদায়েতের প্রতীক। ঝরনার পানি আল্লাহর খাস রহমতের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, পানি জীবনের উৎস। পবিত্র পানি দেখা ঈমানের সতেজতার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, পানি জ্ঞান ও প্রজ্ঞার প্রতীক। পরিষ্কার পানি বিশুদ্ধ অন্তরের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, পানি দেখা আত্মার পরিশুদ্ধতার ইঙ্গিত। তওবা ও ইস্তেগফারের আলামত।"},
+{id:1,cat:"water",ic:"&#x1F4A7;",t:"পরিষ্কার পানি দেখা",kw:"পানি,নদী,খাল,পুকুর",s1:"পরিষ্কার পানি দেখা জীবনে বরকত ও সুখের আলামত। প্রবহমান পানি দীর্ঘ জীবন ও সুস্বাস্থ্যের ইঙ্গিত দেয়।",s2:"স্বচ্ছ পানি রহমত ও নিয়ামতের প্রতীক। পানি পান করা রিজিক বৃদ্ধির সুসংবাদ।",s3:"স্বপ্নে পানি দেখা ইলম ও হেদায়েতের প্রতীক। ঝরনার পানি আল্লাহর খাস রহমতের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, পানি জীবনের উৎস। পবিত্র পানি দেখা ঈমানের সতেজতার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, পানি জ্ঞান ও প্রজ্ঞার প্রতীক। পরিষ্কার পানি বিশুদ্ধ অন্তরের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, পানি দেখা আত্মার পরিশুদ্ধতার ইঙ্গিত। তওবা ও ইস্তেগফারের আলামত।",dua_ar:"اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا",dua_bn:"হে আল্লাহ! আমি আপনার কাছে উপকারী জ্ঞান ও পবিত্র রিজিক চাই।",karanio:"এই স্বপ্ন দেখলে দুই রাকাত শুকরিয়ার নামাজ পড়ুন এবং বেশি বেশি ইস্তেগফার করুন।"},
 {id:2,cat:"water",ic:"&#x1F30A;",t:"সমুদ্রে ডুব দেওয়া",kw:"সমুদ্র,ডুব,সাঁতার,গভীর",s1:"সমুদ্রে ডুব দিয়ে জীবিত উঠে আসা শক্তিশালী ব্যক্তির সাথে সম্পর্ক থেকে উপকার লাভের ইঙ্গিত।",s2:"গভীর সমুদ্রে সাঁতার কাটা বড় বিপদ থেকে উদ্ধার পাওয়ার ইঙ্গিত।",s3:"সমুদ্র হলো দুনিয়ার প্রতীক। তাতে ডুব দেওয়া দুনিয়াবী বিষয়ে গভীরভাবে জড়িত হওয়ার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, সমুদ্র দুনিয়ার বিশালতার প্রতীক। ডুব দিয়ে সুরক্ষিত থাকা আল্লাহর হেফাজতের ইঙ্গিত।"},
 {id:3,cat:"water",ic:"&#x1F327;",t:"বৃষ্টি দেখা",kw:"বৃষ্টি,ঝড়,বর্ষা,মেঘ",s1:"বৃষ্টি দেখা রহমত ও বরকতের আলামত। ঘরের উপর বৃষ্টি পড়া সে পরিবারে নিয়ামত নাজিলের ইঙ্গিত।",s2:"মৌসুমী বৃষ্টি জীবিকার সমৃদ্ধির ইঙ্গিত। ঝড়ো বৃষ্টি কষ্টের পর সুদিন আসার আলামত।",s3:"বৃষ্টি আল্লাহর রহমতের প্রতীক। দোয়া কবুল হওয়ার সুসংবাদ বহন করে।",s4:"ইবনে কাসীর (রহ.) বলেন, বৃষ্টি আল্লাহর রহমতের নিদর্শন। বৃষ্টিতে ভেজা বরকত লাভের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, বৃষ্টি দেখা মানুষের জন্য রহমত বর্ষণের ইঙ্গিত।"},
 {id:4,cat:"water",ic:"&#x1F3CA;",t:"নদীতে গোসল করা",kw:"গোসল,নদী,পরিষ্কার,পবিত্র",s1:"পরিষ্কার নদীতে গোসল করা পাপ থেকে মুক্তি ও তওবা কবুলের ইঙ্গিত।",s2:"গোসল করা রোগ থেকে মুক্তির ইঙ্গিত। নদীর পানিতে গোসল দীর্ঘ সুস্বাস্থ্যের আলামত।",s5:"গাজ্জালী (রহ.) বলেন, গোসল করা আত্মার পরিশুদ্ধির প্রতীক। এটি তওবার আলামত।"},
@@ -129,10 +170,10 @@ var D=[
 {id:6,cat:"water",ic:"&#x1F41F;",t:"মাছ দেখা বা ধরা",kw:"মাছ,মৎস্য,ধরা,জাল",s1:"মাছ ধরা হালাল রিজিক ও সম্পদ লাভের ইঙ্গিত। বড় মাছ বড় নিয়ামতের আলামত।",s2:"জীবন্ত মাছ দেখা জীবিকার সমৃদ্ধির ইঙ্গিত।",s3:"মাছ ধরা হালাল উপায়ে জীবিকা অর্জনের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মাছ সমুদ্রের সম্পদের প্রতীক। প্রচুর মাছ প্রচুর রিজিকের আলামত।"},
 {id:7,cat:"water",ic:"&#x26F2;",t:"কূপ বা ঝরনা দেখা",kw:"কূপ,ঝরনা,প্রস্রবণ,উৎস",s1:"কূপ থেকে পানি তোলা জ্ঞান অর্জন ও উপকার লাভের ইঙ্গিত।",s2:"পরিষ্কার কূপ দেখা ভালো স্ত্রী বা বন্ধুর ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, কূপ হলো জ্ঞানের ভান্ডারের প্রতীক। পানি তোলা জ্ঞান অর্জনের ইঙ্গিত।"},
 {id:8,cat:"water",ic:"&#x1F30A;",t:"বন্যা বা প্লাবন দেখা",kw:"বন্যা,প্লাবন,পানি বৃদ্ধি",s1:"বন্যা দেখা বিপদ ও পরীক্ষার ইঙ্গিত। পানি সরে গেলে বিপদ কেটে যাওয়ার আলামত।",s2:"বন্যায় ভেসে না যাওয়া বিপদ থেকে রক্ষার ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, বন্যা ফিতনার প্রতীক। ধৈর্য ধরলে নাজাত পাওয়ার ইঙ্গিত।"},
-{id:9,cat:"fire",ic:"&#x1F525;",t:"আগুন দেখা",kw:"আগুন,জ্বলা,আলো",s1:"আগুন দেখা ফিতনা ও বিপদের ইঙ্গিত। আগুন আলো দেয় কিন্তু পোড়ায় না হলে ইলমের আলামত।",s2:"ঘরে আগুন লাগলে সে পরিবারে বিপদ আসতে পারে।",s3:"আগুন ক্ষমতা ও প্রভাবের প্রতীক। আগুনে আলো দেখা নেতৃত্বের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, আগুন জাহান্নামের স্মরণ করিয়ে দেয়। তওবার তাকিদ।",s5:"গাজ্জালী (রহ.) বলেন, আগুন কু-প্রবৃত্তির প্রতীক। আগুন থেকে রক্ষা পাওয়া নাফসের উপর বিজয়।",s6:"শা'রানী (রহ.) বলেন, আগুন দেখলে বেশি বেশি ইস্তেগফার করা উচিত।"},
+{id:9,cat:"fire",ic:"&#x1F525;",t:"আগুন দেখা",kw:"আগুন,জ্বলা,আলো",s1:"আগুন দেখা ফিতনা ও বিপদের ইঙ্গিত। আগুন আলো দেয় কিন্তু পোড়ায় না হলে ইলমের আলামত।",s2:"ঘরে আগুন লাগলে সে পরিবারে বিপদ আসতে পারে।",s3:"আগুন ক্ষমতা ও প্রভাবের প্রতীক। আগুনে আলো দেখা নেতৃত্বের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, আগুন জাহান্নামের স্মরণ করিয়ে দেয়। তওবার তাকিদ।",s5:"গাজ্জালী (রহ.) বলেন, আগুন কু-প্রবৃত্তির প্রতীক। আগুন থেকে রক্ষা পাওয়া নাফসের উপর বিজয়।",s6:"শা'রানী (রহ.) বলেন, আগুন দেখলে বেশি বেশি ইস্তেগফার করা উচিত।",dua_ar:"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",dua_bn:"আমি আল্লাহর পরিপূর্ণ কালেমাসমূহের মাধ্যমে তাঁর সৃষ্টির অনিষ্ট থেকে আশ্রয় চাই।",karanio:"আগুন দেখলে তওবা করুন, ইস্তেগফার পড়ুন এবং সদকা দিন।"},
 {id:10,cat:"fire",ic:"&#x1F56F;",t:"মোমবাতি বা প্রদীপ",kw:"আলো,মোমবাতি,প্রদীপ,বাতি",s1:"প্রদীপ দেখা ইলম ও হেদায়েতের প্রতীক। নিভে যাওয়া প্রদীপ নেককার মানুষের ইন্তেকালের ইঙ্গিত।",s2:"উজ্জ্বল আলো দেখা ঈমান ও তাকওয়ার বৃদ্ধির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, প্রদীপ নবী ও আলেমদের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, প্রদীপের আলো অন্তরের নূরের প্রতীক।"},
 {id:11,cat:"fire",ic:"&#x26A1;",t:"বজ্রপাত বা বিদ্যুৎ",kw:"বজ্র,বিদ্যুৎ,ঝড়",s1:"বজ্রপাত দেখা হঠাৎ বিপদ বা সংকটের ইঙ্গিত।",s2:"বিদ্যুৎ চমকানো ভয় ও শঙ্কার ইঙ্গিত। বিদ্যুৎ থেকে রক্ষা পাওয়া বিপদ এড়ানোর আলামত।",s6:"শা'রানী (রহ.) বলেন, বজ্রপাত আল্লাহর কুদরতের নিদর্শন। ইস্তেগফার ও দোয়া করা উচিত।"},
-{id:12,cat:"animals",ic:"&#x1F40D;",t:"সাপ দেখা",kw:"সাপ,কামড়,বিষ",s1:"সাপ দেখা শত্রু ও বিপদের প্রতীক। সাপ মেরে ফেলা শত্রুর উপর বিজয়ের আলামত।",s2:"সাপ স্বপ্নে শত্রু ও প্রলোভনের প্রতীক। সাপ থেকে পালানো বিপদ এড়ানোর ইঙ্গিত।",s3:"সাপ শয়তানের প্রতীক। সাপ মেরে ফেলা নাফসের উপর বিজয়ের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, সাপ শয়তানের বাহন। সাপ থেকে রক্ষা পাওয়া ঈমানের শক্তির ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, সাপ কু-প্রবৃত্তির প্রতীক। সাপ মারা নাফসে আম্মারাকে দমনের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, সাপ দেখলে আউযুবিল্লাহ পড়া ও তওবা করা উচিত।"},
+{id:12,cat:"animals",ic:"&#x1F40D;",t:"সাপ দেখা",kw:"সাপ,কামড়,বিষ",s1:"সাপ দেখা শত্রু ও বিপদের প্রতীক। সাপ মেরে ফেলা শত্রুর উপর বিজয়ের আলামত।",s2:"সাপ স্বপ্নে শত্রু ও প্রলোভনের প্রতীক। সাপ থেকে পালানো বিপদ এড়ানোর ইঙ্গিত।",s3:"সাপ শয়তানের প্রতীক। সাপ মেরে ফেলা নাফসের উপর বিজয়ের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, সাপ শয়তানের বাহন। সাপ থেকে রক্ষা পাওয়া ঈমানের শক্তির ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, সাপ কু-প্রবৃত্তির প্রতীক। সাপ মারা নাফসে আম্মারাকে দমনের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, সাপ দেখলে আউযুবিল্লাহ পড়া ও তওবা করা উচিত।",dua_ar:"أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",dua_bn:"আমি বিতাড়িত শয়তান থেকে আল্লাহর আশ্রয় চাই।",karanio:"সাপ দেখলে ঘুম থেকে উঠে আউযুবিল্লাহ ও আয়াতুল কুরসি পড়ুন।"},
 {id:13,cat:"animals",ic:"&#x1F981;",t:"সিংহ দেখা",kw:"সিংহ,বাঘ,হিংস্র পশু",s1:"সিংহ দেখা ক্ষমতাবান শত্রুর প্রতীক। সিংহকে পরাজিত করা বড় বিপদ অতিক্রমের আলামত।",s2:"সিংহ রাজা বা শাসকের প্রতীক। সিংহের সাথে বন্ধুত্ব রাজানুগ্রহ লাভের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, সিংহ পরাক্রমশালী শত্রুর প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, সিংহ দুনিয়াবী শক্তির প্রতীক। সিংহের সামনে দৃঢ় থাকা সাহস ও তাওয়াক্কুলের ইঙ্গিত।"},
 {id:14,cat:"animals",ic:"&#x1F426;",t:"পাখি দেখা",kw:"পাখি,উড়া,কবুতর,ময়না",s1:"সাদা পাখি শান্তি ও সুখের প্রতীক। কবুতর দেখা ভালো সংবাদের ইঙ্গিত।",s2:"গান করা পাখি আনন্দ ও খুশির সুসংবাদ।",s3:"পাখি আত্মার প্রতীক। উড়ন্ত পাখি আধ্যাত্মিক উন্নতির ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, পাখি আত্মার মুক্তির প্রতীক। সুন্দর পাখি নেক আত্মার ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, পাখি আল্লাহর তাসবিহকারী প্রাণী। পাখি দেখা জিকিরের তাকিদ।"},
 {id:15,cat:"animals",ic:"&#x1F404;",t:"গরু দেখা",kw:"গরু,মহিষ,গাভী",s1:"মোটা গরু সমৃদ্ধির আলামত। দুর্বল গরু দুর্ভিক্ষের ইঙ্গিত।",s2:"গরু বছরের প্রতীক। সাতটি মোটা গরু সাত বছরের সুসময়ের ইঙ্গিত।",s3:"গরু রিজিক ও জীবিকার প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, ইউসুফ (আ.) এর স্বপ্নে গরু বছরের প্রতীক ছিল।"},
@@ -150,14 +191,14 @@ var D=[
 {id:27,cat:"sky",ic:"&#x1F308;",t:"রংধনু দেখা",kw:"রংধনু,বৃষ্টি,রঙ,আকাশ",s1:"রংধনু দেখা শান্তি ও সুখের ইঙ্গিত।",s2:"রংধনু আল্লাহর বিভিন্ন নিয়ামতের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, রংধনু আল্লাহর বৈচিত্র্যময় সৃষ্টির নিদর্শন।"},
 {id:28,cat:"sky",ic:"&#x2601;",t:"মেঘ দেখা",kw:"মেঘ,আকাশ,বৃষ্টি,সাদা",s1:"সাদা মেঘ দেখা রহমত ও বরকতের ইঙ্গিত। কালো মেঘ বিপদের আলামত।",s2:"মেঘের মধ্যে থাকা ক্ষমতা ও পদমর্যাদার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মেঘ আল্লাহর রহমত বহনকারী।"},
 {id:29,cat:"sky",ic:"&#x1F32A;",t:"ঝড় বা তুফান দেখা",kw:"ঝড়,তুফান,বাতাস,ঘূর্ণিঝড়",s1:"ঝড় দেখা বিপদ ও ফিতনার ইঙ্গিত। ঝড়ের পর শান্ত হওয়া বিপদ কাটানোর আলামত।",s6:"শা'রানী (রহ.) বলেন, ঝড় পরীক্ষার প্রতীক। আল্লাহর উপর তাওয়াক্কুল রাখলে রক্ষার ইঙ্গিত।"},
-{id:30,cat:"people",ic:"&#x1F474;",t:"মৃত ব্যক্তিকে দেখা",kw:"মৃত,মৃত্যু,মরা,লাশ",s1:"মৃত ব্যক্তিকে সুখী দেখা তার জান্নাতের ইঙ্গিত। মৃত কিছু দিলে বরকত লাভ।",s2:"মৃত ব্যক্তির সাথে কথা বলা তার ওসিয়ত পালনের ইঙ্গিত।",s3:"মৃত ব্যক্তি দোয়া চাইলে তার জন্য দোয়া ও সদকা করা উচিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মৃত ব্যক্তি স্বপ্নে আসে আল্লাহর অনুমতিতে। তার জন্য দোয়া করা উচিত।",s5:"গাজ্জালী (রহ.) বলেন, মৃত ব্যক্তি দেখা আখেরাতের স্মরণের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, মৃত ব্যক্তিকে কষ্টে দেখলে তার জন্য কুরআন পড়া ও সদকা করা উচিত।"},
+{id:30,cat:"people",ic:"&#x1F474;",t:"মৃত ব্যক্তিকে দেখা",kw:"মৃত,মৃত্যু,মরা,লাশ",s1:"মৃত ব্যক্তিকে সুখী দেখা তার জান্নাতের ইঙ্গিত। মৃত কিছু দিলে বরকত লাভ।",s2:"মৃত ব্যক্তির সাথে কথা বলা তার ওসিয়ত পালনের ইঙ্গিত।",s3:"মৃত ব্যক্তি দোয়া চাইলে তার জন্য দোয়া ও সদকা করা উচিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মৃত ব্যক্তি স্বপ্নে আসে আল্লাহর অনুমতিতে। তার জন্য দোয়া করা উচিত।",s5:"গাজ্জালী (রহ.) বলেন, মৃত ব্যক্তি দেখা আখেরাতের স্মরণের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, মৃত ব্যক্তিকে কষ্টে দেখলে তার জন্য কুরআন পড়া ও সদকা করা উচিত।",dua_ar:"اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ وَعَافِهِ وَاعْفُ عَنْهُ",dua_bn:"হে আল্লাহ! তাকে ক্ষমা করুন, রহম করুন, সুস্থতা দান করুন এবং তাকে মাফ করুন।",karanio:"মৃত ব্যক্তিকে দেখলে তার জন্য দোয়া করুন, সূরা ইয়াসিন পড়ুন এবং সদকা দিন।"},
 {id:31,cat:"people",ic:"&#x1F476;",t:"শিশু দেখা",kw:"শিশু,বাচ্চা,নবজাতক",s1:"সুন্দর শিশু দেখা সুসংবাদ ও আনন্দের ইঙ্গিত।",s2:"শিশু বিশুদ্ধতা ও নিষ্পাপতার প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, শিশু ফিতরতের পবিত্রতার প্রতীক। শিশু দেখা খাঁটি নিয়তের ইঙ্গিত।"},
 {id:32,cat:"people",ic:"&#x1F934;",t:"রাজা বা বড় ব্যক্তি দেখা",kw:"রাজা,শাসক,নেতা,বড়",s1:"রাজার সাথে কথা বলা সম্মান ও মর্যাদা লাভের ইঙ্গিত।",s2:"রাজা বা শাসকের দরবারে উপস্থিত হওয়া রাষ্ট্রীয় সুযোগ লাভের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, রাজা ক্ষমতাবান ব্যক্তির প্রতীক। রাজার অনুগ্রহ সম্মান লাভের ইঙ্গিত।"},
 {id:33,cat:"people",ic:"&#x1F470;",t:"বিবাহ বা নিকাহ দেখা",kw:"বিয়ে,নিকাহ,বিবাহ,কনে,বর",s1:"বিবাহ দেখা সুখ, সমৃদ্ধি ও নতুন সম্পর্কের ইঙ্গিত।",s2:"বিবাহের অনুষ্ঠান দেখা আনন্দময় ঘটনার ইঙ্গিত।",s3:"বিবাহ হালাল সম্পর্কের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, বিবাহ আত্মার পরিপূর্ণতার প্রতীক।",s6:"শা'রানী (রহ.) বলেন, বিবাহ দেখা সুন্নত পালনের তাকিদ।"},
 {id:34,cat:"people",ic:"&#x1F46A;",t:"পরিবার একত্রিত দেখা",kw:"পরিবার,মা,বাবা,ভাই,বোন",s1:"পরিবার একত্রিত দেখা পারিবারিক ঐক্য ও ভালোবাসার ইঙ্গিত।",s2:"মাকে দেখা মাতৃস্নেহের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, পরিবার আল্লাহর বিশেষ নিয়ামত। সম্মিলন দেখা বরকতের আলামত।"},
 {id:35,cat:"people",ic:"&#x1F9D9;",t:"আলেম বা বুজুর্গ দেখা",kw:"আলেম,পীর,বুজুর্গ,হুজুর",s1:"আলেম বা বুজুর্গ দেখা ইলম ও হেদায়েতের ইঙ্গিত।",s2:"বুজুর্গ ব্যক্তি দেখা আধ্যাত্মিক পথনির্দেশের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, আলেম দেখা ইলম অর্জনের তাকিদ। তাদের সাহচর্য সৌভাগ্যের আলামত।",s6:"শা'রানী (রহ.) বলেন, আলেম স্বপ্নে দেখা আল্লাহর হেদায়েতের ইঙ্গিত।"},
 {id:36,cat:"people",ic:"&#x1F47C;",t:"ফেরেশতা দেখা",kw:"ফেরেশতা,মালাইকা,নূর",s1:"ফেরেশতা দেখা অত্যন্ত শুভ স্বপ্ন।",s2:"ফেরেশতা দেখা ঈমান ও তাকওয়ার উচ্চ মর্যাদার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, ফেরেশতা দেখা আল্লাহর বিশেষ রহমতের নিদর্শন।",s5:"গাজ্জালী (রহ.) বলেন, ফেরেশতা দেখা অন্তরের পবিত্রতার পুরস্কার।",s6:"শা'রানী (রহ.) বলেন, ফেরেশতা দেখা উচ্চ আধ্যাত্মিক মর্যাদার ইঙ্গিত।"},
-{id:37,cat:"people",ic:"&#x1F9D3;",t:"নবীজি (সা.) কে দেখা",kw:"নবী,রাসূল,মুহাম্মদ,সাল্লাল্লাহু",s1:"নবীজি (সা.) কে দেখা সর্বোচ্চ শুভ স্বপ্ন। তাঁকে যেভাবেই দেখা হোক তা সত্য, কারণ শয়তান তাঁর রূপ ধারণ করতে পারে না।",s2:"নবীজি (সা.) দেখা সুসংবাদ ও মুক্তির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, হাদিসে স্পষ্ট আছে, যে আমাকে স্বপ্নে দেখেছে সে আমাকেই দেখেছে।",s5:"গাজ্জালী (রহ.) বলেন, নবীজি (সা.) দেখা সর্বোচ্চ আধ্যাত্মিক পুরস্কার।",s6:"শা'রানী (রহ.) বলেন, নবীজি (সা.) কে দেখলে দরূদ পড়া ও কৃতজ্ঞতা প্রকাশ করা উচিত।"},
+{id:37,cat:"people",ic:"&#x1F9D3;",t:"নবীজি (সা.) কে দেখা",kw:"নবী,রাসূল,মুহাম্মদ,সাল্লাল্লাহু",s1:"নবীজি (সা.) কে দেখা সর্বোচ্চ শুভ স্বপ্ন। তাঁকে যেভাবেই দেখা হোক তা সত্য, কারণ শয়তান তাঁর রূপ ধারণ করতে পারে না।",s2:"নবীজি (সা.) দেখা সুসংবাদ ও মুক্তির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, হাদিসে স্পষ্ট আছে, যে আমাকে স্বপ্নে দেখেছে সে আমাকেই দেখেছে।",s5:"গাজ্জালী (রহ.) বলেন, নবীজি (সা.) দেখা সর্বোচ্চ আধ্যাত্মিক পুরস্কার।",s6:"শা'রানী (রহ.) বলেন, নবীজি (সা.) কে দেখলে দরূদ পড়া ও কৃতজ্ঞতা প্রকাশ করা উচিত।",dua_ar:"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ",dua_bn:"হে আল্লাহ! মুহাম্মাদ (সা.) ও তাঁর পরিবারের উপর রহমত বর্ষণ করুন।",karanio:"নবীজি (সা.) কে দেখলে বেশি বেশি দরূদ পড়ুন এবং তাঁর সুন্নত পালনের নিয়ত করুন।"},
 {id:38,cat:"food",ic:"&#x1F36F;",t:"মধু দেখা বা খাওয়া",kw:"মধু,মিষ্টি,চিনি",s1:"মধু দেখা বা খাওয়া কুরআন তিলাওয়াত, ইলম অর্জন ও হালাল রিজিকের প্রতীক।",s2:"মধু সর্বোত্তম মিষ্টি সম্পদ।",s3:"মধু কুরআনের মিষ্টি কালামের প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, কুরআনে মধু উল্লেখ আছে। মধু খাওয়া কুরআনের মিষ্টতা আস্বাদনের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, মধু হিকমত ও ইলমের প্রতীক।"},
 {id:39,cat:"food",ic:"&#x1F34E;",t:"ফল খাওয়া",kw:"ফল,আপেল,আঙুর,খেজুর",s1:"পরিচিত ফল খাওয়া হালাল রিজিক ও সুখের প্রতীক। খেজুর খাওয়া বিশেষভাবে শুভ।",s2:"মৌসুমী ফল খাওয়া সময়মতো রিজিক লাভের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, জান্নাতি ফল দেখা পরকালীন নিয়ামতের স্মরণ ও আমল বৃদ্ধির তাকিদ।",s5:"গাজ্জালী (রহ.) বলেন, মিষ্টি ফল সুকর্মের প্রতিফলের প্রতীক।"},
 {id:40,cat:"food",ic:"&#x1F35E;",t:"রুটি বা ভাত দেখা",kw:"রুটি,ভাত,খাবার,রান্না",s1:"রুটি বা ভাত দেখা হালাল রিজিকের প্রতীক। একসাথে খাওয়া ভ্রাতৃত্বের ইঙ্গিত।",s2:"তাজা রুটি দীর্ঘ হায়াত ও সুস্বাস্থ্যের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, রুটি জীবিকার মূল উপাদান। রুটি বিতরণ করা সদকার ইঙ্গিত।"},
@@ -165,9 +206,9 @@ var D=[
 {id:42,cat:"food",ic:"&#x1F95B;",t:"দুধ পান করা",kw:"দুধ,পান,পাত্র,সাদা",s1:"দুধ পান করা ফিতরাত ও ইসলামের উপর থাকার ইঙ্গিত।",s2:"দুধ পবিত্রতা ও নিষ্পাপতার প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, নবীজি (সা.) মেরাজে দুধ পান করেছিলেন। দুধ ফিতরতের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, দুধ ইলম ও হিকমতের প্রতীক।"},
 {id:43,cat:"food",ic:"&#x1F366;",t:"মিষ্টি বা হালুয়া দেখা",kw:"মিষ্টি,হালুয়া,মিষ্টান্ন",s1:"মিষ্টি খাওয়া আনন্দ ও সুখের ইঙ্গিত। হালুয়া দেখা বরকতের আলামত।",s6:"শা'রানী (রহ.) বলেন, মিষ্টি হালাল আনন্দের প্রতীক।"},
 {id:44,cat:"food",ic:"&#x1F9C2;",t:"লবণ বা তিক্ত খাবার",kw:"লবণ,তিক্ত,মরিচ,ঝাল",s1:"তিক্ত খাবার খাওয়া কষ্ট ও পরীক্ষার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, তিক্ত খাবার দুনিয়ার পরীক্ষার প্রতীক। সবর করলে আখেরাতে মিষ্টি ফলের ইঙ্গিত।"},
-{id:45,cat:"worship",ic:"&#x1F54C;",t:"মসজিদে যাওয়া",kw:"মসজিদ,নামাজ,ইবাদত",s1:"মসজিদে প্রবেশ করা ঈমান ও তাকওয়ার উন্নতির ইঙ্গিত।",s2:"মসজিদ নির্মাণ করা ইসলামী কার্যক্রমে অবদান রাখার ইঙ্গিত।",s3:"মসজিদ আল্লাহর ঘর।",s4:"ইবনে কাসীর (রহ.) বলেন, মসজিদ আল্লাহর পবিত্র ঘর। স্বপ্নে মসজিদ দেখা ঈমানের দৃঢ়তার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, মসজিদ আত্মার প্রশান্তির স্থান।",s6:"শা'রানী (রহ.) বলেন, মসজিদ দেখা ইবাদত বৃদ্ধির তাকিদ।"},
-{id:46,cat:"worship",ic:"&#x1F54B;",t:"কাবা শরীফ দেখা",kw:"কাবা,মক্কা,হজ্ব,তাওয়াফ",s1:"কাবা শরীফ দেখা অত্যন্ত শুভ। হজ্ব করতে দেখা হজ্বের তওফিক লাভের ইঙ্গিত।",s2:"কাবা তাওয়াফ করা সকল বালা-মুসিবত থেকে মুক্তির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, কাবা ইসলামের কেন্দ্র।",s5:"গাজ্জালী (রহ.) বলেন, কাবা আল্লাহর ঘর। স্বপ্নে কাবা দেখা সর্বোচ্চ আধ্যাত্মিক পুরস্কার।",s6:"শা'রানী (রহ.) বলেন, কাবা দেখলে হজ্বের নিয়ত করা উচিত।"},
-{id:47,cat:"worship",ic:"&#x1F4D6;",t:"কুরআন তিলাওয়াত",kw:"কুরআন,তিলাওয়াত,আয়াত",s1:"কুরআন তিলাওয়াত করতে দেখা ইলম ও হেদায়েতের শ্রেষ্ঠ আলামত।",s2:"কুরআন পড়তে দেখা সর্বোত্তম স্বপ্নগুলোর একটি।",s4:"ইবনে কাসীর (রহ.) বলেন, কুরআন আল্লাহর বাণী। কুরআন পড়তে দেখা আল্লাহর রহমতের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, কুরআন তিলাওয়াত আত্মার খোরাক।",s6:"শা'রানী (রহ.) বলেন, কুরআন দেখলে আমলের পরিমাণ বাড়ানো উচিত।"},
+{id:45,cat:"worship",ic:"&#x1F54C;",t:"মসজিদে যাওয়া",kw:"মসজিদ,নামাজ,ইবাদত",s1:"মসজিদে প্রবেশ করা ঈমান ও তাকওয়ার উন্নতির ইঙ্গিত।",s2:"মসজিদ নির্মাণ করা ইসলামী কার্যক্রমে অবদান রাখার ইঙ্গিত।",s3:"মসজিদ আল্লাহর ঘর।",s4:"ইবনে কাসীর (রহ.) বলেন, মসজিদ আল্লাহর পবিত্র ঘর। স্বপ্নে মসজিদ দেখা ঈমানের দৃঢ়তার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, মসজিদ আত্মার প্রশান্তির স্থান।",s6:"শা'রানী (রহ.) বলেন, মসজিদ দেখা ইবাদত বৃদ্ধির তাকিদ।",dua_ar:"اللَّهُمَّ اجْعَلْنَا مِمَّنْ يَسْتَمِعُونَ الْقَوْلَ فَيَتَّبِعُونَ أَحْسَنَهُ",dua_bn:"হে আল্লাহ! আমাদের তাদের মধ্যে শামিল করুন যারা কথা শুনে এবং উত্তমটি অনুসরণ করে।",karanio:"মসজিদ দেখলে পাঁচ ওয়াক্ত নামাজ জামাতে আদায়ের নিয়ত করুন।"},
+{id:46,cat:"worship",ic:"&#x1F54B;",t:"কাবা শরীফ দেখা",kw:"কাবা,মক্কা,হজ্ব,তাওয়াফ",s1:"কাবা শরীফ দেখা অত্যন্ত শুভ। হজ্ব করতে দেখা হজ্বের তওফিক লাভের ইঙ্গিত।",s2:"কাবা তাওয়াফ করা সকল বালা-মুসিবত থেকে মুক্তির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, কাবা ইসলামের কেন্দ্র।",s5:"গাজ্জালী (রহ.) বলেন, কাবা আল্লাহর ঘর। স্বপ্নে কাবা দেখা সর্বোচ্চ আধ্যাত্মিক পুরস্কার।",s6:"শা'রানী (রহ.) বলেন, কাবা দেখলে হজ্বের নিয়ত করা উচিত।",dua_ar:"لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ",dua_bn:"আমি হাজির হে আল্লাহ! আমি হাজির। আপনার কোনো অংশীদার নেই।",karanio:"কাবা দেখলে হজ্বের নিয়ত করুন এবং বেশি বেশি তালবিয়া পড়ুন।"},
+{id:47,cat:"worship",ic:"&#x1F4D6;",t:"কুরআন তিলাওয়াত",kw:"কুরআন,তিলাওয়াত,আয়াত",s1:"কুরআন তিলাওয়াত করতে দেখা ইলম ও হেদায়েতের শ্রেষ্ঠ আলামত।",s2:"কুরআন পড়তে দেখা সর্বোত্তম স্বপ্নগুলোর একটি।",s4:"ইবনে কাসীর (রহ.) বলেন, কুরআন আল্লাহর বাণী। কুরআন পড়তে দেখা আল্লাহর রহমতের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, কুরআন তিলাওয়াত আত্মার খোরাক।",s6:"শা'রানী (রহ.) বলেন, কুরআন দেখলে আমলের পরিমাণ বাড়ানো উচিত।",dua_ar:"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",dua_bn:"হে আমাদের রব! আমাদেরকে দুনিয়াতে কল্যাণ দিন এবং আখেরাতেও কল্যাণ দিন এবং আমাদেরকে জাহান্নামের আযাব থেকে রক্ষা করুন।",karanio:"কুরআন দেখলে প্রতিদিন নির্দিষ্ট পরিমাণ তিলাওয়াতের নিয়ত করুন।"},
 {id:48,cat:"worship",ic:"&#x1F932;",t:"দোয়া করতে দেখা",kw:"দোয়া,মোনাজাত,হাত,কান্না",s1:"দোয়া করতে দেখা আল্লাহর দিকে রুজু হওয়ার ইঙ্গিত।",s2:"দোয়া কবুল হওয়া দেখা বড় সুসংবাদ।",s5:"গাজ্জালী (রহ.) বলেন, দোয়া আল্লাহর সাথে বান্দার সংলাপ।",s6:"শা'রানী (রহ.) বলেন, দোয়া করতে দেখা আল্লাহর সান্নিধ্য লাভের আলামত।"},
 {id:49,cat:"worship",ic:"&#x1F319;",t:"রমযান বা রোযা দেখা",kw:"রমযান,রোযা,ইফতার,সেহরি",s1:"রমযান মাস দেখা বরকত ও রহমতের ইঙ্গিত।",s2:"ইফতার করতে দেখা দীর্ঘ পরিশ্রমের পর ফল লাভের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, রমযান আল্লাহর বিশেষ রহমতের মাস।",s5:"গাজ্জালী (রহ.) বলেন, রোযা আত্মার পরিশুদ্ধির মাধ্যম।"},
 {id:50,cat:"worship",ic:"&#x1F54C;",t:"আযান শোনা",kw:"আযান,মুয়াজ্জিন,ডাক,মসজিদ",s1:"আযান শোনা সত্যের ডাকে সাড়া দেওয়ার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, আযান ইসলামের শিআর।",s6:"শা'রানী (রহ.) বলেন, আযান দিতে দেখা সম্মান ও নেতৃত্বের ইঙ্গিত।"},
@@ -197,7 +238,7 @@ var D=[
 {id:74,cat:"clothes",ic:"&#x1F451;",t:"রাজকীয় পোশাক বা মুকুট",kw:"মুকুট,রাজকীয়,সিংহাসন",s1:"মুকুট পরা সম্মান ও ক্ষমতা লাভের ইঙ্গিত।",s2:"মুকুট শাসন ও নেতৃত্বের প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, মুকুট রাজ-ক্ষমতার প্রতীক। পদোন্নতির ইঙ্গিত।"},
 {id:75,cat:"clothes",ic:"&#x1F7E2;",t:"সবুজ পোশাক পরা",kw:"সবুজ,পোশাক,কাপড়,রঙ",s1:"সবুজ পোশাক পরা দীনদারি ও জান্নাতের আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, কুরআনে জান্নাতিদের সবুজ পোশাকের উল্লেখ আছে।",s5:"গাজ্জালী (রহ.) বলেন, সবুজ রঙ রহমত ও প্রাণের প্রতীক।"},
 {id:76,cat:"clothes",ic:"&#x1F48D;",t:"আংটি বা অলংকার পরা",kw:"আংটি,অলংকার,গহনা,পরা",s1:"আংটি পরা কর্তৃত্ব ও মর্যাদার ইঙ্গিত।",s2:"রুপার আংটি পবিত্রতার প্রতীক।",s6:"শা'রানী (রহ.) বলেন, আংটি চুক্তি ও প্রতিশ্রুতির প্রতীক।"},
-{id:77,cat:"death",ic:"&#x26B0;",t:"নিজের মৃত্যু দেখা",kw:"মৃত্যু,মরা,কবর,দাফন,জানাজা",s1:"নিজের মৃত্যু দেখা দীর্ঘায়ু ও তওবার ইঙ্গিত।",s2:"মৃত্যু দেখা আখেরাতের চিন্তা বৃদ্ধির আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, মৃত্যু স্মরণ করা গাফলত থেকে মুক্তির পথ।",s5:"গাজ্জালী (রহ.) বলেন, মৃত্যু দেখা দুনিয়ার মোহ থেকে মুক্তির ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, মৃত্যু দেখলে তওবা ও নেক আমল বৃদ্ধি করা উচিত।"},
+{id:77,cat:"death",ic:"&#x26B0;",t:"নিজের মৃত্যু দেখা",kw:"মৃত্যু,মরা,কবর,দাফন,জানাজা",s1:"নিজের মৃত্যু দেখা দীর্ঘায়ু ও তওবার ইঙ্গিত।",s2:"মৃত্যু দেখা আখেরাতের চিন্তা বৃদ্ধির আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, মৃত্যু স্মরণ করা গাফলত থেকে মুক্তির পথ।",s5:"গাজ্জালী (রহ.) বলেন, মৃত্যু দেখা দুনিয়ার মোহ থেকে মুক্তির ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, মৃত্যু দেখলে তওবা ও নেক আমল বৃদ্ধি করা উচিত।",dua_ar:"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْمَوْتِ الْفَجْأَةِ",dua_bn:"হে আল্লাহ! আমি আপনার কাছে হঠাৎ মৃত্যু থেকে আশ্রয় চাই।",karanio:"মৃত্যু দেখলে তওবা করুন, কুরআন পড়ুন এবং সদকা দিন।"},
 {id:78,cat:"death",ic:"&#x1FAA6;",t:"কবর দেখা",kw:"কবর,মাজার,গোরস্তান",s1:"কবর দেখা পরকালের স্মরণ ও তওবার ইঙ্গিত।",s2:"কবর জিয়ারত করা মৃত্যুর স্মরণ ও নেক আমলের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, কবর আখেরাতের প্রথম মনজিলের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, কবর দেখা দুনিয়ার ক্ষণস্থায়িত্বের স্মরণ।",s6:"শা'রানী (রহ.) বলেন, কবর দেখলে পরিবারের জন্য দোয়া করা উচিত।"},
 {id:79,cat:"death",ic:"&#x1F33A;",t:"জানাজার নামাজ পড়া",kw:"জানাজা,নামাজ,মৃত,দোয়া",s1:"জানাজার নামাজ পড়া মৃত ব্যক্তির জন্য দোয়া করার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, জানাজায় অংশগ্রহণ মুসলমানের দায়িত্ব।",s6:"শা'রানী (রহ.) বলেন, জানাজা দেখলে মৃতের জন্য সদকা করা উচিত।"},
 {id:80,cat:"death",ic:"&#x1F9DF;",t:"কিয়ামত বা হাশরের ময়দান",kw:"কিয়ামত,হাশর,বিচার,আখেরাত",s1:"কিয়ামত দেখা আখেরাতের প্রস্তুতির তাকিদ। হাশরের ময়দানে নিরাপদ থাকা নেক আমলের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, কিয়ামত দেখা তওবা ও ইবাদত বৃদ্ধির তাকিদ।",s5:"গাজ্জালী (রহ.) বলেন, হাশরের ময়দান দেখা পরকালীন জীবনের প্রস্তুতির ইঙ্গিত।"},
@@ -212,13 +253,75 @@ var D=[
 {id:89,cat:"colors",ic:"&#x1F7E9;",t:"সবুজ রঙ দেখা",kw:"সবুজ,গাছ,বাগান,রঙ",s1:"সবুজ রঙ দেখা জান্নাত ও রহমতের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, সবুজ রঙ কুরআনে জান্নাতের রঙ হিসেবে উল্লেখিত।",s5:"গাজ্জালী (রহ.) বলেন, সবুজ রঙ প্রাণ ও আশার প্রতীক।"},
 {id:90,cat:"colors",ic:"&#x1F7E8;",t:"হলুদ রঙ দেখা",kw:"হলুদ,রঙ,সোনালী",s1:"হলুদ রঙ দেখা রোগ বা কষ্টের ইঙ্গিত। তবে সোনালী হলুদ সম্পদের আলামত।",s6:"শা'রানী (রহ.) বলেন, হলুদ রঙ দুর্বলতার প্রতীক। স্বাস্থ্যের প্রতি যত্নশীল হওয়ার ইঙ্গিত।"},
 {id:91,cat:"supernatural",ic:"&#x1F47B;",t:"জিন বা শয়তান দেখা",kw:"জিন,শয়তান,ভূত,আত্মা",s1:"জিন বা শয়তান দেখা বিপদ ও ফিতনার ইঙ্গিত। আউযুবিল্লাহ পড়া এবং তওবা করা উচিত।",s2:"শয়তান দেখলে আয়াতুল কুরসি পড়া উচিত।",s4:"ইবনে কাসীর (রহ.) বলেন, শয়তান দেখা ওয়াসওয়াসা থেকে সাবধান থাকার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, শয়তান দেখা কু-প্রবৃত্তির প্রতীক। জিকির ও ইস্তেগফার করা উচিত।"},
-{id:92,cat:"supernatural",ic:"&#x1F5FD;",t:"জান্নাত দেখা",kw:"জান্নাত,বেহেশত,নেয়ামত",s1:"জান্নাত দেখা অত্যন্ত শুভ স্বপ্ন। নেক আমল ও তাকওয়ার পুরস্কারের ইঙ্গিত।",s2:"জান্নাত দেখা আখেরাতের সাফল্যের সুসংবাদ।",s4:"ইবনে কাসীর (রহ.) বলেন, জান্নাত দেখা আল্লাহর বিশেষ অনুগ্রহের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, জান্নাত দেখা সর্বোচ্চ আধ্যাত্মিক পুরস্কার।",s6:"শা'রানী (রহ.) বলেন, জান্নাত দেখলে বেশি বেশি নেক আমল করা উচিত।"},
+{id:92,cat:"supernatural",ic:"&#x1F5FD;",t:"জান্নাত দেখা",kw:"জান্নাত,বেহেশত,নেয়ামত",s1:"জান্নাত দেখা অত্যন্ত শুভ স্বপ্ন। নেক আমল ও তাকওয়ার পুরস্কারের ইঙ্গিত।",s2:"জান্নাত দেখা আখেরাতের সাফল্যের সুসংবাদ।",s4:"ইবনে কাসীর (রহ.) বলেন, জান্নাত দেখা আল্লাহর বিশেষ অনুগ্রহের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, জান্নাত দেখা সর্বোচ্চ আধ্যাত্মিক পুরস্কার।",s6:"শা'রানী (রহ.) বলেন, জান্নাত দেখলে বেশি বেশি নেক আমল করা উচিত।",dua_ar:"رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",dua_bn:"হে আমাদের রব! আমাদের স্ত্রী ও সন্তানদের মধ্য থেকে আমাদের জন্য চোখের শীতলতা দিন।",karanio:"জান্নাত দেখলে নেক আমল বৃদ্ধি করুন এবং বেশি বেশি জান্নাতের দোয়া পড়ুন।"},
 {id:93,cat:"supernatural",ic:"&#x1F525;",t:"জাহান্নাম দেখা",kw:"জাহান্নাম,দোজখ,শাস্তি",s1:"জাহান্নাম দেখা সতর্কতার ইঙ্গিত। তওবা ও গুনাহ থেকে বিরত থাকার তাকিদ।",s4:"ইবনে কাসীর (রহ.) বলেন, জাহান্নাম দেখা গুনাহ থেকে দূরে থাকার কড়া তাকিদ।",s5:"গাজ্জালী (রহ.) বলেন, জাহান্নাম দেখা আখেরাতের ভয় জাগ্রত করার ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, জাহান্নাম দেখলে অবিলম্বে তওবা করা উচিত।"},
 {id:94,cat:"prophets",ic:"&#x1F54A;",t:"হযরত ইব্রাহিম (আ.) দেখা",kw:"ইব্রাহিম,নবী,পয়গম্বর",s1:"হযরত ইব্রাহিম (আ.) দেখা তাওহীদ ও একনিষ্ঠতার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, ইব্রাহিম (আ.) ছিলেন খলিলুল্লাহ। তাঁকে দেখা মহান সৌভাগ্যের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, ইব্রাহিম (আ.) দেখা তাওহীদের শক্তিশালী অনুসরণের ইঙ্গিত।"},
 {id:95,cat:"prophets",ic:"&#x1F30A;",t:"হযরত মুসা (আ.) দেখা",kw:"মুসা,নবী,তুর,কালিমুল্লাহ",s1:"হযরত মুসা (আ.) দেখা শক্তি ও সাহসের ইঙ্গিত। বাতিলের বিরুদ্ধে সত্যের বিজয়ের আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, মুসা (আ.) আল্লাহর কালিমুল্লাহ। তাঁকে দেখা মহা সৌভাগ্য।"},
 {id:96,cat:"prophets",ic:"&#x2B50;",t:"হযরত ইউসুফ (আ.) দেখা",kw:"ইউসুফ,নবী,স্বপ্ন,সৌন্দর্য",s1:"হযরত ইউসুফ (আ.) দেখা সৌন্দর্য, ধৈর্য ও বিজয়ের ইঙ্গিত। কষ্টের পর সাফল্যের আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, ইউসুফ (আ.) স্বপ্নের নবী। তাঁকে দেখা স্বপ্নের সঠিক ব্যাখ্যার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, ইউসুফ (আ.) দেখা ধৈর্য ও তাওয়াক্কুলের তাকিদ।"},
 {id:97,cat:"prophets",ic:"&#x1F54C;",t:"হযরত ঈসা (আ.) দেখা",kw:"ঈসা,নবী,রূহুল্লাহ",s1:"হযরত ঈসা (আ.) দেখা রূহানিয়াত ও আধ্যাত্মিক শক্তির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, ঈসা (আ.) রূহুল্লাহ। তাঁকে দেখা রুহানী উন্নতির ইঙ্গিত।"},
-{id:98,cat:"prophets",ic:"&#x1F4A7;",t:"হযরত নূহ (আ.) দেখা",kw:"নূহ,নবী,কিস্তি,বন্যা",s1:"হযরত নূহ (আ.) দেখা ধৈর্য ও দীর্ঘ সংগ্রামের পর সাফল্যের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, নূহ (আ.) দীর্ঘতম ধৈর্যের নবী। তাঁকে দেখা সবরের তাকিদ।"}
+{id:98,cat:"prophets",ic:"&#x1F4A7;",t:"হযরত নূহ (আ.) দেখা",kw:"নূহ,নবী,কিস্তি,বন্যা",s1:"হযরত নূহ (আ.) দেখা ধৈর্য ও দীর্ঘ সংগ্রামের পর সাফল্যের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, নূহ (আ.) দীর্ঘতম ধৈর্যের নবী। তাঁকে দেখা সবরের তাকিদ।"},
+{id:99,cat:"water",ic:"&#x1F30A;",t:"ঝরনায় গোসল করা",kw:"ঝরনা,গোসল,পাহাড়,পরিষ্কার",s1:"ঝরনায় গোসল করা পাপ থেকে পবিত্রতা ও আত্মার শুদ্ধির ইঙ্গিত।",s2:"ঝরনা আল্লাহর বিশেষ রহমতের প্রতীক। গোসল করা সুস্বাস্থ্যের আলামত।",s5:"গাজ্জালী (রহ.) বলেন, ঝরনার পানি বিশুদ্ধ জ্ঞানের প্রতীক।"},
+{id:100,cat:"water",ic:"&#x1F4A6;",t:"অশ্রু বা কান্না",kw:"কান্না,অশ্রু,চোখের পানি,তওবা",s1:"কান্না দেখা অনুতাপ ও তওবার ইঙ্গিত। আল্লাহর ভয়ে কাঁদা জান্নাতের আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, ভয় ও ভালোবাসায় কাঁদা ঈমানের গভীরতার প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, আল্লাহর ভয়ে অশ্রু সর্বোচ্চ ইবাদতের একটি।"},
+{id:101,cat:"fire",ic:"&#x1F31F;",t:"আকাশে আলোর ঝলক",kw:"আকাশ,আলো,উজ্জ্বল,ঝলক",s1:"আকাশে আলোর ঝলক দেখা মহান ঘটনার পূর্বাভাস। শুভ সংবাদের আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, আকাশের আলো আল্লাহর নিদর্শনের প্রতীক।"},
+{id:102,cat:"animals",ic:"&#x1F98A;",t:"শিয়াল দেখা",kw:"শিয়াল,ধূর্ত,চালাক",s1:"শিয়াল দেখা ধূর্ত শত্রু বা প্রতারকের ইঙ্গিত। সতর্ক থাকা উচিত।",s4:"ইবনে কাসীর (রহ.) বলেন, শিয়াল চালাক শত্রুর প্রতীক।"},
+{id:103,cat:"animals",ic:"&#x1F40C;",t:"শামুক বা ঝিনুক দেখা",kw:"শামুক,ঝিনুক,মুক্তা,ধীর",s1:"শামুক দেখা ধৈর্য ও ধীরগতিতে সাফল্যের ইঙ্গিত। মুক্তা দেখা মূল্যবান জ্ঞানের আলামত।",s6:"শা'রানী (রহ.) বলেন, ধীর গতির প্রাণী ধৈর্যের শিক্ষা দেয়।"},
+{id:104,cat:"animals",ic:"&#x1F40A;",t:"কুমির দেখা",kw:"কুমির,পানি,বিপদ,শিকার",s1:"কুমির দেখা ক্ষমতাবান অত্যাচারী শত্রুর ইঙ্গিত।",s2:"কুমির জলে ও স্থলে বিপদের প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, কুমির দুমুখো শত্রুর প্রতীক।"},
+{id:105,cat:"animals",ic:"&#x1F98C;",t:"হরিণ দেখা",kw:"হরিণ,সুন্দর,দ্রুত,বন",s1:"হরিণ দেখা সৌন্দর্য ও সুখের ইঙ্গিত। সুন্দরী ও ভালো স্বভাবের মানুষের আলামত।",s5:"গাজ্জালী (রহ.) বলেন, হরিণ সৌন্দর্য ও নিরীহতার প্রতীক।"},
+{id:106,cat:"animals",ic:"&#x1F54A;",t:"কবুতর বা পায়রা দেখা",kw:"কবুতর,পায়রা,সাদা,শান্তি",s1:"সাদা কবুতর দেখা শান্তি, ভালো সংবাদ ও ভালোবাসার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, কবুতর নবীজির (সা.) হিজরতের সাথি। শুভ প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, সাদা কবুতর পবিত্র আত্মার প্রতীক।"},
+{id:107,cat:"animals",ic:"&#x1F99A;",t:"ময়ূর দেখা",kw:"ময়ূর,সুন্দর,পালক,রঙিন",s1:"ময়ূর দেখা সৌন্দর্য ও প্রদর্শনীর ইঙ্গিত। অহংকার থেকে সাবধান থাকার তাকিদ।",s5:"গাজ্জালী (রহ.) বলেন, ময়ূর দুনিয়াবী সৌন্দর্যের প্রতীক। আখেরাতের দিকে মনোযোগ দিন।"},
+{id:108,cat:"animals",ic:"&#x1F40E;",t:"ঘোড়া দেখা",kw:"ঘোড়া,দ্রুত,শক্তি,সওয়ার",s1:"ঘোড়া দেখা সম্মান, শক্তি ও বিজয়ের ইঙ্গিত। সাদা ঘোড়া বিশেষভাবে শুভ।",s4:"ইবনে কাসীর (রহ.) বলেন, ঘোড়া জিহাদ ও বীরত্বের প্রতীক। সাদা ঘোড়া বিজয়ের আলামত।",s5:"গাজ্জালী (রহ.) বলেন, ঘোড়ায় চড়া উচ্চ মাকামের ইঙ্গিত।"},
+{id:109,cat:"animals",ic:"&#x1F434;",t:"গাধা বা খচ্চর দেখা",kw:"গাধা,খচ্চর,বাহন,কষ্ট",s1:"গাধা দেখা কঠোর পরিশ্রম ও ধৈর্যের ইঙ্গিত। গাধায় চড়া সাফল্যের আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, গাধা বিনম্রতার প্রতীক।"},
+{id:110,cat:"animals",ic:"&#x1F986;",t:"হাঁস বা রাজহাঁস দেখা",kw:"হাঁস,রাজহাঁস,পানি,সাঁতার",s1:"হাঁস দেখা স্বাচ্ছন্দ্য ও নিরাপদ জীবনের ইঙ্গিত।",s2:"রাজহাঁস সৌন্দর্য ও উচ্চ মর্যাদার প্রতীক।"},
+{id:111,cat:"animals",ic:"&#x1F989;",t:"পেঁচা দেখা",kw:"পেঁচা,রাত,অন্ধকার,জ্ঞান",s1:"পেঁচা দেখা জ্ঞান ও একাকীত্বের ইঙ্গিত। রাতের ইবাদতের তাকিদ।",s4:"ইবনে কাসীর (রহ.) বলেন, পেঁচা রাতের প্রাণী। রাতের আমলের তাকিদ।"},
+{id:112,cat:"animals",ic:"&#x1F438;",t:"ব্যাঙ দেখা",kw:"ব্যাঙ,পানি,বৃষ্টি,ডাকা",s1:"ব্যাঙ দেখা ধার্মিক মানুষের সাথে সাক্ষাতের ইঙ্গিত। রহমতের আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, ব্যাঙ আল্লাহর তাসবিহকারী প্রাণী।"},
+{id:113,cat:"sky",ic:"&#x1F30C;",t:"আকাশগঙ্গা বা ছায়াপথ",kw:"আকাশগঙ্গা,ছায়াপথ,তারা,রাত",s1:"ছায়াপথ দেখা আল্লাহর বিশাল সৃষ্টির প্রতি বিস্ময়ের ইঙ্গিত। ঈমান বৃদ্ধির আলামত।",s5:"গাজ্জালী (রহ.) বলেন, মহাবিশ্বের বিশালতা দেখা আল্লাহর মহত্ত্বের স্মরণ।"},
+{id:114,cat:"sky",ic:"&#x2604;",t:"ধূমকেতু বা উল্কা দেখা",kw:"ধূমকেতু,উল্কা,আকাশ,আলো",s1:"ধূমকেতু দেখা বড় পরিবর্তনের ইঙ্গিত। গুরুত্বপূর্ণ ঘটনার আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, আকাশের বিশেষ ঘটনা আল্লাহর কুদরতের নিদর্শন।"},
+{id:115,cat:"sky",ic:"&#x1F303;",t:"রাতের পরিষ্কার আকাশ",kw:"রাত,আকাশ,তারা,পরিষ্কার",s1:"পরিষ্কার রাতের আকাশ দেখা শান্তি ও প্রশান্তির ইঙ্গিত। আধ্যাত্মিক উন্নতির আলামত।",s5:"গাজ্জালী (রহ.) বলেন, রাতের আকাশ আল্লাহর সৌন্দর্যের প্রতীক।"},
+{id:116,cat:"people",ic:"&#x1F91D;",t:"বন্ধু বা প্রিয়জনের সাথে দেখা",kw:"বন্ধু,প্রিয়জন,মিলন,আনন্দ",s1:"বন্ধুর সাথে দেখা সুসম্পর্ক ও বন্ধুত্বের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, সৎ বন্ধু আল্লাহর নিয়ামত। তাদের সাথে সময় কাটানো বরকতের আলামত।"},
+{id:117,cat:"people",ic:"&#x1F9B8;",t:"বীর বা সৈনিক দেখা",kw:"বীর,সৈনিক,যোদ্ধা,বর্ম",s1:"বীর সৈনিক দেখা সাহস ও শক্তির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মুজাহিদ দেখা জিহাদ ফি সাবিলিল্লাহর প্রতি অনুপ্রেরণার ইঙ্গিত।"},
+{id:118,cat:"people",ic:"&#x1F9B3;",t:"বৃদ্ধ বা বয়স্ক মানুষ দেখা",kw:"বৃদ্ধ,বয়স্ক,বুজুর্গ,সাদা চুল",s1:"বৃদ্ধ মানুষ দেখা প্রজ্ঞা ও অভিজ্ঞতার ইঙ্গিত। তাদের পরামর্শ নেওয়ার তাকিদ।",s6:"শা'রানী (রহ.) বলেন, বৃদ্ধ আলেম দেখা হেকমত ও ইলমের ইঙ্গিত।"},
+{id:119,cat:"people",ic:"&#x1F46F;",t:"জনতা বা ভিড় দেখা",kw:"জনতা,ভিড়,মানুষ,সমাগম",s1:"জনতা দেখা সামাজিক প্রভাব ও নেতৃত্বের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, জনতার নেতৃত্ব বড় দায়িত্বের ইঙ্গিত।"},
+{id:120,cat:"people",ic:"&#x1F468;&#x200D;&#x1F393;",t:"শিক্ষক বা উস্তাদ দেখা",kw:"শিক্ষক,উস্তাদ,পড়ানো,জ্ঞান",s1:"শিক্ষক দেখা ইলম অর্জন ও জ্ঞান বৃদ্ধির ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, উস্তাদ ইলমের দরজার চাবিকাঠি। তাদের সম্মান করা ওয়াজিব।"},
+{id:121,cat:"food",ic:"&#x1F347;",t:"আঙুর খাওয়া",kw:"আঙুর,ফল,মিষ্টি,বাগান",s1:"আঙুর খাওয়া বিশেষ বরকত ও আনন্দের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, কুরআনে জান্নাতি ফলের মধ্যে আঙুর উল্লেখিত।"},
+{id:122,cat:"food",ic:"&#x1F33F;",t:"সবজি বা তরকারি দেখা",kw:"সবজি,তরকারি,সবুজ,বাগান",s1:"তাজা সবজি দেখা সুস্বাস্থ্য ও সরল জীবনযাপনের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, সবুজ সবজি সতেজ জীবনের প্রতীক।"},
+{id:123,cat:"food",ic:"&#x1F9C1;",t:"ডিম দেখা",kw:"ডিম,মুরগি,সন্তান,নতুন",s1:"ডিম দেখা নতুন সূচনা ও সন্তান লাভের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, ডিম সম্পদ ও সন্তানের ইঙ্গিত।"},
+{id:124,cat:"food",ic:"&#x2615;",t:"চা বা কফি পান করা",kw:"চা,কফি,পানীয়,গরম",s1:"চা পান করা শান্তি ও আরামের ইঙ্গিত। বন্ধুত্বপূর্ণ সম্পর্কের আলামত।"},
+{id:125,cat:"worship",ic:"&#x1F550;",t:"ফজরের নামাজ পড়া",kw:"ফজর,নামাজ,ভোর,আযান",s1:"ফজরের নামাজ পড়তে দেখা ঈমানের দৃঢ়তার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, ফজর নামাজ ফেরেশতাদের সাক্ষ্যের নামাজ।",s5:"গাজ্জালী (রহ.) বলেন, ফজরের নামাজ দিনের আলোর প্রতীক।"},
+{id:126,cat:"worship",ic:"&#x1F4B0;",t:"যাকাত বা সদকা দেওয়া",kw:"যাকাত,সদকা,দান,গরিব",s1:"যাকাত দিতে দেখা সম্পদে বরকত ও পরিশুদ্ধির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, সদকা বিপদ দূর করে ও রিজিক বাড়ায়।",s5:"গাজ্জালী (রহ.) বলেন, দান করা আত্মার মুক্তির প্রতীক।"},
+{id:127,cat:"worship",ic:"&#x1F90F;",t:"তাহাজ্জুদ নামাজ পড়া",kw:"তাহাজ্জুদ,রাত,নামাজ,ইবাদত",s1:"তাহাজ্জুদ পড়তে দেখা সর্বোচ্চ তাকওয়ার ইঙ্গিত। আল্লাহর বিশেষ নৈকট্যের আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, তাহাজ্জুদ নামাজ আল্লাহর প্রিয় বান্দার নিশানা।",s6:"শা'রানী (রহ.) বলেন, তাহাজ্জুদ দেখলে রাতে উঠে নামাজের নিয়ত করুন।"},
+{id:128,cat:"worship",ic:"&#x1F91F;",t:"হজ্বের সফরে যাওয়া",kw:"হজ্ব,মক্কা,সফর,ইহরাম",s1:"হজ্বের সফরে যেতে দেখা হজ্ব পালনের তওফিক লাভের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, হজ্ব ইসলামের পঞ্চম স্তম্ভ।",s5:"গাজ্জালী (রহ.) বলেন, হজ্বের নিয়তেই সওয়াব শুরু হয়।"},
+{id:129,cat:"travel",ic:"&#x2708;",t:"বিমানে উড়া",kw:"বিমান,উড়া,আকাশ,ভ্রমণ",s1:"বিমানে উড়া দ্রুত অগ্রগতি ও উচ্চ লক্ষ্য অর্জনের ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, উঁচুতে উড়া আধ্যাত্মিক মর্যাদার প্রতীক।"},
+{id:130,cat:"travel",ic:"&#x1F697;",t:"গাড়িতে ভ্রমণ",kw:"গাড়ি,ভ্রমণ,রাস্তা,চলা",s1:"গাড়িতে ভ্রমণ জীবনের গতি ও অগ্রগতির ইঙ্গিত।",s2:"গাড়ি জীবনের যাত্রার প্রতীক।"},
+{id:131,cat:"travel",ic:"&#x1F3DE;",t:"সবুজ মাঠ বা বাগানে থাকা",kw:"মাঠ,বাগান,সবুজ,প্রকৃতি",s1:"সবুজ মাঠ দেখা সুখ, সমৃদ্ধি ও জান্নাতের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, কুরআনে জান্নাতকে সবুজ বাগান হিসেবে বর্ণনা করা হয়েছে।",s5:"গাজ্জালী (রহ.) বলেন, সবুজ বাগান আল্লাহর রহমতের প্রতীক।"},
+{id:132,cat:"travel",ic:"&#x1F30B;",t:"আগ্নেয়গিরি বা ভূমিকম্প",kw:"আগ্নেয়গিরি,ভূমিকম্প,বিপদ",s1:"আগ্নেয়গিরি বা ভূমিকম্প দেখা বড় বিপদের সতর্কতা। তওবা ও ইস্তেগফারের তাকিদ।",s4:"ইবনে কাসীর (রহ.) বলেন, প্রাকৃতিক দুর্যোগ আল্লাহর ক্রোধের নিদর্শন।"},
+{id:133,cat:"wealth",ic:"&#x1F4C8;",t:"ব্যবসায় সাফল্য",kw:"ব্যবসা,সাফল্য,লাভ,বাজার",s1:"ব্যবসায় সাফল্য দেখা হালাল উপায়ে সম্পদ অর্জনের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, হালাল ব্যবসা ইবাদতের সমতুল্য।",s5:"গাজ্জালী (রহ.) বলেন, ন্যায্য ব্যবসা আল্লাহর পছন্দনীয় কাজ।"},
+{id:134,cat:"wealth",ic:"&#x1F3DB;",t:"প্রাসাদ বা বড় ভবন দেখা",kw:"প্রাসাদ,ভবন,বড় ঘর,মহল",s1:"প্রাসাদ দেখা বড় সম্মান ও ক্ষমতার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, প্রাসাদ দুনিয়াবী মোহের প্রতীক। আখেরাতের চিন্তা বেশি করুন।"},
+{id:135,cat:"wealth",ic:"&#x1F333;",t:"বড় গাছ বা বাগান দেখা",kw:"গাছ,বাগান,ফল,ছায়া",s1:"বড় ছায়াদার গাছ দেখা আশ্রয় ও সুরক্ষার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, গাছ বরকতের প্রতীক।"},
+{id:136,cat:"wealth",ic:"&#x1F48C;",t:"চিঠি বা খাম পাওয়া",kw:"চিঠি,খাম,সংবাদ,বার্তা",s1:"চিঠি পাওয়া দূর থেকে সংবাদ বা সুযোগের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, চিঠি নতুন সুযোগের দরজার ইঙ্গিত।"},
+{id:137,cat:"body",ic:"&#x1F9B0;",t:"চুল বা দাড়ি দেখা",kw:"চুল,দাড়ি,লম্বা,ছোট",s1:"লম্বা চুল দেখা দীর্ঘ জীবন ও সৌন্দর্যের ইঙ্গিত। দাড়ি দেখা সুন্নতের অনুসরণের আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, দাড়ি রাখা নবীজির (সা.) সুন্নত।"},
+{id:138,cat:"body",ic:"&#x1F9B4;",t:"হাড় দেখা",kw:"হাড়,শক্তি,কঙ্কাল",s1:"হাড় দেখা শক্তি ও দৃঢ়তার ইঙ্গিত। কঙ্কাল দেখা মৃত্যুর স্মরণের তাকিদ।",s4:"ইবনে কাসীর (রহ.) বলেন, হাড় শরীরের কাঠামো। শক্তিশালী হাড় মজবুত ভিত্তির ইঙ্গিত।"},
+{id:139,cat:"clothes",ic:"&#x1F3A9;",t:"টুপি বা পাগড়ি পরা",kw:"টুপি,পাগড়ি,মাথা,পরা",s1:"পাগড়ি পরা সম্মান ও মর্যাদার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, পাগড়ি আলেম ও সম্মানিতদের পোশাক।",s6:"শা'রানী (রহ.) বলেন, পাগড়ি ইসলামী পোশাকের অংশ।"},
+{id:140,cat:"clothes",ic:"&#x1F45F;",t:"জুতা বা স্যান্ডেল পরা",kw:"জুতা,স্যান্ডেল,পায়ে,চলা",s1:"জুতা পরা সুরক্ষা ও সফরের ইঙ্গিত। নতুন জুতা নতুন পথচলার আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, জুতা পথের সুরক্ষার প্রতীক।"},
+{id:141,cat:"death",ic:"&#x1F9F1;",t:"কফিন বা জানাজা বহন",kw:"কফিন,জানাজা,বহন,মৃত",s1:"জানাজা বহন করা মৃত্যুর স্মরণ ও নেক কাজের তাকিদ।",s4:"ইবনে কাসীর (রহ.) বলেন, জানাজায় অংশগ্রহণ বড় সওয়াবের কাজ।"},
+{id:142,cat:"death",ic:"&#x1F3F3;",t:"মৃত ব্যক্তির সম্পদ পাওয়া",kw:"মৃত,সম্পদ,উত্তরাধিকার",s1:"মৃত ব্যক্তির সম্পদ পাওয়া উত্তরাধিকার বা অপ্রত্যাশিত সম্পদ লাভের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, হালাল উপায়ে সম্পদ লাভ আল্লাহর রহমতের ইঙ্গিত।"},
+{id:143,cat:"conflict",ic:"&#x1F5E1;",t:"ছুরি বা কাঁচি দেখা",kw:"ছুরি,কাঁচি,ধারালো,অস্ত্র",s1:"ছুরি দেখা ধারালো সিদ্ধান্ত ও বিচ্ছেদের ইঙ্গিত।",s2:"ছুরি বিচ্ছেদ ও সিদ্ধান্তের প্রতীক।"},
+{id:144,cat:"conflict",ic:"&#x1F4A3;",t:"বোমা বা বিস্ফোরণ দেখা",kw:"বোমা,বিস্ফোরণ,বিপদ,ধ্বংস",s1:"বিস্ফোরণ দেখা হঠাৎ বিপদ বা ফিতনার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, হঠাৎ বিপদ গাফলত থেকে জেগে ওঠার সতর্কতা।"},
+{id:145,cat:"conflict",ic:"&#x270A;",t:"মুষ্টিযুদ্ধ বা ঝগড়া",kw:"মুষ্টি,ঝগড়া,মারামারি",s1:"ঝগড়া দেখা বাস্তব জীবনে সংঘাতের সতর্কতা। শান্তিপূর্ণ সমাধানের তাকিদ।",s6:"শা'রানী (রহ.) বলেন, ঝগড়া ফিতনার প্রতীক। ক্ষমা ও মিলের পথ বেছে নিন।"},
+{id:146,cat:"knowledge",ic:"&#x1F393;",t:"পরীক্ষায় উত্তীর্ণ হওয়া",kw:"পরীক্ষা,উত্তীর্ণ,সাফল্য",s1:"পরীক্ষায় উত্তীর্ণ হওয়া জীবনের পরীক্ষায় সাফল্যের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, পরীক্ষায় সাফল্য পরিশ্রম ও দোয়ার ফল।"},
+{id:147,cat:"knowledge",ic:"&#x1F4BB;",t:"কম্পিউটার বা প্রযুক্তি",kw:"কম্পিউটার,প্রযুক্তি,আধুনিক",s1:"কম্পিউটার দেখা আধুনিক জ্ঞান ও দক্ষতার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, যুগোপযোগী জ্ঞান অর্জন করা ফরজে কেফায়া।"},
+{id:148,cat:"knowledge",ic:"&#x1F4F0;",t:"সংবাদপত্র বা সংবাদ পড়া",kw:"সংবাদ,পত্রিকা,পড়া,জ্ঞান",s1:"সংবাদ পড়া তথ্য ও জ্ঞান অর্জনের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, জ্ঞান অর্জন প্রতিটি মুসলমানের দায়িত্ব।"},
+{id:149,cat:"colors",ic:"&#x1F7E6;",t:"নীল রঙ দেখা",kw:"নীল,আকাশ,সমুদ্র,রঙ",s1:"নীল রঙ দেখা প্রশান্তি ও শান্তির ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, নীল রঙ প্রশান্তি ও গভীরতার প্রতীক।"},
+{id:150,cat:"colors",ic:"&#x1F7E5;",t:"গাঢ় লাল বা বিপদের রঙ",kw:"গাঢ় লাল,বিপদ,সতর্কতা",s1:"গাঢ় লাল রঙ দেখা বিপদ ও সতর্কতার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, তীব্র লাল রঙ ক্রোধ ও বিপদের প্রতীক।"},
+{id:151,cat:"supernatural",ic:"&#x2728;",t:"নূর বা আলোর ঝলক",kw:"নূর,আলো,ঝলক,উজ্জ্বল",s1:"নূর বা আলোর ঝলক দেখা হেদায়েত ও ঈমান বৃদ্ধির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, নূর দেখা আল্লাহর হেদায়েতের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, অন্তরের নূর ঈমানের পরিমাপ।"},
+{id:152,cat:"supernatural",ic:"&#x1F9F8;",t:"জান্নাতের নদী বা হাউজ",kw:"জান্নাত,নদী,হাউজ,কাউসার",s1:"জান্নাতের নদী দেখা সর্বোচ্চ সুসংবাদ।",s4:"ইবনে কাসীর (রহ.) বলেন, হাউযে কাউসার নবীজির (সা.) বিশেষ নিয়ামত।",s5:"গাজ্জালী (রহ.) বলেন, জান্নাতি নদী দেখা সর্বোচ্চ আধ্যাত্মিক পুরস্কার।"},
+{id:153,cat:"supernatural",ic:"&#x1F52E;",t:"স্বপ্নের মধ্যে স্বপ্ন",kw:"স্বপ্ন,রহস্য,গভীর",s1:"স্বপ্নের মধ্যে স্বপ্ন দেখা গভীর রহস্যের ইঙ্গিত। আলেমের কাছে ব্যাখ্যা নেওয়া উচিত।",s2:"স্বপ্নের মধ্যে স্বপ্ন বিশেষ ইঙ্গিতের প্রতীক।"},
+{id:154,cat:"prophets",ic:"&#x1F4AB;",t:"হযরত ইউনুস (আ.) দেখা",kw:"ইউনুস,মাছ,নবী,তওবা",s1:"হযরত ইউনুস (আ.) দেখা তওবা ও ধৈর্যের ইঙ্গিত। বিপদ থেকে মুক্তির আলামত।",s4:"ইবনে কাসীর (রহ.) বলেন, ইউনুস (আ.) মাছের পেটে তওবা করেছিলেন।",s5:"গাজ্জালী (রহ.) বলেন, ইউনুস (আ.) দেখা যেকোনো বিপদ থেকে মুক্তির আশার ইঙ্গিত।"},
+{id:155,cat:"prophets",ic:"&#x1F451;",t:"হযরত সুলাইমান (আ.) দেখা",kw:"সুলাইমান,নবী,রাজা,জিন",s1:"হযরত সুলাইমান (আ.) দেখা ক্ষমতা, জ্ঞান ও শাসনের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, সুলাইমান (আ.) নবী ও রাজা উভয়ই ছিলেন।"},
+{id:156,cat:"prophets",ic:"&#x1F3C5;",t:"হযরত আইয়ুব (আ.) দেখা",kw:"আইয়ুব,সবর,নবী,রোগ",s1:"হযরত আইয়ুব (আ.) দেখা ধৈর্য ও পরীক্ষার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, আইয়ুব (আ.) দীর্ঘ রোগ থেকে আল্লাহর দয়ায় মুক্তি পেয়েছিলেন।",s5:"গাজ্জালী (রহ.) বলেন, আইয়ুব (আ.) সবরের সর্বোচ্চ আদর্শ।"},
+{id:157,cat:"prophets",ic:"&#x1F91A;",t:"হযরত আদম (আ.) দেখা",kw:"আদম,মানবজাতি,প্রথম মানুষ",s1:"হযরত আদম (আ.) দেখা মানবজাতির উৎপত্তির স্মরণ। তওবার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, আদম (আ.) প্রথম মানুষ ও প্রথম নবী।",s5:"গাজ্জালী (রহ.) বলেন, আদম (আ.) তওবার আদর্শ প্রতিষ্ঠা করেছিলেন।"},
+{id:158,cat:"prophets",ic:"&#x1F917;",t:"সাহাবায়ে কেরাম দেখা",kw:"সাহাবা,সঙ্গী,নবী,ইসলাম",s1:"সাহাবায়ে কেরাম দেখা উচ্চ মর্যাদার ইঙ্গিত। তাঁদের জীবন অনুসরণের তাকিদ।",s4:"ইবনে কাসীর (রহ.) বলেন, সাহাবারা সর্বোত্তম প্রজন্ম।",s5:"গাজ্জালী (রহ.) বলেন, সাহাবারা ইসলামের আলোকবর্তিকা।"},
+{id:159,cat:"prophets",ic:"&#x1F4AE;",t:"হযরত মারিয়াম (আ.) দেখা",kw:"মারিয়াম,মহিলা,পবিত্র",s1:"হযরত মারিয়াম (আ.) দেখা পবিত্রতা ও ইবাদতের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মারিয়াম (আ.) সর্বশ্রেষ্ঠ মহিলাদের একজন।"},
+{id:160,cat:"prophets",ic:"&#x1F4AB;",t:"মেরাজ বা ঊর্ধ্বলোক দেখা",kw:"মেরাজ,ঊর্ধ্বলোক,নবী,আকাশ",s1:"মেরাজের দৃশ্য দেখা অত্যন্ত শুভ ও বরকতময় স্বপ্ন। সর্বোচ্চ আধ্যাত্মিক উন্নতির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মেরাজ নবীজির (সা.) জীবনের সর্বোচ্চ ঘটনা।",s5:"গাজ্জালী (রহ.) বলেন, মেরাজ দেখা সর্বোচ্চ আধ্যাত্মিক পুরস্কারের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, মেরাজের স্বপ্ন দেখলে নামাজ ও ইবাদত বৃদ্ধি করুন।"}
 ];
 var C=[
 {id:"water",ic:"&#x1F4A7;",n:"পানি ও নদী"},
@@ -240,10 +343,36 @@ var C=[
 {id:"prophets",ic:"&#x1F54A;",n:"নবী-রাসূলগণ"}
 ];
 var curTab="home",openId=null,openPanel={};
+var fsz=15;
+var darkMode=false;
 
 function cnt(cat){var n=0;for(var i=0;i<D.length;i++){if(D[i].cat===cat)n++;}return n;}
-
 function getSch(d){var r=[];for(var i=0;i<SK.length;i++){if(d[SK[i]])r.push(i);}return r;}
+
+function togDark(){
+  darkMode=!darkMode;
+  document.documentElement.setAttribute("data-theme",darkMode?"dark":"light");
+  document.getElementById("dmBtn").innerHTML=darkMode?"&#x2600; লাইট":"&#x1F319; ডার্ক";
+}
+
+function togFS(){
+  var p=document.getElementById("fsp");
+  var ov=document.getElementById("ov");
+  p.classList.toggle("open");
+  ov.classList.toggle("open",p.classList.contains("open"));
+}
+
+function chFS(d){
+  fsz=Math.min(22,Math.max(12,fsz+d));
+  document.body.style.setProperty("--fs",fsz+"px");
+  document.getElementById("fsv").textContent=fsz+"px";
+}
+
+function closeAll(){
+  document.getElementById("ap").classList.remove("open");
+  document.getElementById("fsp").classList.remove("open");
+  document.getElementById("ov").classList.remove("open");
+}
 
 function buildGrid(){
   var h="";
@@ -263,7 +392,17 @@ function buildCard(d){
   var tabs="";
   for(var i=0;i<schs.length;i++){var si=schs[i];tabs+="<button class=\"tb"+(def===SK[si]?" active":"")+"\" onclick=\"swP("+d.id+",'"+SK[si]+"')\">"+SS[si]+"</button>";}
   var panels="";
-  for(var i=0;i<schs.length;i++){var si=schs[i];panels+="<div class=\"tp"+(def===SK[si]?" active":"")+"\" id=\"p"+d.id+SK[si]+"\"><span class=\"sb2\">"+SF[si]+"</span><p>"+d[SK[si]]+"</p></div>";}
+  for(var i=0;i<schs.length;i++){
+    var si=schs[i];
+    var duaHtml="";
+    if(d.dua_ar||d.karanio){
+      duaHtml="<div class=\"dua-box\">";
+      if(d.karanio){duaHtml+="<div class=\"karanio\"><div class=\"karanio-title\">&#x2705; &#x0995;&#x09B0;&#x09A3;&#x09C0;&#x09AF;&#x09BC;</div>"+d.karanio+"</div>";}
+      if(d.dua_ar){duaHtml+="<div class=\"dua-title\">&#x1F4D6; &#x09B8;&#x0982;&#x09B6;&#x09CD;&#x09B2;&#x09BF;&#x09B7;&#x09CD;&#x099F; &#x09A6;&#x09CB;&#x09AF;&#x09BC;&#x09BE;</div><div class=\"dua-arabic\">"+d.dua_ar+"</div><div class=\"dua-bn\">"+d.dua_bn+"</div>";}
+      duaHtml+="</div>";
+    }
+    panels+="<div class=\"tp"+(def===SK[si]?" active":"")+"\" id=\"p"+d.id+SK[si]+"\"><span class=\"sb2\">"+SF[si]+"</span><p>"+d[SK[si]]+"</p>"+(si===schs[0]?duaHtml:"")+"</div>";
+  }
   return "<div class=\"dc\" id=\"dc"+d.id+"\">"
     +"<div class=\"dh\" onclick=\"togD("+d.id+")\">"
     +"<span class=\"di\">"+d.ic+"</span>"
@@ -281,29 +420,24 @@ function buildList(list){var h="";for(var i=0;i<list.length;i++){h+=buildCard(li
 function showHome(){
   document.getElementById("mc").innerHTML=
     "<div class=\"bism\">&#x0628;&#x0650;&#x0633;&#x0652;&#x0645;&#x0650; &#x0627;&#x0644;&#x0644;&#x0651;&#x0670;&#x0647;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x064E;&#x062D;&#x0652;&#x0645;&#x0670;&#x0646;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x064E;&#x062D;&#x0650;&#x064A;&#x0652;&#x0645;&#x0650;</div>"
-    +"<div class=\"sh2\"><span class=\"shi\">&#x1F4C2;</span><span class=\"sht\">&#x09AC;&#x09BF;&#x09AD;&#x09BE;&#x0997;&#x09B8;&#x09AE;&#x09C2;&#x09B9; ("+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;, &#x09EC; &#x0986;&#x09B2;&#x09C7;&#x09AE;)</span></div>"
+    +"<div class=\"sh2\"><span class=\"shi\">&#x1F4C2;</span><span class=\"sht\">&#x09AC;&#x09BF;&#x09AD;&#x09BE;&#x0997;&#x09B8;&#x09AE;&#x09C2;&#x09B9; ("+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;)</span></div>"
     +"<div class=\"cg\">"+buildGrid()+"</div>";
 }
-
 function showCatPage(){document.getElementById("mc").innerHTML="<div class=\"cg\">"+buildGrid()+"</div>";}
-
 function showCat(id){
   var cat=null;for(var i=0;i<C.length;i++){if(C[i].id===id){cat=C[i];break;}}
   var list=[];for(var i=0;i<D.length;i++){if(D[i].cat===id)list.push(D[i]);}
   document.getElementById("mc").innerHTML="<div class=\"sh2\"><span class=\"shi\">"+cat.ic+"</span><span class=\"sht\">"+cat.n+"</span><button class=\"bbk\" onclick=\"goBack()\">&#x2190; &#x09AA;&#x09BF;&#x099B;&#x09A8;&#x09C7;</button></div><div class=\"dl\">"+buildList(list)+"</div>";
 }
-
 function showAll(){document.getElementById("mc").innerHTML="<div class=\"sh2\"><span class=\"shi\">&#x1F4D6;</span><span class=\"sht\">&#x09B8;&#x0995;&#x09B2; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8; ("+D.length+"&#x099F;&#x09BF;)</span></div><div class=\"dl\">"+buildList(D)+"</div>";}
-
 function showAbout(){
   var sh="";for(var i=0;i<SF.length;i++){sh+="<p style=\"margin-bottom:6px\"><strong>"+SF[i]+"</strong></p>";}
   document.getElementById("mc").innerHTML=
-    "<div class=\"acard\"><h3>&#x1F54C; &#x09B8;&#x09CB;&#x09B2;&#x09BE;&#x0987;&#x09AE;&#x09BE;&#x09A8;&#x09C0; &#x0996;&#x09BE;&#x09AC;&#x09A8;&#x09BE;&#x09AE;&#x09BE;</h3><p>&#x09AE;&#x09CB;&#x099F; "+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x09C7;&#x09B0; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE;, "+C.length+"&#x099F;&#x09BF; &#x09AC;&#x09BF;&#x09AD;&#x09BE;&#x0997;&#x09C7; &#x098F;&#x09AC;&#x0982; &#x09EC; &#x099C;&#x09A8; &#x09AC;&#x09BF;&#x0996;&#x09CD;&#x09AF;&#x09BE;&#x09A4; &#x0986;&#x09B2;&#x09C7;&#x09AE;&#x09C7;&#x09B0; &#x09AE;&#x09A4;&#x09BE;&#x09AE;&#x09A4; &#x09B8;&#x0982;&#x0997;&#x09C3;&#x09B9;&#x09C0;&#x09A4;&#x0964; &#x09AF;&#x09C7; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x09C7; &#x0995;&#x09CB;&#x09A8;&#x09CB; &#x0986;&#x09B2;&#x09C7;&#x09AE;&#x09C7;&#x09B0; &#x09AE;&#x09A4;&#x09BE;&#x09AE;&#x09A4; &#x09A8;&#x09C7;&#x0987; &#x09B8;&#x09C7; &#x099F;&#x09CD;&#x09AF;&#x09BE;&#x09AC; &#x09A6;&#x09C7;&#x0996;&#x09BE;&#x09AC;&#x09C7; &#x09A8;&#x09BE;&#x0964;</p></div>"
+    "<div class=\"acard\"><h3>&#x1F54C; &#x09B8;&#x09CB;&#x09B2;&#x09BE;&#x0987;&#x09AE;&#x09BE;&#x09A8;&#x09C0; &#x0996;&#x09BE;&#x09AC;&#x09A8;&#x09BE;&#x09AE;&#x09BE;</h3><p>&#x09AE;&#x09CB;&#x099F; "+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x09C7;&#x09B0; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE;&#x0964; &#x09A1;&#x09BE;&#x09B0;&#x09CD;&#x0995; &#x09AE;&#x09CB;&#x09A1; &#x0993; &#x09AB;&#x09A8;&#x09CD;&#x099F; &#x09B8;&#x09BE;&#x0987;&#x099C; &#x09AC;&#x09BE;&#x09A1;&#x09BC;&#x09BE;&#x09A8;&#x09CB;/&#x0995;&#x09AE;&#x09BE;&#x09A8;&#x09CB; &#x09B8;&#x09AE;&#x09B0;&#x09CD;&#x09A5;&#x09BF;&#x09A4;&#x0964;</p></div>"
     +"<div class=\"acard\"><h3>&#x1F4DA; &#x0986;&#x09B2;&#x09C7;&#x09AE;&#x0997;&#x09A3;</h3>"+sh+"</div>"
     +"<div class=\"acard\"><h3>&#x26A0;&#xFE0F; &#x0997;&#x09C1;&#x09B0;&#x09C1;&#x09A4;&#x09CD;&#x09AC;&#x09AA;&#x09C2;&#x09B0;&#x09CD;&#x09A3; &#x09A8;&#x09CB;&#x099F;</h3><p>&#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x09C7;&#x09B0; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09B8;&#x09AC;&#x09B8;&#x09AE;&#x09AF;&#x09BC; &#x09A8;&#x09BF;&#x09B6;&#x09CD;&#x099A;&#x09BF;&#x09A4; &#x09A8;&#x09AF;&#x09BC;&#x0964; &#x09AC;&#x09CD;&#x09AF;&#x0995;&#x09CD;&#x09A4;&#x09BF;, &#x09B8;&#x09AE;&#x09AF;&#x09BC; &#x0993; &#x09AA;&#x09B0;&#x09BF;&#x09B8;&#x09CD;&#x09A5;&#x09BF;&#x09A4;&#x09BF; &#x09AD;&#x09C7;&#x09A6;&#x09C7; &#x09AD;&#x09BF;&#x09A8;&#x09CD;&#x09A8; &#x09B9;&#x09A4;&#x09C7; &#x09AA;&#x09BE;&#x09B0;&#x09C7;&#x0964;</p></div>"
-    +"<div class=\"acard\"><h3>&#x1F468;&#x200D;&#x1F4BB; &#x09A1;&#x09C7;&#x09AD;&#x09C7;&#x09B2;&#x09AA;&#x09BE;&#x09B0;</h3><p>&#x09A4;&#x09C8;&#x09B0;&#x09BF; &#x0995;&#x09B0;&#x09C7;&#x099B;&#x09C7;&#x09A8;: <strong>A.M. Morshed</strong><br>&#x09B8;&#x0982;&#x09B8;&#x09CD;&#x0995;&#x09B0;&#x09A3;: &#x09E9;.&#x09E6; | "+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8; | &#x09EC; &#x0986;&#x09B2;&#x09C7;&#x09AE;</p></div>";
+    +"<div class=\"acard\"><h3>&#x1F468;&#x200D;&#x1F4BB; &#x09A1;&#x09C7;&#x09AD;&#x09C7;&#x09B2;&#x09AA;&#x09BE;&#x09B0;</h3><p>&#x09A4;&#x09C8;&#x09B0;&#x09BF; &#x0995;&#x09B0;&#x09C7;&#x099B;&#x09C7;&#x09A8;: <strong>A.M. Morshed</strong><br>&#x09B8;&#x0982;&#x09B8;&#x09CD;&#x0995;&#x09B0;&#x09A3;: &#x09EA;.&#x09E6; | "+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8; | &#x09EC; &#x0986;&#x09B2;&#x09C7;&#x09AE;</p></div>";
 }
-
 function showTab(t){
   curTab=t;
   var tabs=document.querySelectorAll(".tab");
@@ -314,9 +448,7 @@ function showTab(t){
   else if(t==="all")showAll();
   else if(t==="about")showAbout();
 }
-
 function goBack(){showTab(curTab==="home"?"home":"cat");}
-
 function togD(id){
   openId=(openId===id?null:id);
   var body=document.getElementById("db"+id);
@@ -327,7 +459,6 @@ function togD(id){
     if(exp)exp.innerHTML=(openId===id?"&#x25B2;":"&#x25BC;");
   }
 }
-
 function swP(did,p){
   openPanel[did]=p;
   var d=null;for(var i=0;i<D.length;i++){if(D[i].id===did){d=D[i];break;}}
@@ -341,7 +472,6 @@ function swP(did,p){
     for(var i=0;i<schs.length;i++){if(SK[schs[i]]===p&&btns[i]){btns[i].classList.add("active");break;}}
   }
 }
-
 function onSrch(val){
   document.getElementById("bc").style.display=val?"block":"none";
   if(!val.trim()){showTab(curTab);return;}
@@ -356,19 +486,18 @@ function onSrch(val){
   if(!res.length){m.innerHTML="<div class=\"nr\"><div style=\"font-size:40px\">&#x1F50D;</div><p>"+val+" &#x098F;&#x09B0; &#x099C;&#x09A8;&#x09CD;&#x09AF; &#x0995;&#x09CB;&#x09A8;&#x09CB; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09AA;&#x09BE;&#x0993;&#x09AF;&#x09BC;&#x09BE; &#x09AF;&#x09BE;&#x09AF;&#x09BC;&#x09A8;&#x09BF;&#x0964;</p></div>";return;}
   m.innerHTML="<div class=\"rc\">&#x1F50D; "+val+" &#x2014; "+res.length+"&#x099F;&#x09BF; &#x09AB;&#x09B2;&#x09BE;&#x09AB;&#x09B2;</div><div class=\"dl\">"+buildList(res)+"</div>";
 }
-
 function clrSrch(){document.getElementById("si").value="";document.getElementById("bc").style.display="none";showTab(curTab);}
-
 function togAI(){
-  document.getElementById("ap").classList.toggle("open");
-  document.getElementById("ov").classList.toggle("open");
+  var ap=document.getElementById("ap");
+  var ov=document.getElementById("ov");
+  ap.classList.toggle("open");
+  ov.classList.toggle("open",ap.classList.contains("open"));
 }
-
 async function askAI(){
   var inp=document.getElementById("ai").value.trim();
-  if(!inp){shToast("&#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x09C7;&#x09B0; &#x09AC;&#x09BF;&#x09B7;&#x09AF;&#x09BC; &#x09B2;&#x09BF;&#x0996;&#x09C1;&#x09A8;");return;}
+  if(!inp){shToast("স্বপ্নের বিষয় লিখুন");return;}
   var ar=document.getElementById("ar");
-  ar.innerHTML="&#x23F3; AI &#x09AC;&#x09BF;&#x09B6;&#x09CD;&#x09B2;&#x09C7;&#x09B7;&#x09A3; &#x0995;&#x09B0;&#x099B;&#x09C7;...";
+  ar.innerHTML="&#x23F3; AI বিশ্লেষণ করছে...";
   try{
     var res=await fetch("https://api.anthropic.com/v1/messages",{
       method:"POST",
@@ -376,17 +505,14 @@ async function askAI(){
       body:JSON.stringify({
         model:"claude-sonnet-4-20250514",
         max_tokens:1200,
-        system:"&#x0986;&#x09AA;&#x09A8;&#x09BF; &#x098F;&#x0995;&#x099C;&#x09A8; &#x09AC;&#x09BF;&#x09B6;&#x09C7;&#x09B7;&#x099C;&#x09CD;&#x099E; &#x0987;&#x09B8;&#x09B2;&#x09BE;&#x09AE;&#x09C0; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE;&#x0995;&#x09BE;&#x09B0;&#x09C0;&#x0964; &#x0987;&#x09AE;&#x09BE;&#x09AE; &#x0987;&#x09AC;&#x09A8;&#x09C7; &#x09B8;&#x09C0;&#x09B0;&#x09C0;&#x09A8;, &#x0987;&#x09AE;&#x09BE;&#x09AE; &#x09A8;&#x09BE;&#x09AC;&#x09C1;&#x09B2;&#x09C1;&#x09B8;&#x09C0;, &#x09B6;&#x09BE;&#x09AF;&#x09BC;&#x0996; &#x0986;&#x09AC;&#x09CD;&#x09A6;&#x09C1;&#x09B2; &#x0997;&#x09A8;&#x09C0; &#x09A8;&#x09BE;&#x09AC;&#x09C1;&#x09B2;&#x09C1;&#x09B8;&#x09C0;, &#x0987;&#x09AE;&#x09BE;&#x09AE; &#x0987;&#x09AC;&#x09A8;&#x09C7; &#x0995;&#x09BE;&#x09B8;&#x09C0;&#x09B0;, &#x0987;&#x09AE;&#x09BE;&#x09AE; &#x0997;&#x09BE;&#x099C;&#x09CD;&#x099C;&#x09BE;&#x09B2;&#x09C0; &#x0993; &#x0987;&#x09AE;&#x09BE;&#x09AE; &#x09B6;&#x09BE;'&#x09B0;&#x09BE;&#x09A8;&#x09C0; &#x09B0;&#x09B9;. &#x098F;&#x09B0; &#x09AE;&#x09A4;&#x09BE;&#x09AE;&#x09A4;&#x09C7;&#x09B0; &#x09AD;&#x09BF;&#x09A4;&#x09CD;&#x09A4;&#x09BF;&#x09A4;&#x09C7; &#x09AC;&#x09BE;&#x0982;&#x09B2;&#x09BE;&#x09AF;&#x09BC; &#x09AC;&#x09BF;&#x09B8;&#x09CD;&#x09A4;&#x09BE;&#x09B0;&#x09BF;&#x09A4; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09A6;&#x09BF;&#x09A8;&#x0964;",
-        messages:[{role:"user",content:"&#x098F;&#x0987; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x099F;&#x09BF;&#x09B0; &#x0987;&#x09B8;&#x09B2;&#x09BE;&#x09AE;&#x09C0; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09A6;&#x09BF;&#x09A8;: "+inp}]
+        system:"আপনি একজন বিশেষজ্ঞ ইসলামী স্বপ্ন ব্যাখ্যাকারী। ইমাম ইবনে সীরীন, ইমাম নাবুলুসী, শায়খ আব্দুল গনী নাবুলুসী, ইমাম ইবনে কাসীর, ইমাম গাজ্জালী ও ইমাম শারানী রহ. এর মতামতের ভিত্তিতে বাংলায় বিস্তারিত ব্যাখ্যা দিন। শেষে করণীয় ও একটি প্রাসঙ্গিক দোয়া উল্লেখ করুন।",
+        messages:[{role:"user",content:"এই স্বপ্নটির ইসলামী ব্যাখ্যা দিন: "+inp}]
       })
     });
     var data=await res.json();
-    ar.innerHTML=(data.content&&data.content[0]?data.content[0].text:"&#x0989;&#x09A4;&#x09CD;&#x09A4;&#x09B0; &#x09AA;&#x09BE;&#x0993;&#x09AF;&#x09BC;&#x09BE; &#x09AF;&#x09BE;&#x09AF;&#x09BC;&#x09A8;&#x09BF;&#x0964;").replace(/\n/g,"<br>");
-  }catch(e){ar.innerHTML="&#x274C; AI &#x09B8;&#x0982;&#x09AF;&#x09CB;&#x0997; &#x09AC;&#x09CD;&#x09AF;&#x09B0;&#x09CD;&#x09A5;&#x0964; &#x0987;&#x09A8;&#x09CD;&#x099F;&#x09BE;&#x09B0;&#x09A8;&#x09C7;&#x099F; &#x09AA;&#x09B0;&#x09C0;&#x0995;&#x09CD;&#x09B7;&#x09BE; &#x0995;&#x09B0;&#x09C1;&#x09A8;&#x0964;";}
+    ar.innerHTML=(data.content&&data.content[0]?data.content[0].text:"উত্তর পাওয়া যায়নি।").replace(/\n/g,"<br>")}catch(e){ar.innerHTML="&#x274C; AI সংযোগ ব্যর্থ। ইন্টারনেট পরীক্ষা করুন।";}
 }
-
-function shToast(msg){var t=document.getElementById("toast");t.innerHTML=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2500);}
-
+function shToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2500);}
 showHome();
 </script>
 </body>

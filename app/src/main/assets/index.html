@@ -553,7 +553,7 @@ async function askAI(){
   ar.innerHTML="&#x23F3; AI &#x09AC;&#x09BF;&#x09B6;&#x09CD;&#x09B2;&#x09C7;&#x09B7;&#x09A3; &#x0995;&#x09B0;&#x099B;&#x09C7;...";
   try{
     var prompt="&#x0986;&#x09AA;&#x09A8;&#x09BF; &#x098F;&#x0995;&#x099C;&#x09A8; &#x09AC;&#x09BF;&#x09B6;&#x09C7;&#x09B7;&#x099C;&#x09CD;&#x099E; &#x0987;&#x09B8;&#x09B2;&#x09BE;&#x09AE;&#x09C0; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE;&#x0995;&#x09BE;&#x09B0;&#x09C0;&#x0964; &#x09EC; &#x0986;&#x09B2;&#x09C7;&#x09AE;&#x09C7;&#x09B0; &#x09AE;&#x09A4;&#x09BE;&#x09AE;&#x09A4;&#x09C7;&#x09B0; &#x09AD;&#x09BF;&#x09A4;&#x09CD;&#x09A4;&#x09BF;&#x09A4;&#x09C7; &#x09AC;&#x09BE;&#x0982;&#x09B2;&#x09BE;&#x09AF;&#x09BC; &#x09AC;&#x09BF;&#x09B8;&#x09CD;&#x09A4;&#x09BE;&#x09B0;&#x09BF;&#x09A4; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09A6;&#x09BF;&#x09A8;&#x0964; &#x09B6;&#x09C7;&#x09B7;&#x09C7; &#x0995;&#x09B0;&#x09A3;&#x09C0;&#x09AF;&#x09BC; &#x0993; &#x09A6;&#x09CB;&#x09AF;&#x09BC;&#x09BE; &#x09A6;&#x09BF;&#x09A8;&#x0964; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;: "+inp;
-    var res=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key="+apiKey,{
+    var res=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key="+apiKey,{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{maxOutputTokens:1200,temperature:0.7}})

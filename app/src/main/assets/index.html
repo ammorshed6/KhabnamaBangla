@@ -6,119 +6,106 @@
 <title>সোলাইমানী খাবনামা</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600&display=swap');
-
-[data-theme="light"]{
---em:#1b4d3e;--el:#2d6a4f;--go:#b8860b;--gl:#d4a017;--gp:#f0e0a0;
---rd:#8b1a1a;--cr:#faf6ed;--pg:#f5efe0;--pd:#e8dcc5;--sh:rgba(26,16,8,0.15);
---ink:#1a1008;--ink2:#3a2a10;--ink3:#6a5030;--hbg:#1b4d3e;--hbg2:#0d2b22;
---card:#faf6ed;--border:#f0e0a0;--tab:#e8dcc5;--dua:#fff8e7;--dua-border:#d4a017}
-[data-theme="dark"]{
---em:#4caf87;--el:#5dc498;--go:#d4a017;--gl:#e8b830;--gp:#3a3010;
---rd:#c0392b;--cr:#1a1a1a;--pg:#121212;--pd:#1e1e1e;--sh:rgba(0,0,0,0.4);
---ink:#e8e0d0;--ink2:#c8b898;--ink3:#8a7a60;--hbg:#0d2b22;--hbg2:#071a14;
---card:#1e1e1e;--border:#2a2a2a;--tab:#181818;--dua:#1a1500;--dua-border:#5a4010}
-
+[data-theme="light"]{--em:#1b4d3e;--el:#2d6a4f;--go:#b8860b;--gl:#d4a017;--gp:#f0e0a0;--rd:#8b1a1a;--cr:#faf6ed;--pg:#f5efe0;--pd:#e8dcc5;--sh:rgba(26,16,8,0.15);--ink:#1a1008;--ink2:#3a2a10;--ink3:#6a5030;--hbg:#1b4d3e;--hbg2:#0d2b22;--card:#faf6ed;--bd:#f0e0a0;--tab:#e8dcc5;--dua:#fff8e7;--dub:#d4a017}
+[data-theme="dark"]{--em:#4caf87;--el:#5dc498;--go:#d4a017;--gl:#e8b830;--gp:#3a3010;--rd:#c0392b;--cr:#1a1a1a;--pg:#121212;--pd:#1e1e1e;--sh:rgba(0,0,0,0.4);--ink:#e8e0d0;--ink2:#c8b898;--ink3:#8a7a60;--hbg:#0d2b22;--hbg2:#071a14;--card:#1e1e1e;--bd:#2a2a2a;--tab:#181818;--dua:#1a1500;--dub:#5a4010}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Noto Sans Bengali",sans-serif;background:var(--pg);color:var(--ink);min-height:100vh;font-size:var(--fs,15px);transition:background .3s,color .3s}
+body{font-family:"Noto Sans Bengali",sans-serif;background:var(--pg);color:var(--ink);min-height:100vh;transition:background .3s,color .3s}
 header{background:linear-gradient(135deg,var(--hbg),var(--hbg2));position:sticky;top:0;z-index:100;box-shadow:0 2px 12px var(--sh);border-bottom:2px solid var(--go)}
-.ht{display:flex;align-items:center;justify-content:space-between;padding:8px 12px 4px}
+.ht{display:flex;align-items:center;justify-content:space-between;padding:8px 10px 4px}
 .htc{display:flex;flex-direction:column;align-items:center;flex:1}
 .at{font-family:"Noto Serif Bengali",serif;font-size:18px;font-weight:700;color:var(--gl)}
 .as{font-size:10px;color:#a8c5b0;margin-top:1px}
-.wm{background:var(--rd);color:#fff;font-size:10px;font-weight:700;padding:3px 7px;border-radius:3px}
-.htools{display:flex;gap:6px;align-items:center}
-.htbtn{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:20px;color:#fff;font-size:11px;padding:4px 8px;cursor:pointer;font-family:"Noto Sans Bengali",sans-serif;white-space:nowrap}
-.sw{padding:6px 12px 8px;display:flex;gap:8px;align-items:center}
+.wm{background:var(--rd);color:#fff;font-size:10px;font-weight:700;padding:3px 7px;border-radius:3px;flex-shrink:0}
+.hbtns{display:flex;gap:4px;align-items:center;flex-shrink:0}
+.hb{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:18px;color:#fff;font-size:10px;padding:4px 7px;cursor:pointer;font-family:"Noto Sans Bengali",sans-serif;white-space:nowrap}
+.sw{padding:6px 10px 8px;display:flex;gap:6px;align-items:center}
 .sb{flex:1;display:flex;align-items:center;background:rgba(255,255,255,0.12);border:1px solid rgba(212,160,23,0.4);border-radius:24px;overflow:hidden}
-.si{padding:0 10px;color:var(--gl);font-size:16px}
-#si{flex:1;background:transparent;border:none;outline:none;color:#fff;font-family:"Noto Sans Bengali",sans-serif;font-size:14px;padding:8px 0}
+.si{padding:0 8px;color:var(--gl);font-size:15px}
+#si{flex:1;background:transparent;border:none;outline:none;color:#fff;font-family:"Noto Sans Bengali",sans-serif;font-size:13px;padding:8px 0}
 #si::placeholder{color:rgba(255,255,255,0.5)}
-#bc{background:none;border:none;color:rgba(255,255,255,0.6);padding:0 10px;font-size:18px;cursor:pointer;display:none}
-.ba{background:linear-gradient(135deg,var(--go),var(--gl));border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:17px;box-shadow:0 2px 8px rgba(0,0,0,0.3);flex-shrink:0}
+#bc{background:none;border:none;color:rgba(255,255,255,0.6);padding:0 8px;font-size:16px;cursor:pointer;display:none}
+.ba{background:linear-gradient(135deg,var(--go),var(--gl));border:none;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;box-shadow:0 2px 8px rgba(0,0,0,0.3);flex-shrink:0}
 .tabs{display:flex;background:var(--tab);border-bottom:2px solid var(--go)}
-.tab{flex:1;padding:9px 4px;font-size:11px;font-family:"Noto Sans Bengali",sans-serif;font-weight:500;color:var(--ink3);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;text-align:center;white-space:nowrap}
+.tab{flex:1;padding:9px 2px;font-size:11px;font-family:"Noto Sans Bengali",sans-serif;font-weight:500;color:var(--ink3);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;text-align:center;white-space:nowrap}
 .tab.active{color:var(--em);border-bottom-color:var(--em);font-weight:600}
-main{padding:12px;min-height:calc(100vh - 140px)}
+main{padding:10px;min-height:calc(100vh - 130px)}
 .cg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.cc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;box-shadow:0 2px 8px var(--sh);position:relative;overflow:hidden;transition:background .3s}
+.cc{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px 8px;text-align:center;cursor:pointer;box-shadow:0 2px 6px var(--sh);position:relative;overflow:hidden}
 .cc:active{transform:scale(0.97)}
 .cc::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--go),var(--em))}
-.ci{font-size:26px;margin-bottom:6px}
-.cn{font-family:"Noto Serif Bengali",serif;font-size:13px;font-weight:600;color:var(--em)}
+.ci{font-size:24px;margin-bottom:4px}
+.cn{font-family:"Noto Serif Bengali",serif;font-size:12px;font-weight:600;color:var(--em)}
 .ck{font-size:10px;color:var(--ink3);margin-top:2px}
-.dl{display:flex;flex-direction:column;gap:10px}
-.dc{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 2px 6px var(--sh);transition:background .3s}
-.dh{display:flex;align-items:center;padding:10px 12px;gap:10px;cursor:pointer}
-.di{font-size:22px;flex-shrink:0}
+.dl{display:flex;flex-direction:column;gap:8px}
+.dc{background:var(--card);border:1px solid var(--bd);border-radius:10px;overflow:hidden;box-shadow:0 2px 6px var(--sh)}
+.dh{display:flex;align-items:center;padding:10px 12px;gap:8px;cursor:pointer}
+.di{font-size:20px;flex-shrink:0}
 .dtw{flex:1}
-.dt{font-family:"Noto Serif Bengali",serif;font-size:14px;font-weight:600;line-height:1.4;color:var(--ink)}
+.dt{font-family:"Noto Serif Bengali",serif;font-size:13px;font-weight:600;line-height:1.4;color:var(--ink)}
 .dk{font-size:11px;color:var(--ink3);margin-top:2px}
-.de{color:var(--go);font-size:18px}
-.db{display:none;border-top:1px solid var(--border)}
+.de{color:var(--go);font-size:16px}
+.db{display:none;border-top:1px solid var(--bd)}
 .db.open{display:block}
-.tr{display:flex;background:var(--tab);border-bottom:1px solid var(--border);overflow-x:auto}
+.tr{display:flex;background:var(--tab);border-bottom:1px solid var(--bd);overflow-x:auto}
 .tb{flex-shrink:0;padding:6px 8px;font-size:10px;font-family:"Noto Sans Bengali",sans-serif;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;color:var(--ink3);font-weight:500;white-space:nowrap}
 .tb.active{color:var(--em);border-bottom-color:var(--em);font-weight:600}
-.tc{padding:12px;font-size:13px;line-height:1.8;color:var(--ink2)}
+.tc{padding:10px;font-size:13px;line-height:1.8;color:var(--ink2)}
 .tp{display:none}
 .tp.active{display:block}
 .sb2{display:inline-block;background:linear-gradient(90deg,var(--em),var(--el));color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;margin-bottom:6px}
-.dua-box{background:var(--dua);border:1px solid var(--dua-border);border-radius:8px;padding:10px 12px;margin-top:10px}
-.dua-title{font-size:11px;font-weight:600;color:var(--go);margin-bottom:6px}
-.dua-arabic{font-size:16px;text-align:right;color:var(--ink);line-height:2;direction:rtl;margin-bottom:4px}
-.dua-bn{font-size:12px;color:var(--ink3);line-height:1.6;margin-bottom:4px}
-.karanio{background:rgba(27,77,62,0.08);border-left:3px solid var(--em);padding:8px 10px;margin-top:8px;border-radius:0 6px 6px 0;font-size:12px;color:var(--ink2);line-height:1.7}
-.karanio-title{font-size:11px;font-weight:700;color:var(--em);margin-bottom:4px}
-.rc{font-size:12px;color:var(--ink3);margin-bottom:10px;padding:6px 10px;background:var(--border);border-radius:6px}
-.ap{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:2px solid var(--go);border-radius:16px 16px 0 0;padding:16px;max-height:70vh;overflow-y:auto;z-index:200;box-shadow:0 -4px 20px var(--sh)}
-.ap.open{display:block}
-.ah{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.at2{flex:1;font-family:"Noto Serif Bengali",serif;font-size:15px;font-weight:600;color:var(--em)}
-.bca{background:none;border:none;font-size:22px;color:var(--ink3);cursor:pointer}
-.air{display:flex;gap:8px;margin-bottom:12px}
-#ai{flex:1;border:1.5px solid var(--border);border-radius:24px;padding:10px 14px;font-family:"Noto Sans Bengali",sans-serif;font-size:13px;background:var(--pg);outline:none;color:var(--ink)}
+.dua-box{background:var(--dua);border:1px solid var(--dub);border-radius:8px;padding:10px;margin-top:8px}
+.dua-t{font-size:11px;font-weight:600;color:var(--go);margin-bottom:4px}
+.dua-ar{font-size:15px;text-align:right;direction:rtl;line-height:2;margin-bottom:4px;color:var(--ink)}
+.dua-bn{font-size:11px;color:var(--ink3);line-height:1.6;margin-bottom:4px}
+.kar{background:rgba(27,77,62,0.08);border-left:3px solid var(--em);padding:6px 8px;margin-top:6px;border-radius:0 6px 6px 0;font-size:12px;color:var(--ink2);line-height:1.6}
+.kar-t{font-size:11px;font-weight:700;color:var(--em);margin-bottom:3px}
+.rc{font-size:12px;color:var(--ink3);margin-bottom:10px;padding:6px 10px;background:var(--bd);border-radius:6px}
+.panel{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:2px solid var(--go);border-radius:16px 16px 0 0;padding:14px;max-height:75vh;overflow-y:auto;z-index:200;box-shadow:0 -4px 20px var(--sh)}
+.panel.open{display:block}
+.ph{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.pt{flex:1;font-family:"Noto Serif Bengali",serif;font-size:14px;font-weight:600;color:var(--em)}
+.pc{background:none;border:none;font-size:20px;color:var(--ink3);cursor:pointer}
+.air{display:flex;gap:8px;margin-bottom:10px}
+#ai{flex:1;border:1.5px solid var(--bd);border-radius:20px;padding:9px 12px;font-family:"Noto Sans Bengali",sans-serif;font-size:13px;background:var(--pg);outline:none;color:var(--ink)}
 #ai:focus{border-color:var(--em)}
-.bask{background:linear-gradient(135deg,var(--em),var(--el));color:#fff;border:none;border-radius:24px;padding:10px 16px;font-family:"Noto Sans Bengali",sans-serif;font-size:13px;font-weight:600;cursor:pointer}
-.ar{background:var(--pg);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:13px;line-height:1.8;min-height:60px;color:var(--ink)}
+.bask{background:linear-gradient(135deg,var(--em),var(--el));color:#fff;border:none;border-radius:20px;padding:9px 14px;font-family:"Noto Sans Bengali",sans-serif;font-size:12px;font-weight:600;cursor:pointer}
+.ar{background:var(--pg);border:1px solid var(--bd);border-radius:10px;padding:10px;font-size:13px;line-height:1.8;min-height:60px;color:var(--ink)}
 .ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199}
 .ov.open{display:block}
-.sh2{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.shi{font-size:20px}
-.sht{font-family:"Noto Serif Bengali",serif;font-size:16px;font-weight:700;color:var(--em);flex:1}
-.bbk{background:none;border:1px solid var(--go);border-radius:20px;padding:4px 12px;font-family:"Noto Sans Bengali",sans-serif;font-size:12px;color:var(--go);cursor:pointer}
-.bism{text-align:center;font-family:"Noto Serif Bengali",serif;font-size:18px;color:var(--go);padding:14px;background:linear-gradient(135deg,var(--hbg),var(--hbg2));border-radius:10px;margin-bottom:14px}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--em);color:#fff;padding:10px 20px;border-radius:24px;font-size:13px;z-index:300;transition:transform .3s}
+.sh2{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.shi{font-size:18px}
+.sht{font-family:"Noto Serif Bengali",serif;font-size:15px;font-weight:700;color:var(--em);flex:1}
+.bbk{background:none;border:1px solid var(--go);border-radius:18px;padding:4px 10px;font-family:"Noto Sans Bengali",sans-serif;font-size:11px;color:var(--go);cursor:pointer}
+.bism{text-align:center;font-family:"Noto Serif Bengali",serif;font-size:17px;color:var(--go);padding:12px;background:linear-gradient(135deg,var(--hbg),var(--hbg2));border-radius:10px;margin-bottom:12px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--em);color:#fff;padding:8px 18px;border-radius:20px;font-size:13px;z-index:300;transition:transform .3s;white-space:nowrap}
 .toast.show{transform:translateX(-50%) translateY(0)}
-.acard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:10px}
-.acard h3{font-family:"Noto Serif Bengali",serif;font-size:14px;font-weight:700;color:var(--em);margin-bottom:8px}
-.acard p{font-size:13px;line-height:1.8;color:var(--ink2)}
+.acard{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:14px;margin-bottom:10px}
+.acard h3{font-family:"Noto Serif Bengali",serif;font-size:13px;font-weight:700;color:var(--em);margin-bottom:6px}
+.acard p{font-size:12px;line-height:1.8;color:var(--ink2)}
 .nr{text-align:center;padding:30px 20px;color:var(--ink3)}
-/* Font size panel */
-.setpanel{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:2px solid var(--go);border-radius:16px 16px 0 0;padding:16px;z-index:200;box-shadow:0 -4px 20px var(--sh)}
-.setpanel.open{display:block}
-.set-row{margin-bottom:12px}
-.set-label{font-size:12px;font-weight:600;color:var(--em);margin-bottom:4px}
-.set-input{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;font-family:"Noto Sans Bengali",sans-serif;font-size:12px;background:var(--pg);outline:none;color:var(--ink)}
-.set-input:focus{border-color:var(--em)}
-.set-save{background:linear-gradient(135deg,var(--em),var(--el));color:#fff;border:none;border-radius:24px;padding:10px 20px;font-family:"Noto Sans Bengali",sans-serif;font-size:13px;font-weight:600;cursor:pointer;width:100%}
-.set-note{font-size:11px;color:var(--ink3);margin-top:6px;line-height:1.5}
-.fspanel{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:2px solid var(--go);border-radius:16px 16px 0 0;padding:16px;z-index:200;box-shadow:0 -4px 20px var(--sh)}
-.fspanel.open{display:block}
-.fs-row{display:flex;align-items:center;gap:12px;justify-content:center;margin-top:10px}
-.fsbtn{background:var(--em);color:#fff;border:none;border-radius:50%;width:40px;height:40px;font-size:20px;cursor:pointer;font-weight:700}
-.fs-val{font-family:"Noto Serif Bengali",serif;font-size:18px;font-weight:700;color:var(--em);min-width:50px;text-align:center}
+.si-row{margin-bottom:10px}
+.si-label{font-size:12px;font-weight:600;color:var(--em);margin-bottom:4px}
+.si-inp{width:100%;border:1.5px solid var(--bd);border-radius:8px;padding:9px 10px;font-family:"Noto Sans Bengali",sans-serif;font-size:12px;background:var(--pg);outline:none;color:var(--ink)}
+.si-inp:focus{border-color:var(--em)}
+.si-note{font-size:10px;color:var(--ink3);margin-top:4px;line-height:1.5}
+.si-save{background:linear-gradient(135deg,var(--em),var(--el));color:#fff;border:none;border-radius:20px;padding:10px;font-family:"Noto Sans Bengali",sans-serif;font-size:13px;font-weight:600;cursor:pointer;width:100%}
+.fs-row{display:flex;align-items:center;gap:12px;justify-content:center;margin-top:8px}
+.fsb{background:var(--em);color:#fff;border:none;border-radius:50%;width:38px;height:38px;font-size:20px;cursor:pointer;font-weight:700}
+.fsv{font-family:"Noto Serif Bengali",serif;font-size:18px;font-weight:700;color:var(--em);min-width:50px;text-align:center}
 </style>
 </head>
 <body>
 <header>
   <div class="ht">
-    <div style="width:10px"></div>
+    <span class="wm">@A.M.MORSHED</span>
     <div class="htc">
       <div class="at">&#x1F319; সোলাইমানী খাবনামা</div>
       <div class="as">ইসলামী স্বপ্নের ব্যাখ্যা &#x2014; ৬ আলেম</div>
     </div>
-    <div class="htools">
-      <span class="wm">@A.M.MORSHED</span>
+    <div class="hbtns">
+      <button class="hb" onclick="togDark()" id="dmB">&#x1F319; &#x09A1;&#x09BE;&#x09B0;&#x09CD;&#x0995;</button>
+      <button class="hb" onclick="togFS()">&#x1F524;</button>
+      <button class="hb" onclick="togSet()">&#x2699;&#xFE0F;</button>
     </div>
   </div>
   <div class="sw">
@@ -127,9 +114,6 @@ main{padding:12px;min-height:calc(100vh - 140px)}
       <input type="text" id="si" placeholder="স্বপ্নের বিষয় লিখুন..." oninput="onSrch(this.value)">
       <button id="bc" onclick="clrSrch()">&#x2715;</button>
     </div>
-    <button class="htbtn" onclick="togDark()" id="dmBtn">&#x1F319; ডার্ক</button>
-    <button class="htbtn" onclick="togFS()">&#x1F524; ফন্ট</button>
-    <button class="htbtn" onclick="togSettings()" id="setBtnH">&#x2699;&#xFE0F; Key</button>
     <button class="ba" onclick="togAI()">&#x1F916;</button>
   </div>
 </header>
@@ -141,124 +125,53 @@ main{padding:12px;min-height:calc(100vh - 140px)}
 </div>
 <main id="mc"></main>
 <div class="ov" id="ov" onclick="closeAll()"></div>
-<div class="ap" id="ap">
-  <div class="ah">
-    <span style="font-size:24px">&#x1F916;</span>
-    <span class="at2">AI দিয়ে স্বপ্নের ব্যাখ্যা নিন</span>
-    <button class="bca" onclick="togAI()">&#x2715;</button>
+
+<div class="panel" id="aip">
+  <div class="ph">
+    <span style="font-size:22px">&#x1F916;</span>
+    <span class="pt">AI দিয়ে স্বপ্নের ব্যাখ্যা</span>
+    <button class="pc" onclick="closeAll()">&#x2715;</button>
   </div>
   <div class="air">
     <input type="text" id="ai" placeholder="আপনার স্বপ্নের বিস্তারিত লিখুন...">
     <button class="bask" onclick="askAI()">জিজ্ঞেস করুন</button>
   </div>
-  <div class="ar" id="ar">আপনার স্বপ্নের বিষয় উপরে লিখুন এবং জিজ্ঞেস করুন বোতামে চাপ দিন।</div>
+  <div class="ar" id="ar">স্বপ্নের বিষয় লিখুন এবং জিজ্ঞেস করুন বোতামে চাপ দিন।</div>
 </div>
-<div class="setpanel" id="setp">
-  <div class="ah">
+
+<div class="panel" id="setp">
+  <div class="ph">
     <span style="font-size:22px">&#x2699;&#xFE0F;</span>
-    <span class="at2">API Key সেটিংস</span>
-    <button class="bca" onclick="togSettings()">&#x2715;</button>
+    <span class="pt">Gemini API Key</span>
+    <button class="pc" onclick="closeAll()">&#x2715;</button>
   </div>
-  <div class="set-row">
-    <div class="set-label">&#x1F511; Google Gemini API Key</div>
-    <input type="password" class="set-input" id="apiKeyInput" placeholder="AIza... (আপনার Gemini API Key দিন)">
-    <div class="set-note">&#x1F512; Key শুধু আপনার ডিভাইসে সেভ থাকবে। APK-এ থাকবে না। Key পেতে: aistudio.google.com/app/apikey</div>
+  <div class="si-row">
+    <div class="si-label">&#x1F511; Google Gemini API Key</div>
+    <input type="password" class="si-inp" id="akInp" placeholder="AIza...">
+    <div class="si-note">&#x1F512; Key শুধু আপনার ডিভাইসে থাকবে। পেতে: aistudio.google.com/app/apikey</div>
   </div>
-  <button class="set-save" onclick="saveApiKey()">&#x1F4BE; সেভ করুন</button>
+  <button class="si-save" onclick="saveKey()">&#x1F4BE; সেভ করুন</button>
 </div>
-<div class="fspanel" id="fsp">
-  <div class="ah">
-    <span style="font-size:20px">&#x1F524;</span>
-    <span class="at2">ফন্ট সাইজ পরিবর্তন</span>
-    <button class="bca" onclick="togFS()">&#x2715;</button>
+
+<div class="panel" id="fsp">
+  <div class="ph">
+    <span style="font-size:22px">&#x1F524;</span>
+    <span class="pt">ফন্ট সাইজ</span>
+    <button class="pc" onclick="closeAll()">&#x2715;</button>
   </div>
   <div class="fs-row">
-    <button class="fsbtn" onclick="chFS(-1)">&#x2212;</button>
-    <span class="fs-val" id="fsv">15px</span>
-    <button class="fsbtn" onclick="chFS(1)">&#x2B;</button>
+    <button class="fsb" onclick="chFS(-1)">&#x2212;</button>
+    <span class="fsv" id="fsVal">15px</span>
+    <button class="fsb" onclick="chFS(1)">&#x2B;</button>
   </div>
 </div>
+
 <div class="toast" id="toast"></div>
 <script>
-var SF=["ইমাম মুহাম্মদ ইবনে সীরীন (রহ.)","ইমাম নাবুলুসী (রহ.)","শায়খ আব্দুল গনী নাবুলুসী (রহ.)","ইমাম ইবনে কাসীর (রহ.)","ইমাম আবু হামিদ গাজ্জালী (রহ.)","ইমাম আব্দুল ওয়াহহাব শা'রানী (রহ.)"];
-var SS=["ইবনে সীরীন","নাবুলুসী","আ.গ. নাবুলুসী","ইবনে কাসীর","গাজ্জালী","শা'রানী"];
+var SF=["ইমাম মুহাম্মদ ইবনে সীরীন (রহ.)", "ইমাম নাবুলুসী (রহ.)", "শায়খ আব্দুল গনী নাবুলুসী (রহ.)", "ইমাম ইবনে কাসীর (রহ.)", "ইমাম আবু হামিদ গাজ্জালী (রহ.)", "ইমাম আব্দুল ওয়াহহাব শা'রানী (রহ.)"];
+var SS=["ইবনে সীরীন", "নাবুলুসী", "আ.গ. নাবুলুসী", "ইবনে কাসীর", "গাজ্জালী", "শা'রানী"];
 var SK=["s1","s2","s3","s4","s5","s6"];
-var D=[
-{id:1,cat:"water",ic:"&#x1F4A7;",t:"পরিষ্কার পানি দেখা",kw:"পানি,নদী,খাল,পুকুর",s1:"পরিষ্কার পানি দেখা জীবনে বরকত ও সুখের আলামত। প্রবহমান পানি দীর্ঘ জীবন ও সুস্বাস্থ্যের ইঙ্গিত দেয়।",s2:"স্বচ্ছ পানি রহমত ও নিয়ামতের প্রতীক। পানি পান করা রিজিক বৃদ্ধির সুসংবাদ।",s3:"স্বপ্নে পানি দেখা ইলম ও হেদায়েতের প্রতীক। ঝরনার পানি আল্লাহর খাস রহমতের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, পানি জীবনের উৎস। পবিত্র পানি দেখা ঈমানের সতেজতার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, পানি জ্ঞান ও প্রজ্ঞার প্রতীক। পরিষ্কার পানি বিশুদ্ধ অন্তরের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, পানি দেখা আত্মার পরিশুদ্ধতার ইঙ্গিত। তওবা ও ইস্তেগফারের আলামত।",dua_ar:"اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا",dua_bn:"হে আল্লাহ! আমি আপনার কাছে উপকারী জ্ঞান ও পবিত্র রিজিক চাই।",karanio:"এই স্বপ্ন দেখলে দুই রাকাত শুকরিয়ার নামাজ পড়ুন এবং বেশি বেশি ইস্তেগফার করুন।"},
-{id:2,cat:"water",ic:"&#x1F30A;",t:"সমুদ্রে ডুব দেওয়া",kw:"সমুদ্র,ডুব,সাঁতার,গভীর",s1:"সমুদ্রে ডুব দিয়ে জীবিত উঠে আসা শক্তিশালী ব্যক্তির সাথে সম্পর্ক থেকে উপকার লাভের ইঙ্গিত।",s2:"গভীর সমুদ্রে সাঁতার কাটা বড় বিপদ থেকে উদ্ধার পাওয়ার ইঙ্গিত।",s3:"সমুদ্র হলো দুনিয়ার প্রতীক। তাতে ডুব দেওয়া দুনিয়াবী বিষয়ে গভীরভাবে জড়িত হওয়ার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, সমুদ্র দুনিয়ার বিশালতার প্রতীক। ডুব দিয়ে সুরক্ষিত থাকা আল্লাহর হেফাজতের ইঙ্গিত।"},
-{id:3,cat:"water",ic:"&#x1F327;",t:"বৃষ্টি দেখা",kw:"বৃষ্টি,ঝড়,বর্ষা,মেঘ",s1:"বৃষ্টি দেখা রহমত ও বরকতের আলামত। ঘরের উপর বৃষ্টি পড়া সে পরিবারে নিয়ামত নাজিলের ইঙ্গিত।",s2:"মৌসুমী বৃষ্টি জীবিকার সমৃদ্ধির ইঙ্গিত। ঝড়ো বৃষ্টি কষ্টের পর সুদিন আসার আলামত।",s3:"বৃষ্টি আল্লাহর রহমতের প্রতীক। দোয়া কবুল হওয়ার সুসংবাদ বহন করে।",s4:"ইবনে কাসীর (রহ.) বলেন, বৃষ্টি আল্লাহর রহমতের নিদর্শন। বৃষ্টিতে ভেজা বরকত লাভের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, বৃষ্টি দেখা মানুষের জন্য রহমত বর্ষণের ইঙ্গিত।"},
-{id:4,cat:"water",ic:"&#x1F3CA;",t:"নদীতে গোসল করা",kw:"গোসল,নদী,পরিষ্কার,পবিত্র",s1:"পরিষ্কার নদীতে গোসল করা পাপ থেকে মুক্তি ও তওবা কবুলের ইঙ্গিত।",s2:"গোসল করা রোগ থেকে মুক্তির ইঙ্গিত। নদীর পানিতে গোসল দীর্ঘ সুস্বাস্থ্যের আলামত।",s5:"গাজ্জালী (রহ.) বলেন, গোসল করা আত্মার পরিশুদ্ধির প্রতীক। এটি তওবার আলামত।"},
-{id:5,cat:"water",ic:"&#x26F5;",t:"নৌকায় ভ্রমণ",kw:"নৌকা,জাহাজ,সমুদ্র,নদী",s1:"নৌকায় ভ্রমণ নিরাপদ পথে জীবন পরিচালনার ইঙ্গিত। সুষ্ঠু নৌকা সাফল্যের প্রতীক।",s2:"নৌকায় ভ্রমণ জীবনের এক পর্যায় থেকে অন্য পর্যায়ে যাওয়ার ইঙ্গিত।",s3:"নৌকা জীবনের যানবাহনের প্রতীক। আল্লাহর উপর ভরসা করে পথ চলার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, নৌকা নূহ (আ.) এর কিস্তির স্মরণ করিয়ে দেয়। মুক্তির ইঙ্গিত।"},
-{id:6,cat:"water",ic:"&#x1F41F;",t:"মাছ দেখা বা ধরা",kw:"মাছ,মৎস্য,ধরা,জাল",s1:"মাছ ধরা হালাল রিজিক ও সম্পদ লাভের ইঙ্গিত। বড় মাছ বড় নিয়ামতের আলামত।",s2:"জীবন্ত মাছ দেখা জীবিকার সমৃদ্ধির ইঙ্গিত।",s3:"মাছ ধরা হালাল উপায়ে জীবিকা অর্জনের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মাছ সমুদ্রের সম্পদের প্রতীক। প্রচুর মাছ প্রচুর রিজিকের আলামত।"},
-{id:7,cat:"water",ic:"&#x26F2;",t:"কূপ বা ঝরনা দেখা",kw:"কূপ,ঝরনা,প্রস্রবণ,উৎস",s1:"কূপ থেকে পানি তোলা জ্ঞান অর্জন ও উপকার লাভের ইঙ্গিত।",s2:"পরিষ্কার কূপ দেখা ভালো স্ত্রী বা বন্ধুর ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, কূপ হলো জ্ঞানের ভান্ডারের প্রতীক। পানি তোলা জ্ঞান অর্জনের ইঙ্গিত।"},
-{id:8,cat:"water",ic:"&#x1F30A;",t:"বন্যা বা প্লাবন দেখা",kw:"বন্যা,প্লাবন,পানি বৃদ্ধি",s1:"বন্যা দেখা বিপদ ও পরীক্ষার ইঙ্গিত। পানি সরে গেলে বিপদ কেটে যাওয়ার আলামত।",s2:"বন্যায় ভেসে না যাওয়া বিপদ থেকে রক্ষার ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, বন্যা ফিতনার প্রতীক। ধৈর্য ধরলে নাজাত পাওয়ার ইঙ্গিত।"},
-{id:9,cat:"fire",ic:"&#x1F525;",t:"আগুন দেখা",kw:"আগুন,জ্বলা,আলো",s1:"আগুন দেখা ফিতনা ও বিপদের ইঙ্গিত। আগুন আলো দেয় কিন্তু পোড়ায় না হলে ইলমের আলামত।",s2:"ঘরে আগুন লাগলে সে পরিবারে বিপদ আসতে পারে।",s3:"আগুন ক্ষমতা ও প্রভাবের প্রতীক। আগুনে আলো দেখা নেতৃত্বের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, আগুন জাহান্নামের স্মরণ করিয়ে দেয়। তওবার তাকিদ।",s5:"গাজ্জালী (রহ.) বলেন, আগুন কু-প্রবৃত্তির প্রতীক। আগুন থেকে রক্ষা পাওয়া নাফসের উপর বিজয়।",s6:"শা'রানী (রহ.) বলেন, আগুন দেখলে বেশি বেশি ইস্তেগফার করা উচিত।",dua_ar:"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",dua_bn:"আমি আল্লাহর পরিপূর্ণ কালেমাসমূহের মাধ্যমে তাঁর সৃষ্টির অনিষ্ট থেকে আশ্রয় চাই।",karanio:"আগুন দেখলে তওবা করুন, ইস্তেগফার পড়ুন এবং সদকা দিন।"},
-{id:10,cat:"fire",ic:"&#x1F56F;",t:"মোমবাতি বা প্রদীপ",kw:"আলো,মোমবাতি,প্রদীপ,বাতি",s1:"প্রদীপ দেখা ইলম ও হেদায়েতের প্রতীক। নিভে যাওয়া প্রদীপ নেককার মানুষের ইন্তেকালের ইঙ্গিত।",s2:"উজ্জ্বল আলো দেখা ঈমান ও তাকওয়ার বৃদ্ধির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, প্রদীপ নবী ও আলেমদের প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, প্রদীপের আলো অন্তরের নূরের প্রতীক।"},
-{id:11,cat:"fire",ic:"&#x26A1;",t:"বজ্রপাত বা বিদ্যুৎ",kw:"বজ্র,বিদ্যুৎ,ঝড়",s1:"বজ্রপাত দেখা হঠাৎ বিপদ বা সংকটের ইঙ্গিত।",s2:"বিদ্যুৎ চমকানো ভয় ও শঙ্কার ইঙ্গিত। বিদ্যুৎ থেকে রক্ষা পাওয়া বিপদ এড়ানোর আলামত।",s6:"শা'রানী (রহ.) বলেন, বজ্রপাত আল্লাহর কুদরতের নিদর্শন। ইস্তেগফার ও দোয়া করা উচিত।"},
-{id:12,cat:"animals",ic:"&#x1F40D;",t:"সাপ দেখা",kw:"সাপ,কামড়,বিষ",s1:"সাপ দেখা শত্রু ও বিপদের প্রতীক। সাপ মেরে ফেলা শত্রুর উপর বিজয়ের আলামত।",s2:"সাপ স্বপ্নে শত্রু ও প্রলোভনের প্রতীক। সাপ থেকে পালানো বিপদ এড়ানোর ইঙ্গিত।",s3:"সাপ শয়তানের প্রতীক। সাপ মেরে ফেলা নাফসের উপর বিজয়ের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, সাপ শয়তানের বাহন। সাপ থেকে রক্ষা পাওয়া ঈমানের শক্তির ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, সাপ কু-প্রবৃত্তির প্রতীক। সাপ মারা নাফসে আম্মারাকে দমনের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, সাপ দেখলে আউযুবিল্লাহ পড়া ও তওবা করা উচিত।",dua_ar:"أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",dua_bn:"আমি বিতাড়িত শয়তান থেকে আল্লাহর আশ্রয় চাই।",karanio:"সাপ দেখলে ঘুম থেকে উঠে আউযুবিল্লাহ ও আয়াতুল কুরসি পড়ুন।"},
-{id:13,cat:"animals",ic:"&#x1F981;",t:"সিংহ দেখা",kw:"সিংহ,বাঘ,হিংস্র পশু",s1:"সিংহ দেখা ক্ষমতাবান শত্রুর প্রতীক। সিংহকে পরাজিত করা বড় বিপদ অতিক্রমের আলামত।",s2:"সিংহ রাজা বা শাসকের প্রতীক। সিংহের সাথে বন্ধুত্ব রাজানুগ্রহ লাভের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, সিংহ পরাক্রমশালী শত্রুর প্রতীক।",s5:"গাজ্জালী (রহ.) বলেন, সিংহ দুনিয়াবী শক্তির প্রতীক। সিংহের সামনে দৃঢ় থাকা সাহস ও তাওয়াক্কুলের ইঙ্গিত।"},
-{id:14,cat:"animals",ic:"&#x1F426;",t:"পাখি দেখা",kw:"পাখি,উড়া,কবুতর,ময়না",s1:"সাদা পাখি শান্তি ও সুখের প্রতীক। কবুতর দেখা ভালো সংবাদের ইঙ্গিত।",s2:"গান করা পাখি আনন্দ ও খুশির সুসংবাদ।",s3:"পাখি আত্মার প্রতীক। উড়ন্ত পাখি আধ্যাত্মিক উন্নতির ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, পাখি আত্মার মুক্তির প্রতীক। সুন্দর পাখি নেক আত্মার ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, পাখি আল্লাহর তাসবিহকারী প্রাণী। পাখি দেখা জিকিরের তাকিদ।"},
-{id:15,cat:"animals",ic:"&#x1F404;",t:"গরু দেখা",kw:"গরু,মহিষ,গাভী",s1:"মোটা গরু সমৃদ্ধির আলামত। দুর্বল গরু দুর্ভিক্ষের ইঙ্গিত।",s2:"গরু বছরের প্রতীক। সাতটি মোটা গরু সাত বছরের সুসময়ের ইঙ্গিত।",s3:"গরু রিজিক ও জীবিকার প্রতীক।",s4:"ইবনে কাসীর (রহ.) বলেন, ইউসুফ (আ.) এর স্বপ্নে গরু বছরের প্রতীক ছিল।"},
-{id:16,cat:"animals",ic:"&#x1F411;",t:"ভেড়া বা ছাগল দেখা",kw:"ভেড়া,ছাগল,মেষ,পাল",s1:"ভেড়া দেখা সম্পদ ও সমৃদ্ধির ইঙ্গিত। ভেড়ার পাল প্রচুর নিয়ামতের আলামত।",s2:"সাদা ভেড়া পবিত্রতা ও সুখের প্রতীক।",s6:"শা'রানী (রহ.) বলেন  <div class="ht">
-    <div style="width:10px"></div>
-    <div class="htc">
-      <div class="at">&#x1F319; সোলাইমানী খাবনামা</div>
-      <div class="as">ইসলামী স্বপ্নের ব্যাখ্যা &#x2014; ৬ আলেম</div>
-    </div>
-    <div class="htools">
-      <span class="wm">@A.M.MORSHED</span>
-    </div>
-  </div>
-  <div class="sw">
-    <div class="sb">
-      <span class="si">&#x1F50D;</span>
-      <input type="text" id="si" placeholder="স্বপ্নের বিষয় লিখুন..." oninput="onSrch(this.value)">
-      <button id="bc" onclick="clrSrch()">&#x2715;</button>
-    </div>
-    <button class="htbtn" onclick="togDark()" id="dmBtn">&#x1F319; ডার্ক</button>
-    <button class="htbtn" onclick="togFS()">&#x1F524; ফন্ট</button>
-    <button class="ba" onclick="togAI()">&#x1F916;</button>
-  </div>
-</header>
-<div class="tabs">
-  <button class="tab active" onclick="showTab('home')">&#x1F3E0; হোম</button>
-  <button class="tab" onclick="showTab('cat')">&#x1F4C2; বিভাগ</button>
-  <button class="tab" onclick="showTab('all')">&#x1F4D6; সব</button>
-  <button class="tab" onclick="showTab('about')">&#x2139;&#xFE0F; পরিচিতি</button>
-</div>
-<main id="mc"></main>
-<div class="ov" id="ov" onclick="closeAll()"></div>
-<div class="ap" id="ap">
-  <div class="ah">
-    <span style="font-size:24px">&#x1F916;</span>
-    <span class="at2">AI দিয়ে স্বপ্নের ব্যাখ্যা নিন</span>
-    <button class="bca" onclick="togAI()">&#x2715;</button>
-  </div>
-  <div class="air">
-    <input type="text" id="ai" placeholder="আপনার স্বপ্নের বিস্তারিত লিখুন...">
-    <button class="bask" onclick="askAI()">জিজ্ঞেস করুন</button>
-  </div>
-  <div class="ar" id="ar">আপনার স্বপ্নের বিষয় উপরে লিখুন এবং জিজ্ঞেস করুন বোতামে চাপ দিন।</div>
-</div>
-<div class="fspanel" id="fsp">
-  <div class="ah">
-    <span style="font-size:20px">&#x1F524;</span>
-    <span class="at2">ফন্ট সাইজ পরিবর্তন</span>
-    <button class="bca" onclick="togFS()">&#x2715;</button>
-  </div>
-  <div class="fs-row">
-    <button class="fsbtn" onclick="chFS(-1)">&#x2212;</button>
-    <span class="fs-val" id="fsv">15px</span>
-    <button class="fsbtn" onclick="chFS(1)">&#x2B;</button>
-  </div>
-</div>
-<div class="toast" id="toast"></div>
-<script>
-var SF=["ইমাম মুহাম্মদ ইবনে সীরীন (রহ.)","ইমাম নাবুলুসী (রহ.)","শায়খ আব্দুল গনী নাবুলুসী (রহ.)","ইমাম ইবনে কাসীর (রহ.)","ইমাম আবু হামিদ গাজ্জালী (রহ.)","ইমাম আব্দুল ওয়াহহাব শা'রানী (রহ.)"];
-var SS=["ইবনে সীরীন","নাবুলুসী","আ.গ. নাবুলুসী","ইবনে কাসীর","গাজ্জালী","শা'রানী"];
-var SK=["s1","s2","s3","s4","s5","s6"];
-var D=[
-{id:1,cat:"water",ic:"&#x1F4A7;",t:"পরিষ্কার পানি দেখা",kw:"পানি,নদী,খাল,পুকুর",s1:"পরিষ্কার পানি দেখা জীবনে বরকত ও সুখের আলামত। প্রবহমান পানি দীর্ঘ জীবন ও সুস্বাস্থ্যের ইঙ্গিত দেয়।",s2:"স্বচ্ছ পানি রহমত ও নিয়ামতের প্রতীক। পানি পান করা রিজিক বৃদ্ধির সুসংবাদ।",s3:"স্বপ্নে পানি দেখা ইলম ও হেদায়েতের প্রতীক। ঝরনার পানি আল্লাহর খাস রহমতের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, পানি জীবনের উৎস। পবিত্র পানি দেখা ঈমানের সতেজতার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, পানি জ্ঞান ও প্রজ্ঞার প্রতীক। পরিষ্কার পানি বিশুদ্ধ অন্তরের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, পানি দেখা আত্মার পরিশুদ্ধতার ইঙ্গিত। তওবা ও ইস্তেগফারের আলামত।",dua_ar:"اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا",dua_bn:"হে আল্লাহ! আমি আপনার কাছে উপকারী জ্ঞান ও পবিত্র রিজিক চাই।",karanio:"এই স্বপ্ন দেখলে দুই রাকাত শুকরিয়ার নামাজ পড়ুন এবং বেশি বেশি ইস্তেগফার করুন।"},
+var D=[{id:1,cat:"water",ic:"&#x1F4A7;",t:"পরিষ্কার পানি দেখা",kw:"পানি,নদী,খাল,পুকুর",s1:"পরিষ্কার পানি দেখা জীবনে বরকত ও সুখের আলামত। প্রবহমান পানি দীর্ঘ জীবন ও সুস্বাস্থ্যের ইঙ্গিত দেয়।",s2:"স্বচ্ছ পানি রহমত ও নিয়ামতের প্রতীক। পানি পান করা রিজিক বৃদ্ধির সুসংবাদ।",s3:"স্বপ্নে পানি দেখা ইলম ও হেদায়েতের প্রতীক। ঝরনার পানি আল্লাহর খাস রহমতের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, পানি জীবনের উৎস। পবিত্র পানি দেখা ঈমানের সতেজতার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, পানি জ্ঞান ও প্রজ্ঞার প্রতীক। পরিষ্কার পানি বিশুদ্ধ অন্তরের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, পানি দেখা আত্মার পরিশুদ্ধতার ইঙ্গিত। তওবা ও ইস্তেগফারের আলামত।",dua_ar:"اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا",dua_bn:"হে আল্লাহ! আমি আপনার কাছে উপকারী জ্ঞান ও পবিত্র রিজিক চাই।",karanio:"এই স্বপ্ন দেখলে দুই রাকাত শুকরিয়ার নামাজ পড়ুন এবং বেশি বেশি ইস্তেগফার করুন।"},
 {id:2,cat:"water",ic:"&#x1F30A;",t:"সমুদ্রে ডুব দেওয়া",kw:"সমুদ্র,ডুব,সাঁতার,গভীর",s1:"সমুদ্রে ডুব দিয়ে জীবিত উঠে আসা শক্তিশালী ব্যক্তির সাথে সম্পর্ক থেকে উপকার লাভের ইঙ্গিত।",s2:"গভীর সমুদ্রে সাঁতার কাটা বড় বিপদ থেকে উদ্ধার পাওয়ার ইঙ্গিত।",s3:"সমুদ্র হলো দুনিয়ার প্রতীক। তাতে ডুব দেওয়া দুনিয়াবী বিষয়ে গভীরভাবে জড়িত হওয়ার ইঙ্গিত।",s5:"গাজ্জালী (রহ.) বলেন, সমুদ্র দুনিয়ার বিশালতার প্রতীক। ডুব দিয়ে সুরক্ষিত থাকা আল্লাহর হেফাজতের ইঙ্গিত।"},
 {id:3,cat:"water",ic:"&#x1F327;",t:"বৃষ্টি দেখা",kw:"বৃষ্টি,ঝড়,বর্ষা,মেঘ",s1:"বৃষ্টি দেখা রহমত ও বরকতের আলামত। ঘরের উপর বৃষ্টি পড়া সে পরিবারে নিয়ামত নাজিলের ইঙ্গিত।",s2:"মৌসুমী বৃষ্টি জীবিকার সমৃদ্ধির ইঙ্গিত। ঝড়ো বৃষ্টি কষ্টের পর সুদিন আসার আলামত।",s3:"বৃষ্টি আল্লাহর রহমতের প্রতীক। দোয়া কবুল হওয়ার সুসংবাদ বহন করে।",s4:"ইবনে কাসীর (রহ.) বলেন, বৃষ্টি আল্লাহর রহমতের নিদর্শন। বৃষ্টিতে ভেজা বরকত লাভের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, বৃষ্টি দেখা মানুষের জন্য রহমত বর্ষণের ইঙ্গিত।"},
 {id:4,cat:"water",ic:"&#x1F3CA;",t:"নদীতে গোসল করা",kw:"গোসল,নদী,পরিষ্কার,পবিত্র",s1:"পরিষ্কার নদীতে গোসল করা পাপ থেকে মুক্তি ও তওবা কবুলের ইঙ্গিত।",s2:"গোসল করা রোগ থেকে মুক্তির ইঙ্গিত। নদীর পানিতে গোসল দীর্ঘ সুস্বাস্থ্যের আলামত।",s5:"গাজ্জালী (রহ.) বলেন, গোসল করা আত্মার পরিশুদ্ধির প্রতীক। এটি তওবার আলামত।"},
@@ -417,10 +330,8 @@ var D=[
 {id:157,cat:"prophets",ic:"&#x1F91A;",t:"হযরত আদম (আ.) দেখা",kw:"আদম,মানবজাতি,প্রথম মানুষ",s1:"হযরত আদম (আ.) দেখা মানবজাতির উৎপত্তির স্মরণ। তওবার ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, আদম (আ.) প্রথম মানুষ ও প্রথম নবী।",s5:"গাজ্জালী (রহ.) বলেন, আদম (আ.) তওবার আদর্শ প্রতিষ্ঠা করেছিলেন।"},
 {id:158,cat:"prophets",ic:"&#x1F917;",t:"সাহাবায়ে কেরাম দেখা",kw:"সাহাবা,সঙ্গী,নবী,ইসলাম",s1:"সাহাবায়ে কেরাম দেখা উচ্চ মর্যাদার ইঙ্গিত। তাঁদের জীবন অনুসরণের তাকিদ।",s4:"ইবনে কাসীর (রহ.) বলেন, সাহাবারা সর্বোত্তম প্রজন্ম।",s5:"গাজ্জালী (রহ.) বলেন, সাহাবারা ইসলামের আলোকবর্তিকা।"},
 {id:159,cat:"prophets",ic:"&#x1F4AE;",t:"হযরত মারিয়াম (আ.) দেখা",kw:"মারিয়াম,মহিলা,পবিত্র",s1:"হযরত মারিয়াম (আ.) দেখা পবিত্রতা ও ইবাদতের ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মারিয়াম (আ.) সর্বশ্রেষ্ঠ মহিলাদের একজন।"},
-{id:160,cat:"prophets",ic:"&#x1F4AB;",t:"মেরাজ বা ঊর্ধ্বলোক দেখা",kw:"মেরাজ,ঊর্ধ্বলোক,নবী,আকাশ",s1:"মেরাজের দৃশ্য দেখা অত্যন্ত শুভ ও বরকতময় স্বপ্ন। সর্বোচ্চ আধ্যাত্মিক উন্নতির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মেরাজ নবীজির (সা.) জীবনের সর্বোচ্চ ঘটনা।",s5:"গাজ্জালী (রহ.) বলেন, মেরাজ দেখা সর্বোচ্চ আধ্যাত্মিক পুরস্কারের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, মেরাজের স্বপ্ন দেখলে নামাজ ও ইবাদত বৃদ্ধি করুন।"}
-];
-var C=[
-{id:"water",ic:"&#x1F4A7;",n:"পানি ও নদী"},
+{id:160,cat:"prophets",ic:"&#x1F4AB;",t:"মেরাজ বা ঊর্ধ্বলোক দেখা",kw:"মেরাজ,ঊর্ধ্বলোক,নবী,আকাশ",s1:"মেরাজের দৃশ্য দেখা অত্যন্ত শুভ ও বরকতময় স্বপ্ন। সর্বোচ্চ আধ্যাত্মিক উন্নতির ইঙ্গিত।",s4:"ইবনে কাসীর (রহ.) বলেন, মেরাজ নবীজির (সা.) জীবনের সর্বোচ্চ ঘটনা।",s5:"গাজ্জালী (রহ.) বলেন, মেরাজ দেখা সর্বোচ্চ আধ্যাত্মিক পুরস্কারের ইঙ্গিত।",s6:"শা'রানী (রহ.) বলেন, মেরাজের স্বপ্ন দেখলে নামাজ ও ইবাদত বৃদ্ধি করুন।"}];
+var C=[{id:"water",ic:"&#x1F4A7;",n:"পানি ও নদী"},
 {id:"fire",ic:"&#x1F525;",n:"আগুন ও আলো"},
 {id:"animals",ic:"&#x1F43E;",n:"পশু-পাখি"},
 {id:"sky",ic:"&#x1F319;",n:"আকাশ ও প্রকৃতি"},
@@ -436,45 +347,63 @@ var C=[
 {id:"knowledge",ic:"&#x1F4DA;",n:"বিদ্যা ও ইলম"},
 {id:"colors",ic:"&#x1F3A8;",n:"রঙ ও দৃশ্য"},
 {id:"supernatural",ic:"&#x1F47B;",n:"অতিপ্রাকৃত"},
-{id:"prophets",ic:"&#x1F54A;",n:"নবী-রাসূলগণ"}
-];
+{id:"prophets",ic:"&#x1F54A;",n:"নবী-রাসূলগণ"}];
 var curTab="home",openId=null,openPanel={};
 var fsz=15;
-var darkMode=false;
 
 function cnt(cat){var n=0;for(var i=0;i<D.length;i++){if(D[i].cat===cat)n++;}return n;}
 function getSch(d){var r=[];for(var i=0;i<SK.length;i++){if(d[SK[i]])r.push(i);}return r;}
 
 function togDark(){
-  darkMode=!darkMode;
-  document.documentElement.setAttribute("data-theme",darkMode?"dark":"light");
-  document.getElementById("dmBtn").innerHTML=darkMode?"&#x2600; লাইট":"&#x1F319; ডার্ক";
+  var html=document.documentElement;
+  var dm=html.getAttribute("data-theme")==="dark";
+  html.setAttribute("data-theme",dm?"light":"dark");
+  document.getElementById("dmB").innerHTML=dm?"&#x1F319; &#x09A1;&#x09BE;&#x09B0;&#x09CD;&#x0995;":"&#x2600;&#xFE0F; &#x09B2;&#x09BE;&#x0987;&#x099F;";
 }
 
-function togFS(){
-  var p=document.getElementById("fsp");
+function togFS(){togPanel("fsp");}
+function togAI(){togPanel("aip");}
+function togSet(){
+  var p=document.getElementById("setp");
+  var wasOpen=p.classList.contains("open");
+  togPanel("setp");
+  if(!wasOpen){var k=lsGet("gak");if(k)document.getElementById("akInp").value=k;}
+}
+
+function togPanel(id){
+  var p=document.getElementById(id);
   var ov=document.getElementById("ov");
-  p.classList.toggle("open");
-  ov.classList.toggle("open",p.classList.contains("open"));
+  var opening=!p.classList.contains("open");
+  document.querySelectorAll(".panel").forEach(function(el){el.classList.remove("open");});
+  if(opening){p.classList.add("open");ov.classList.add("open");}
+  else{ov.classList.remove("open");}
+}
+
+function closeAll(){
+  document.querySelectorAll(".panel").forEach(function(el){el.classList.remove("open");});
+  document.getElementById("ov").classList.remove("open");
 }
 
 function chFS(d){
   fsz=Math.min(22,Math.max(12,fsz+d));
-  document.body.style.setProperty("--fs",fsz+"px");
-  document.getElementById("fsv").textContent=fsz+"px";
+  document.body.style.fontSize=fsz+"px";
+  document.getElementById("fsVal").textContent=fsz+"px";
 }
 
-function closeAll(){
-  document.getElementById("ap").classList.remove("open");
-  document.getElementById("fsp").classList.remove("open");
-  document.getElementById("ov").classList.remove("open");
+function lsGet(k){try{return localStorage.getItem(k)||"";}catch(e){return "";}}
+function lsSet(k,v){try{localStorage.setItem(k,v);return true;}catch(e){return false;}}
+
+function saveKey(){
+  var k=document.getElementById("akInp").value.trim();
+  if(!k){shToast("API Key &#x09A6;&#x09BF;&#x09A8;!");return;}
+  if(lsSet("gak",k)){shToast("&#x2705; Key &#x09B8;&#x09C7;&#x09AD; &#x09B9;&#x09AF;&#x09BC;&#x09C7;&#x099B;&#x09C7;!");closeAll();}
+  else{shToast("&#x274C; &#x09B8;&#x09C7;&#x09AD; &#x09AC;&#x09CD;&#x09AF;&#x09B0;&#x09CD;&#x09A5;!");}
 }
 
 function buildGrid(){
   var h="";
   for(var i=0;i<C.length;i++){
-    var c=cnt(C[i].id);
-    if(c===0)continue;
+    var c=cnt(C[i].id);if(c===0)continue;
     h+="<div class=\"cc\" onclick=\"showCat('"+C[i].id+"')\"><div class=\"ci\">"+C[i].ic+"</div><div class=\"cn\">"+C[i].n+"</div><div class=\"ck\">"+c+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;</div></div>";
   }
   return h;
@@ -486,18 +415,24 @@ function buildCard(d){
   var def=openPanel[d.id]||(schs.length>0?SK[schs[0]]:"s1");
   var kws=d.kw.split(",");var kwh="";for(var i=0;i<kws.length;i++){kwh+="#"+kws[i].trim()+" ";}
   var tabs="";
-  for(var i=0;i<schs.length;i++){var si=schs[i];tabs+="<button class=\"tb"+(def===SK[si]?" active":"")+"\" onclick=\"swP("+d.id+",'"+SK[si]+"')\">"+SS[si]+"</button>";}
+  for(var i=0;i<schs.length;i++){
+    var si=schs[i];
+    tabs+="<button class=\"tb"+(def===SK[si]?" active":"")+"\" onclick=\"swP("+d.id+",'"+SK[si]+"')\">"+SS[si]+"</button>";
+  }
+  var duaHtml="";
+  if(d.dua_ar||d.karanio){
+    duaHtml="<div class=\"dua-box\">";
+    if(d.karanio){duaHtml+="<div class=\"kar\"><div class=\"kar-t\">&#x2705; &#x0995;&#x09B0;&#x09A3;&#x09C0;&#x09AF;&#x09BC;</div>"+d.karanio+"</div>";}
+    if(d.dua_ar){duaHtml+="<div class=\"dua-t\">&#x1F4D6; &#x09A6;&#x09CB;&#x09AF;&#x09BC;&#x09BE;</div><div class=\"dua-ar\">"+d.dua_ar+"</div><div class=\"dua-bn\">"+d.dua_bn+"</div>";}
+    duaHtml+="</div>";
+  }
   var panels="";
   for(var i=0;i<schs.length;i++){
     var si=schs[i];
-    var duaHtml="";
-    if(d.dua_ar||d.karanio){
-      duaHtml="<div class=\"dua-box\">";
-      if(d.karanio){duaHtml+="<div class=\"karanio\"><div class=\"karanio-title\">&#x2705; &#x0995;&#x09B0;&#x09A3;&#x09C0;&#x09AF;&#x09BC;</div>"+d.karanio+"</div>";}
-      if(d.dua_ar){duaHtml+="<div class=\"dua-title\">&#x1F4D6; &#x09B8;&#x0982;&#x09B6;&#x09CD;&#x09B2;&#x09BF;&#x09B7;&#x09CD;&#x099F; &#x09A6;&#x09CB;&#x09AF;&#x09BC;&#x09BE;</div><div class=\"dua-arabic\">"+d.dua_ar+"</div><div class=\"dua-bn\">"+d.dua_bn+"</div>";}
-      duaHtml+="</div>";
-    }
-    panels+="<div class=\"tp"+(def===SK[si]?" active":"")+"\" id=\"p"+d.id+SK[si]+"\"><span class=\"sb2\">"+SF[si]+"</span><p>"+d[SK[si]]+"</p>"+(si===schs[0]?duaHtml:"")+"</div>";
+    panels+="<div class=\"tp"+(def===SK[si]?" active":"")+"\" id=\"p"+d.id+SK[si]+"\">"
+      +"<span class=\"sb2\">"+SF[si]+"</span><p>"+d[SK[si]]+"</p>"
+      +(i===0?duaHtml:"")
+      +"</div>";
   }
   return "<div class=\"dc\" id=\"dc"+d.id+"\">"
     +"<div class=\"dh\" onclick=\"togD("+d.id+")\">"
@@ -516,24 +451,37 @@ function buildList(list){var h="";for(var i=0;i<list.length;i++){h+=buildCard(li
 function showHome(){
   document.getElementById("mc").innerHTML=
     "<div class=\"bism\">&#x0628;&#x0650;&#x0633;&#x0652;&#x0645;&#x0650; &#x0627;&#x0644;&#x0644;&#x0651;&#x0670;&#x0647;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x064E;&#x062D;&#x0652;&#x0645;&#x0670;&#x0646;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x064E;&#x062D;&#x0650;&#x064A;&#x0652;&#x0645;&#x0650;</div>"
-    +"<div class=\"sh2\"><span class=\"shi\">&#x1F4C2;</span><span class=\"sht\">&#x09AC;&#x09BF;&#x09AD;&#x09BE;&#x0997;&#x09B8;&#x09AE;&#x09C2;&#x09B9; ("+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;)</span></div>"
+    +"<div class=\"sh2\"><span class=\"shi\">&#x1F4C2;</span><span class=\"sht\">&#x09AC;&#x09BF;&#x09AD;&#x09BE;&#x0997; ("+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;)</span></div>"
     +"<div class=\"cg\">"+buildGrid()+"</div>";
 }
+
 function showCatPage(){document.getElementById("mc").innerHTML="<div class=\"cg\">"+buildGrid()+"</div>";}
+
 function showCat(id){
   var cat=null;for(var i=0;i<C.length;i++){if(C[i].id===id){cat=C[i];break;}}
   var list=[];for(var i=0;i<D.length;i++){if(D[i].cat===id)list.push(D[i]);}
-  document.getElementById("mc").innerHTML="<div class=\"sh2\"><span class=\"shi\">"+cat.ic+"</span><span class=\"sht\">"+cat.n+"</span><button class=\"bbk\" onclick=\"goBack()\">&#x2190; &#x09AA;&#x09BF;&#x099B;&#x09A8;&#x09C7;</button></div><div class=\"dl\">"+buildList(list)+"</div>";
+  document.getElementById("mc").innerHTML=
+    "<div class=\"sh2\"><span class=\"shi\">"+cat.ic+"</span><span class=\"sht\">"+cat.n+"</span>"
+    +"<button class=\"bbk\" onclick=\"goBack()\">&#x2190; &#x09AA;&#x09BF;&#x099B;&#x09A8;&#x09C7;</button></div>"
+    +"<div class=\"dl\">"+buildList(list)+"</div>";
 }
-function showAll(){document.getElementById("mc").innerHTML="<div class=\"sh2\"><span class=\"shi\">&#x1F4D6;</span><span class=\"sht\">&#x09B8;&#x0995;&#x09B2; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8; ("+D.length+"&#x099F;&#x09BF;)</span></div><div class=\"dl\">"+buildList(D)+"</div>";}
+
+function showAll(){
+  document.getElementById("mc").innerHTML=
+    "<div class=\"sh2\"><span class=\"shi\">&#x1F4D6;</span><span class=\"sht\">&#x09B8;&#x0995;&#x09B2; ("+D.length+"&#x099F;&#x09BF;)</span></div>"
+    +"<div class=\"dl\">"+buildList(D)+"</div>";
+}
+
 function showAbout(){
   var sh="";for(var i=0;i<SF.length;i++){sh+="<p style=\"margin-bottom:6px\"><strong>"+SF[i]+"</strong></p>";}
   document.getElementById("mc").innerHTML=
-    "<div class=\"acard\"><h3>&#x1F54C; &#x09B8;&#x09CB;&#x09B2;&#x09BE;&#x0987;&#x09AE;&#x09BE;&#x09A8;&#x09C0; &#x0996;&#x09BE;&#x09AC;&#x09A8;&#x09BE;&#x09AE;&#x09BE;</h3><p>&#x09AE;&#x09CB;&#x099F; "+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x09C7;&#x09B0; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE;&#x0964; &#x09A1;&#x09BE;&#x09B0;&#x09CD;&#x0995; &#x09AE;&#x09CB;&#x09A1; &#x0993; &#x09AB;&#x09A8;&#x09CD;&#x099F; &#x09B8;&#x09BE;&#x0987;&#x099C; &#x09AC;&#x09BE;&#x09A1;&#x09BC;&#x09BE;&#x09A8;&#x09CB;/&#x0995;&#x09AE;&#x09BE;&#x09A8;&#x09CB; &#x09B8;&#x09AE;&#x09B0;&#x09CD;&#x09A5;&#x09BF;&#x09A4;&#x0964;</p></div>"
+    "<div class=\"acard\"><h3>&#x1F54C; &#x09B8;&#x09CB;&#x09B2;&#x09BE;&#x0987;&#x09AE;&#x09BE;&#x09A8;&#x09C0; &#x0996;&#x09BE;&#x09AC;&#x09A8;&#x09BE;&#x09AE;&#x09BE;</h3>"
+    +"<p>"+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;, "+C.length+"&#x099F;&#x09BF; &#x09AC;&#x09BF;&#x09AD;&#x09BE;&#x0997;, &#x09EC; &#x0986;&#x09B2;&#x09C7;&#x09AE;&#x09C7;&#x09B0; &#x09AE;&#x09A4;&#x09BE;&#x09AE;&#x09A4;&#x0964;</p></div>"
     +"<div class=\"acard\"><h3>&#x1F4DA; &#x0986;&#x09B2;&#x09C7;&#x09AE;&#x0997;&#x09A3;</h3>"+sh+"</div>"
-    +"<div class=\"acard\"><h3>&#x26A0;&#xFE0F; &#x0997;&#x09C1;&#x09B0;&#x09C1;&#x09A4;&#x09CD;&#x09AC;&#x09AA;&#x09C2;&#x09B0;&#x09CD;&#x09A3; &#x09A8;&#x09CB;&#x099F;</h3><p>&#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x09C7;&#x09B0; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09B8;&#x09AC;&#x09B8;&#x09AE;&#x09AF;&#x09BC; &#x09A8;&#x09BF;&#x09B6;&#x09CD;&#x099A;&#x09BF;&#x09A4; &#x09A8;&#x09AF;&#x09BC;&#x0964; &#x09AC;&#x09CD;&#x09AF;&#x0995;&#x09CD;&#x09A4;&#x09BF;, &#x09B8;&#x09AE;&#x09AF;&#x09BC; &#x0993; &#x09AA;&#x09B0;&#x09BF;&#x09B8;&#x09CD;&#x09A5;&#x09BF;&#x09A4;&#x09BF; &#x09AD;&#x09C7;&#x09A6;&#x09C7; &#x09AD;&#x09BF;&#x09A8;&#x09CD;&#x09A8; &#x09B9;&#x09A4;&#x09C7; &#x09AA;&#x09BE;&#x09B0;&#x09C7;&#x0964;</p></div>"
-    +"<div class=\"acard\"><h3>&#x1F468;&#x200D;&#x1F4BB; &#x09A1;&#x09C7;&#x09AD;&#x09C7;&#x09B2;&#x09AA;&#x09BE;&#x09B0;</h3><p>&#x09A4;&#x09C8;&#x09B0;&#x09BF; &#x0995;&#x09B0;&#x09C7;&#x099B;&#x09C7;&#x09A8;: <strong>A.M. Morshed</strong><br>&#x09B8;&#x0982;&#x09B8;&#x09CD;&#x0995;&#x09B0;&#x09A3;: &#x09EA;.&#x09E6; | "+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8; | &#x09EC; &#x0986;&#x09B2;&#x09C7;&#x09AE;</p></div>";
+    +"<div class=\"acard\"><h3>&#x26A0;&#xFE0F; &#x09A8;&#x09CB;&#x099F;</h3><p>&#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x09C7;&#x09B0; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09B8;&#x09AC;&#x09B8;&#x09AE;&#x09AF;&#x09BC; &#x09A8;&#x09BF;&#x09B6;&#x09CD;&#x099A;&#x09BF;&#x09A4; &#x09A8;&#x09AF;&#x09BC;&#x0964; AI &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09B6;&#x09C1;&#x09A7;&#x09C1; &#x09B8;&#x09B9;&#x09BE;&#x09AF;&#x09BC;&#x09A4;&#x09BE;&#x09B0; &#x099C;&#x09A8;&#x09CD;&#x09AF;&#x0964;</p></div>"
+    +"<div class=\"acard\"><h3>&#x1F468;&#x200D;&#x1F4BB; &#x09A1;&#x09C7;&#x09AD;&#x09C7;&#x09B2;&#x09AA;&#x09BE;&#x09B0;</h3><p><strong>A.M. Morshed</strong> | v4.0 | "+D.length+"&#x099F;&#x09BF; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;</p></div>";
 }
+
 function showTab(t){
   curTab=t;
   var tabs=document.querySelectorAll(".tab");
@@ -544,7 +492,9 @@ function showTab(t){
   else if(t==="all")showAll();
   else if(t==="about")showAbout();
 }
+
 function goBack(){showTab(curTab==="home"?"home":"cat");}
+
 function togD(id){
   openId=(openId===id?null:id);
   var body=document.getElementById("db"+id);
@@ -555,6 +505,7 @@ function togD(id){
     if(exp)exp.innerHTML=(openId===id?"&#x25B2;":"&#x25BC;");
   }
 }
+
 function swP(did,p){
   openPanel[did]=p;
   var d=null;for(var i=0;i<D.length;i++){if(D[i].id===did){d=D[i];break;}}
@@ -568,6 +519,7 @@ function swP(did,p){
     for(var i=0;i<schs.length;i++){if(SK[schs[i]]===p&&btns[i]){btns[i].classList.add("active");break;}}
   }
 }
+
 function onSrch(val){
   document.getElementById("bc").style.display=val?"block":"none";
   if(!val.trim()){showTab(curTab);return;}
@@ -579,36 +531,50 @@ function onSrch(val){
     if(txt.toLowerCase().indexOf(q)>=0)res.push(d);
   }
   var m=document.getElementById("mc");
-  if(!res.length){m.innerHTML="<div class=\"nr\"><div style=\"font-size:40px\">&#x1F50D;</div><p>"+val+" &#x098F;&#x09B0; &#x099C;&#x09A8;&#x09CD;&#x09AF; &#x0995;&#x09CB;&#x09A8;&#x09CB; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09AA;&#x09BE;&#x0993;&#x09AF;&#x09BC;&#x09BE; &#x09AF;&#x09BE;&#x09AF;&#x09BC;&#x09A8;&#x09BF;&#x0964;</p></div>";return;}
+  if(!res.length){
+    m.innerHTML="<div class=\"nr\"><div style=\"font-size:36px\">&#x1F50D;</div><p>"+val+" &#x098F;&#x09B0; &#x099C;&#x09A8;&#x09CD;&#x09AF; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09AA;&#x09BE;&#x0993;&#x09AF;&#x09BC;&#x09BE; &#x09AF;&#x09BE;&#x09AF;&#x09BC;&#x09A8;&#x09BF;&#x0964;</p></div>";
+    return;
+  }
   m.innerHTML="<div class=\"rc\">&#x1F50D; "+val+" &#x2014; "+res.length+"&#x099F;&#x09BF; &#x09AB;&#x09B2;&#x09BE;&#x09AB;&#x09B2;</div><div class=\"dl\">"+buildList(res)+"</div>";
 }
-function clrSrch(){document.getElementById("si").value="";document.getElementById("bc").style.display="none";showTab(curTab);}
-function togAI(){
-  var ap=document.getElementById("ap");
-  var ov=document.getElementById("ov");
-  ap.classList.toggle("open");
-  ov.classList.toggle("open",ap.classList.contains("open"));
+
+function clrSrch(){
+  document.getElementById("si").value="";
+  document.getElementById("bc").style.display="none";
+  showTab(curTab);
 }
+
 async function askAI(){
   var inp=document.getElementById("ai").value.trim();
-  if(!inp){shToast("স্বপ্নের বিষয় লিখুন");return;}
+  if(!inp){shToast("&#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;&#x09C7;&#x09B0; &#x09AC;&#x09BF;&#x09B7;&#x09AF;&#x09BC; &#x09B2;&#x09BF;&#x0996;&#x09C1;&#x09A8;");return;}
+  var apiKey=lsGet("gak");
+  if(!apiKey){shToast("&#x09AA;&#x09CD;&#x09B0;&#x09A5;&#x09AE;&#x09C7; API Key &#x09B8;&#x09C7;&#x099F; &#x0995;&#x09B0;&#x09C1;&#x09A8;");togSet();return;}
   var ar=document.getElementById("ar");
-  ar.innerHTML="&#x23F3; AI বিশ্লেষণ করছে...";
+  ar.innerHTML="&#x23F3; AI &#x09AC;&#x09BF;&#x09B6;&#x09CD;&#x09B2;&#x09C7;&#x09B7;&#x09A3; &#x0995;&#x09B0;&#x099B;&#x09C7;...";
   try{
-    var res=await fetch("https://api.anthropic.com/v1/messages",{
+    var prompt="&#x0986;&#x09AA;&#x09A8;&#x09BF; &#x098F;&#x0995;&#x099C;&#x09A8; &#x09AC;&#x09BF;&#x09B6;&#x09C7;&#x09B7;&#x099C;&#x09CD;&#x099E; &#x0987;&#x09B8;&#x09B2;&#x09BE;&#x09AE;&#x09C0; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE;&#x0995;&#x09BE;&#x09B0;&#x09C0;&#x0964; &#x09EC; &#x0986;&#x09B2;&#x09C7;&#x09AE;&#x09C7;&#x09B0; &#x09AE;&#x09A4;&#x09BE;&#x09AE;&#x09A4;&#x09C7;&#x09B0; &#x09AD;&#x09BF;&#x09A4;&#x09CD;&#x09A4;&#x09BF;&#x09A4;&#x09C7; &#x09AC;&#x09BE;&#x0982;&#x09B2;&#x09BE;&#x09AF;&#x09BC; &#x09AC;&#x09BF;&#x09B8;&#x09CD;&#x09A4;&#x09BE;&#x09B0;&#x09BF;&#x09A4; &#x09AC;&#x09CD;&#x09AF;&#x09BE;&#x0996;&#x09CD;&#x09AF;&#x09BE; &#x09A6;&#x09BF;&#x09A8;&#x0964; &#x09B6;&#x09C7;&#x09B7;&#x09C7; &#x0995;&#x09B0;&#x09A3;&#x09C0;&#x09AF;&#x09BC; &#x0993; &#x09A6;&#x09CB;&#x09AF;&#x09BC;&#x09BE; &#x09A6;&#x09BF;&#x09A8;&#x0964; &#x09B8;&#x09CD;&#x09AC;&#x09AA;&#x09CD;&#x09A8;: "+inp;
+    var res=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key="+apiKey,{
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        model:"claude-sonnet-4-20250514",
-        max_tokens:1200,
-        system:"আপনি একজন বিশেষজ্ঞ ইসলামী স্বপ্ন ব্যাখ্যাকারী। ইমাম ইবনে সীরীন, ইমাম নাবুলুসী, শায়খ আব্দুল গনী নাবুলুসী, ইমাম ইবনে কাসীর, ইমাম গাজ্জালী ও ইমাম শারানী রহ. এর মতামতের ভিত্তিতে বাংলায় বিস্তারিত ব্যাখ্যা দিন। শেষে করণীয় ও একটি প্রাসঙ্গিক দোয়া উল্লেখ করুন।",
-        messages:[{role:"user",content:"এই স্বপ্নটির ইসলামী ব্যাখ্যা দিন: "+inp}]
-      })
+      body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{maxOutputTokens:1200,temperature:0.7}})
     });
     var data=await res.json();
-    ar.innerHTML=(data.content&&data.content[0]?data.content[0].text:"উত্তর পাওয়া যায়নি।").replace(/\n/g,"<br>")}catch(e){ar.innerHTML="&#x274C; AI সংযোগ ব্যর্থ। ইন্টারনেট পরীক্ষা করুন।";}
+    if(data.error){ar.innerHTML="&#x274C; Error: "+data.error.message;return;}
+    var text="&#x0989;&#x09A4;&#x09CD;&#x09A4;&#x09B0; &#x09AA;&#x09BE;&#x0993;&#x09AF;&#x09BC;&#x09BE; &#x09AF;&#x09BE;&#x09AF;&#x09BC;&#x09A8;&#x09BF;&#x0964;";
+    if(data.candidates&&data.candidates[0]&&data.candidates[0].content&&data.candidates[0].content.parts&&data.candidates[0].content.parts[0]){
+      text=data.candidates[0].content.parts[0].text;
+    }
+    ar.innerHTML=text.split("\n").join("<br>");
+  }catch(e){ar.innerHTML="&#x274C; AI &#x09B8;&#x0982;&#x09AF;&#x09CB;&#x0997; &#x09AC;&#x09CD;&#x09AF;&#x09B0;&#x09CD;&#x09A5;&#x0964; &#x0987;&#x09A8;&#x09CD;&#x099F;&#x09BE;&#x09B0;&#x09A8;&#x09C7;&#x099F; &#x09AA;&#x09B0;&#x09C0;&#x0995;&#x09CD;&#x09B7;&#x09BE; &#x0995;&#x09B0;&#x09C1;&#x09A8;&#x0964;";}
 }
-function shToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2500);}
+
+function shToast(msg){
+  var t=document.getElementById("toast");
+  t.innerHTML=msg;
+  t.classList.add("show");
+  setTimeout(function(){t.classList.remove("show");},2500);
+}
+
 showHome();
 </script>
 </body>
